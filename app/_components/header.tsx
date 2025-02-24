@@ -17,7 +17,7 @@ export default function Header() {
     };
 
     return (
-        <header className="w-full h-auto flex justify-center font-montserrat bg--noir text-base text-white z-50">
+        <header className="w-full h-auto flex justify-center font-montserrat bg--noir text-base text-white z-50 border-2 border-red-500">
             <div className="containerNav max-w-screen-2xl flex flex-grow items-center justify-between p-4">
 
                 {/* Logo */}
