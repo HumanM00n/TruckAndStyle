@@ -131,6 +131,12 @@
     -webkit-appearance: none;
     margin: 0;
   }
+
+
+  /* FIREFOX */
+  input[type=number] {
+    appearance: textfield;
+  }
 }
 
 
