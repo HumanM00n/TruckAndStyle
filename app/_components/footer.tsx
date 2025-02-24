@@ -37,7 +37,7 @@ export default function Footer() {
                     </div>
 
                     <div className="flex w-28 items-center justify-center gap-3">
-                        <FontAwesomeIcon icon={faSquareInstagram} className="color--form text-3xl border-none"/>
+                       <Link href={"https://www.instagram.com/truck.nstyle/"} target="_blank"><FontAwesomeIcon icon={faSquareInstagram} className="color--form text-3xl border-none"/></Link> 
 
                         <FontAwesomeIcon icon={faSquareFacebook} className="text-3xl color--form"/>
                    </div>
