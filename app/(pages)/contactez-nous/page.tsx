@@ -1,15 +1,8 @@
-'use client'; 
 
-import Header from "@/app/_components/header";
-import { useState } from "react";
+import ContactezNous from "@/app/ui/contacez-nous";
 
-export default function contactUs() {
+export default function page() {
     return (
-        <Header />
-
-
-
-
-        
+        <ContactezNous />
     );
 }
