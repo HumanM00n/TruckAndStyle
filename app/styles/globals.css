@@ -13,7 +13,6 @@
   --marronNoisetteMid: #8C5744;
   --grisArdoiseMid: #333140;
   --marronNoisette70: #c07a61;
-  --marronNoisetteTert: #4F5372;
   --blanc : #FBFBFB;
 }
 
@@ -103,18 +102,6 @@
 
 
 /*---------------------------------- 
-          MARRON NOISETTE 70%       |
------------------------------------*/
-.bg--marronNoisette70 {
-  background-color: var(--marronNoisetteTert);
-}
-
-.color--marronNoisette70 {
-  color: var(--marronNoisetteTert);
-}
-
-
-/*---------------------------------- 
               BLANC                 |
 -----------------------------------*/
 .bg--blanc {
@@ -133,12 +120,12 @@
 
 
 
-@layer components {
-
-.hoverMarron:hover {
-  color: var(--marronNoisetteMid);
-}
-
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
