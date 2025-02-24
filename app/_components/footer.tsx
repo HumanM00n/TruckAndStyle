@@ -10,7 +10,7 @@ import { faSquareInstagram } from "@fortawesome/free-brands-svg-icons";
 export default function Footer() {
 
     return (
-        <footer className="w-full font-montserrat flex justify-center border-2 border-red-500">
+        <footer className="w-full font-montserrat flex justify-center">
             <div className="w-full flex justify-around">
 
                 {/* Logo */}
