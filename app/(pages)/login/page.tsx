@@ -56,7 +56,7 @@ export default function loginPage() {
                         {/* ADRESSE EMAIL */}
                         <input
                             type="email"
-                            className="form-control w-72 py-2.5 px-4 placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4"
+                            className="form-control w-72 py-2.5 px-4 placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
                             id="inputForEmail"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -66,7 +66,7 @@ export default function loginPage() {
                         {/* MOT DE PASSE */}
                         <input
                             type="password"
-                            className="form-control w-72 py-2.5 px-4 placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4"
+                            className="form-control w-72 py-2.5 px-4 placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
                             id="inputForPassword"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
