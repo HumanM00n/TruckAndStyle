@@ -16,19 +16,10 @@ export default function DefaultLayout({ children }: { children: React.ReactNode 
   console.log(titlePage);
 
   return (
-    <>
-      <head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
-        <title>{titlePage}</title>
-      </head>
-      <main>
-        <Header />
-        <section>{children}</section>
-        <Footer />
-      </main>
-    </>
+    <main>
+      <Header />
+      <section className="bg--noir ">{children}</section>
+      <Footer />
+    </main>
   );
 }
-
