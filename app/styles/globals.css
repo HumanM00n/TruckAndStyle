@@ -9,11 +9,12 @@
   --noir: #1A1A1A;
   --grisArdoise: #333140;
   --bleuGris: #4F5372;
-  --bg-form: #733E34; /* marron CHocolat -> Figma */
+  --bg-form: #733E34;
+  /* marron CHocolat -> Figma */
   --marronNoisetteMid: #8C5744;
   --grisArdoiseMid: #333140;
   --marronNoisette70: #c07a61;
-  --blanc : #FBFBFB;
+  --blanc: #FBFBFB;
 }
 
 /*---------------------------------- 
@@ -120,13 +121,18 @@
 
 
 
-@layer base {
+@layer components {
+  .hoverMarron:hover {
+    color: var(--marronNoisetteMid);
+  }
+
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
 }
+
 
 @media (prefers-color-scheme: dark) {
   :root {
