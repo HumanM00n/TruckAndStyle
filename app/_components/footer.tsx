@@ -36,10 +36,10 @@ export default function Footer() {
                         <Link href={"#"} className="text-xs text-left">Contactez-nous</Link>
                     </div>
 
-                    <div className="flex w-28 items-center justify-center gap-2.5">
-                        <FontAwesomeIcon icon={faSquareInstagram} className="color--form size-9 border-none"/>
+                    <div className="flex w-28 items-center justify-center gap-3">
+                       <Link href={"https://www.instagram.com/truck.nstyle/"} target="_blank"><FontAwesomeIcon icon={faSquareInstagram} className="color--form text-3xl border-none"/></Link> 
 
-                        <FontAwesomeIcon icon={faSquareFacebook} className="size-9 color--form"/>
+                        <FontAwesomeIcon icon={faSquareFacebook} className="text-3xl color--form"/>
                    </div>
                 </div>
 

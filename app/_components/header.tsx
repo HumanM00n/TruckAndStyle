@@ -38,13 +38,13 @@ export default function Header() {
                 <nav className="hidden lg:flex h-20 border border-gray-300 rounded-md items-center py-6 px-6 gap-16">
                     <Link className="hoverMarron" href="/">Réservations</Link>
                     <Link className="hoverMarron" href="/">À propos</Link>
-                    <Link className="hoverMarron" href="/">Contactez-nous</Link>
+                    <Link className="hoverMarron" href="/contactez-nous">Contactez-nous</Link>
                 </nav>
 
                 {/* Connexion et Inscription */}
                 <div className="hidden lg:flex h-20 w-60 justify-center gap-6 items-center">
-                    <Link className="hoverMarron" href="/pages/login">Connexion</Link> {/* Lien ajouté pour faire des tests */}
-                    <Link className="hoverMarron" href="">Inscription</Link>
+                    <Link className="hoverMarron" href="/login">Connexion</Link> {/* Lien ajouté pour faire des tests */}
+                    <Link className="hoverMarron" href="/">Inscription</Link>
                 </div>
 
                 {/* {session?.user(

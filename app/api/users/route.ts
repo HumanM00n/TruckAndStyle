@@ -75,7 +75,7 @@ export async function GET(req: Request) {
                      user_password = COALESCE(?, user_password),
                      user_phone_number = COALESCE(?, user_phone_number),
                      user_city = COALESCE(?, user_city)
-                   WHERE id_users = ?,`;
+                   WHERE id_users = ?`;
 
     const values = [id, lastName, firstName, email, hashedPassword, phone_number, city];
     const [result] = await pool.execute<ResultSetHeader>(query, values);

@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import { useState } from "react";
+
 import Link from "next/link";
-    
+import { useState } from "react";
 
 export default function loginPage() {
-
+  
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [email, setEmail] = useState("");
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -36,6 +36,7 @@ export default function loginPage() {
     
 
     return (
+
         <div className="md:w-full h-[715px] flex items-center justify-center relative bg--noir">
             {/* CONTAINER IMAGE */}
             <div className="hidden lg:w-2/5 md:block h-full relative left-96">
@@ -55,7 +56,7 @@ export default function loginPage() {
                         {/* ADRESSE EMAIL */}
                         <input
                             type="email"
-                            className="form-control w-72 py-2.5 px-4 placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4"
+                            className="form-control w-72 py-2.5 px-4 placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
                             id="inputForEmail"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -65,7 +66,7 @@ export default function loginPage() {
                         {/* MOT DE PASSE */}
                         <input
                             type="password"
-                            className="form-control w-72 py-2.5 px-4 placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4"
+                            className="form-control w-72 py-2.5 px-4 placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
                             id="inputForPassword"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
@@ -73,14 +74,16 @@ export default function loginPage() {
                         />
                     </div>
 
-                    <div className="underline underline-offset-1 text-light font-montserrat mt-6">
-                        <Link href={""}>J&apos;ai oublié mon mot de passe</Link>
+                    <div className="underline underline-offset-2 text-light font-montserrat mt-6">
+                        <p className="">J&apos;ai oublié mon mot de passe</p>
                     </div>
 
                     <div className="mt-4 flex justify-end">
+                        <Link href={"/register"}>
                         <button type="submit" className="btn btn-outline-light rounded-xs hover:bg-white hover:text-[#733E34]">
                             Se connecter
                         </button>
+                        </Link>
                     </div>
 
                     <div className="flex items-center my-10">
