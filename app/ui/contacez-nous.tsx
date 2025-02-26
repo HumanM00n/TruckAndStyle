@@ -7,10 +7,11 @@ export default function ContactezNous() {
 
     return (
 
-        <div className="w-full h-auto text-white">
+        <div className="border-2 border-red-500 w-full h-auto text-white">
             <h1 className="text-3xl text-center">Contactez-Nous</h1>
-            <form className="grid grid-cols-1 text-white mt-8">
-                <div className="flex justify-center gap-48 mb-10">
+            <form className="border-1 border-purple-500 grid grid-cols-1 text-white mt-8
+            ">
+                <div className="flex justify-center gap-48 mb-10 border-1">
                     <input className="
                         w-72 
                         py-2.5 
@@ -52,7 +53,10 @@ export default function ContactezNous() {
                     rounded-md
                     outline-none
                     focus:border-[#c07a61]
-                    focus:ring-2 focus:ring-[#C29A7E]"
+                    focus:ring-2 focus:ring-[#C29A7E]
+                    
+                    lg:w-4/6
+                    "
                         name="" id="" placeholder="Votre message"></textarea>
                 </div>
 
