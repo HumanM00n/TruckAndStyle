@@ -13,8 +13,6 @@ export default function DefaultLayout({ children }: { children: React.ReactNode 
   const pathnameUrl = myUrl.split("/");
   const titlePage = pathnameUrl[1] || "Accueil";
 
-  console.log(titlePage);
-
   return (
     <main>
       <Header />

@@ -18,9 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     const myUrl = router;
     const pathnameUrl = myUrl.split("/");
     const titlePage = pathnameUrl[1] || "Accueil";
-  
-    console.log(titlePage);
-
+    
   return (
     <html lang="en">
       <head>
