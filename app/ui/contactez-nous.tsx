@@ -98,10 +98,10 @@ export default function ContactezNous() {
                         focus:ring-2 focus:ring-[#C29A7E]
                         outline-none
                         transition"
-                        type="tel" 
+                        type="tel"
                         pattern="[0-9]+"
                         name="phoneNumber"
-                        maxLength={10} 
+                        maxLength={10}
                         placeholder="Votre Téléphone"
                     />
 
@@ -140,6 +140,7 @@ export default function ContactezNous() {
             </form>
             {message && <p className="mt-4">{message}</p>}
         </div>
+
     )
 
 }
