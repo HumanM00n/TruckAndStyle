@@ -1,14 +1,10 @@
 import { Metadata } from "next";
 
-// FONTAWESOME
-import { config } from "@fortawesome/fontawesome-svg-core";
-import "@fortawesome/fontawesome-svg-core/styles.css";
-config.autoAddCss = false;
 
-// export const metadata: Metadata = {
-//     title: '404',
-//     description: 'Cette pag est introuvable'
-// }
+export const metadata: Metadata = {
+    title: '404',
+    description: 'Cette page est introuvable'
+}
 
 export default function ErrorLayout() {
     return (
