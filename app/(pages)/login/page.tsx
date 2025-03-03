@@ -4,27 +4,32 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
+
 
 export default function loginPage() {
-  
+
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [email, setEmail] = useState("");
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [password, setPassword] = useState("");
 
+    const [showPassword, setShowPassword] = useState(false);
+
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-    
+
         const res = await fetch('/api/auth/login', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password }),
         });
-    
+
         const text = await res.text();  // Récupère la réponse brute (pas en JSON)
         console.log("Réponse brute du serveur :", text);
-    
+
         try {
             const data = JSON.parse(text); // Essaie de parser en JSON
             console.log("Données JSON parsées :", data);
@@ -33,7 +38,7 @@ export default function loginPage() {
             return alert("Le serveur a renvoyé une réponse non valide.");
         }
     };
-    
+
 
     return (
 
@@ -65,14 +70,20 @@ export default function loginPage() {
 
                         {/* MOT DE PASSE */}
                         <input
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             className="form-control w-72 py-2.5 px-4 placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
                             id="inputForPassword"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder="Mot de passe"
                         />
+                        <FontAwesomeIcon 
+                            icon={showPassword ? faEye : faEyeSlash}
+                            className="w-10 relative bottom-14 left-[15.5rem] m-0 p-0"
+                            onClick={() => setShowPassword(!showPassword)}
+                        />
                     </div>
+
 
                     <div className="underline underline-offset-2 text-light font-montserrat mt-6">
                         <p className="">J&apos;ai oublié mon mot de passe</p>
@@ -80,9 +91,9 @@ export default function loginPage() {
 
                     <div className="mt-4 flex justify-end">
                         <Link href={"/register"}>
-                        <button type="submit" className="btn btn-outline-light rounded-xs hover:bg-white hover:text-[#733E34]">
-                            Se connecter
-                        </button>
+                            <button type="submit" className="btn btn-outline-light rounded-xs hover:bg-white hover:text-[#733E34]">
+                                Se connecter
+                            </button>
                         </Link>
                     </div>
 
@@ -91,7 +102,7 @@ export default function loginPage() {
                         <span className="mx-4 text-light">OU</span>
                         <hr className="flex-grow border-white" />
                     </div>
- 
+
                     <div className="underline underline-offset-1 text-light font-montserrat mt-6 text-xs">
                         <Link href={"#"}>Vous n&apos;avez pas de compte ? Créez-en un !</Link>
                     </div>
