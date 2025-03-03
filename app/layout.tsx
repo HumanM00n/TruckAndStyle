@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@/app/styles/globals.css";
 
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   
     const router = usePathname();
@@ -21,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+    
         <title>{titlePage}</title>
       </head>
       <body>
