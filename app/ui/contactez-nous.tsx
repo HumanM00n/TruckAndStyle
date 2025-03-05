@@ -6,8 +6,8 @@ import { sendPostContact } from "../action/contactAction";
 
 export default function ContactezNous() {
 
-    const [content, setContent] = useState("");
-    const [message, setMessage] = useState("");
+    // const [content, setContent] = useState("");
+    const [message] = useState("");
 
     async function handleSubmit(FormData: FormData) {
         const sendResult = await sendPostContact(FormData);
@@ -37,6 +37,7 @@ export default function ContactezNous() {
 
         } else {
 
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const toast = Toastify({
                 text: sendResult.message,
                 duration: 5000,
@@ -98,9 +99,9 @@ export default function ContactezNous() {
                         focus:ring-2 focus:ring-[#C29A7E]
                         outline-none
                         transition"
-                        type="tel"
-                        pattern="[0-9]+"
+                        type="number"
                         name="phoneNumber"
+                        inputMode="numeric"  // Affiche le clavier numérique sur mobile
                         maxLength={10}
                         placeholder="Votre Téléphone"
                     />
