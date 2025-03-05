@@ -44,7 +44,7 @@ export default function Footer() {
                             <FontAwesomeIcon icon={faSquareInstagram} className="color--form text-3xl border-none"/>
                         </Link> 
 
-                       <Link href={profilFacebook} target="_blank" className="transition-transform duration-300 hover:scale-125 hover:shadow-xl">
+                       <Link href={profilFacebook} target="_blank" className="transition-transform duration-200 hover:scale-125 hover:shadow-xl">
                             <FontAwesomeIcon icon={faSquareFacebook} className="text-3xl color--form"/>
                         </Link>
                    </div>
