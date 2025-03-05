@@ -9,6 +9,7 @@ import { faSquareInstagram } from "@fortawesome/free-brands-svg-icons";
 
 export default function Footer() {
 
+    const profilInstagram = "https://www.instagram.com/truck.nstyle/";
     const profilFacebook = "https://www.facebook.com/profile.php?id=61573511614832";
 
     return (
@@ -39,9 +40,13 @@ export default function Footer() {
                     </div>
 
                     <div className="flex w-28 items-center justify-center gap-3">
-                       <Link href={"https://www.instagram.com/truck.nstyle/"} target="_blank"><FontAwesomeIcon icon={faSquareInstagram} className="color--form text-3xl border-none"/></Link> 
+                       <Link href={profilInstagram} target="_blank" className="transition-transform duration-300 hover:scale-125 hover:shadow-xl">
+                            <FontAwesomeIcon icon={faSquareInstagram} className="color--form text-3xl border-none"/>
+                        </Link> 
 
-                       <Link href={profilFacebook} target="_blank"><FontAwesomeIcon icon={faSquareFacebook} className="text-3xl color--form"/></Link>
+                       <Link href={profilFacebook} target="_blank" className="transition-transform duration-300 hover:scale-125 hover:shadow-xl">
+                            <FontAwesomeIcon icon={faSquareFacebook} className="text-3xl color--form"/>
+                        </Link>
                    </div>
                 </div>
 
