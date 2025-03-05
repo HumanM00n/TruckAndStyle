@@ -65,7 +65,7 @@ export default function ContactezNous() {
 
     return (
 
-        <section className=" min-h-auto text-white w-full flex-col md:flex-row">
+        <section className="h-auto text-white w-full flex-col md:flex-row">
             <h1 className="text-3xl text-center mb-2 md:mb-12">Contactez-Nous</h1>
             <form action={handleSubmit}>
                 <div className="flex flex-col items-center justify-center gap-3 mt-4 
@@ -125,16 +125,16 @@ export default function ContactezNous() {
                         placeholder="Votre message"></textarea>
                 </div>
 
-                <div className="w-full flex justify-center mt-6">
+                <div className="w-full flex justify-center mt-6 md:mt-12">
                     <button className="
                     rounded-md
                     py-2.5 
                     px-4
-                    mb-4
+                    mb-16
                     bg--form
                     hover:bg-[#63362d]
                     transition
-                    md:mb-14"
+                    md:mb-16"
                         type="submit" name="">Contactez-nous</button>
                 </div>
             </form>
