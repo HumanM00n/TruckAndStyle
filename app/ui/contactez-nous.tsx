@@ -6,7 +6,6 @@ import { sendPostContact } from "../action/contactAction";
 
 export default function ContactezNous() {
 
-    // const [content, setContent] = useState("");
     const [message] = useState("");
 
     async function handleSubmit(FormData: FormData) {
@@ -66,12 +65,13 @@ export default function ContactezNous() {
 
     return (
 
-        <div className="w-full h-auto text-white">
-            <h1 className="text-3xl text-center">Contactez-Nous</h1>
-            <form className="grid grid-cols-1 text-white mt-8" action={handleSubmit}>
+        <section className=" min-h-auto text-white w-full flex-col md:flex-row">
+            <h1 className="text-3xl text-center mb-2 md:mb-12">Contactez-Nous</h1>
+            <form action={handleSubmit}>
+                <div className="flex flex-col items-center justify-center gap-3 mt-4 
+                            md:flex-row md:!gap-48 md:mt-0">
 
-
-                <div className="flex justify-center gap-48 mb-10">
+                    {/* EMAIL */}
                     <input className="
                         w-72 
                         py-2.5 
@@ -84,12 +84,11 @@ export default function ContactezNous() {
                         transition"
                         name="inputEmail"
                         type="email"
-                        placeholder="Votre Email"
-                    />
+                        placeholder="Votre Email" />
 
-
+                    {/* N° TELEPHONE */}
                     <input className="
-                        w-72 
+                        w-72  
                         py-2.5 
                         px-4 
                         bg--form 
@@ -101,27 +100,26 @@ export default function ContactezNous() {
                         transition"
                         type="number"
                         name="phoneNumber"
-                        inputMode="numeric"  // Affiche le clavier numérique sur mobile
+                        inputMode="numeric"
                         maxLength={10}
-                        placeholder="Votre Téléphone"
-                    />
-
+                        placeholder="Votre Téléphone" />
                 </div>
 
                 {/* TEXTAREA */}
-                <div className="flex justify-center">
+                <div className="flex justify-center mt-3 md:mt-8">
                     <textarea className="
-                    w-2/5 
+                    w-3/5 
                     h-72
                     pl-1
                     pt-1
                     bg--form 
-                    placeholder-[#8C5744] 
+                    text-md
                     rounded-md
                     outline-none
+                    placeholder-[#8C5744] 
                     focus:border-[#c07a61]
                     focus:ring-2 focus:ring-[#C29A7E]
-                    "
+                    md:w-2/5"
                         name="contentTextarea"
                         maxLength={255}
                         placeholder="Votre message"></textarea>
@@ -132,16 +130,16 @@ export default function ContactezNous() {
                     rounded-md
                     py-2.5 
                     px-4
-                    mb-16
+                    mb-4
                     bg--form
                     hover:bg-[#63362d]
-                    transition"
+                    transition
+                    md:mb-14"
                         type="submit" name="">Contactez-nous</button>
                 </div>
             </form>
             {message && <p className="mt-4">{message}</p>}
-        </div>
-
+        </section>
     )
 
 }
