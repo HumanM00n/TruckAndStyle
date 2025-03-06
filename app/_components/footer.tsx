@@ -34,9 +34,9 @@ export default function Footer() {
                 <div className="flex flex-row w-56 justify-between mt-3">
                     <div className="text-white flex flex-col gap-1 items-left">
                         <p className="text-lg font-semibold">Menu</p>
-                        <Link href={"#"} className="text-xs text-left">Réservation</Link>
-                        <Link href={"#"} className="text-xs text-left">À propos</Link>
-                        <Link href={"#"} className="text-xs text-left">Contactez-nous</Link>
+                        <Link href={"/"} className="text-xs text-left">Réservation</Link>
+                        <Link href={"/a-propos"} className="text-xs text-left">À propos</Link>
+                        <Link href={"/contactez-nous"} className="text-xs text-left">Contactez-nous</Link>
                     </div>
 
                     <div className="flex w-28 items-center justify-center gap-3">
