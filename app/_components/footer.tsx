@@ -9,6 +9,9 @@ import { faSquareInstagram } from "@fortawesome/free-brands-svg-icons";
 
 export default function Footer() {
 
+    const profilInstagram = "https://www.instagram.com/truck.nstyle/";
+    const profilFacebook = "https://www.facebook.com/profile.php?id=61573511614832";
+
     return (
         <footer className="w-full font-montserrat flex justify-center">
             <div className="w-full flex justify-around">
@@ -31,15 +34,19 @@ export default function Footer() {
                 <div className="flex flex-row w-56 justify-between mt-3">
                     <div className="text-white flex flex-col gap-1 items-left">
                         <p className="text-lg font-semibold">Menu</p>
-                        <Link href={"#"} className="text-xs text-left">Réservation</Link>
-                        <Link href={"#"} className="text-xs text-left">À propos</Link>
-                        <Link href={"#"} className="text-xs text-left">Contactez-nous</Link>
+                        <Link href={"/"} className="text-xs text-left">Réservation</Link>
+                        <Link href={"/a-propos"} className="text-xs text-left">À propos</Link>
+                        <Link href={"/contactez-nous"} className="text-xs text-left">Contactez-nous</Link>
                     </div>
 
                     <div className="flex w-28 items-center justify-center gap-3">
-                       <Link href={"https://www.instagram.com/truck.nstyle/"} target="_blank"><FontAwesomeIcon icon={faSquareInstagram} className="color--form text-3xl border-none"/></Link> 
+                       <Link href={profilInstagram} target="_blank" className="transition-transform duration-300 hover:scale-125 hover:shadow-xl">
+                            <FontAwesomeIcon icon={faSquareInstagram} className="color--form text-3xl border-none"/>
+                        </Link> 
 
-                        <FontAwesomeIcon icon={faSquareFacebook} className="text-3xl color--form"/>
+                       <Link href={profilFacebook} target="_blank" className="transition-transform duration-200 hover:scale-125 hover:shadow-xl">
+                            <FontAwesomeIcon icon={faSquareFacebook} className="text-3xl color--form"/>
+                        </Link>
                    </div>
                 </div>
 

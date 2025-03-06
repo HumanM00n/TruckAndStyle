@@ -3,6 +3,7 @@
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
+    "noUnusedLocals": false, // Retire la remontée des erreurs lorsqu'un variable n'est pas utilisée.
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
