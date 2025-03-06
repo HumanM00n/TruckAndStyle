@@ -11,7 +11,7 @@
   --grisArdoise: #333140;
   --bleuGris: #4F5372;
   --bg-form: #733E34;
-  /* marron CHocolat -> Figma */
+  --bg-form50: #733E34; /* Même couleur que --bg-form mais avec un remplissage à 50% */
   --marronNoisetteMid: #8C5744;
   --grisArdoiseMid: #333140;
   --marronNoisette70: #c07a61;
