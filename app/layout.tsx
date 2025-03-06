@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <title>{titlePage}</title>
       </head>
       <body>
-        <main>{children}</main>
+        {children}
       </body>
     </html>
   );
