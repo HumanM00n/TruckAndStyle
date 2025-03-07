@@ -11,7 +11,8 @@
   --grisArdoise: #333140;
   --bleuGris: #4F5372;
   --bg-form: #733E34;
-  --bg-form50: #733E34; /* Même couleur que --bg-form mais avec un remplissage à 50% */
+  --bg-form50: #733e3471;
+  /* Même couleur que --bg-form mais avec un remplissage à 50% */
   --marronNoisetteMid: #8C5744;
   --grisArdoiseMid: #333140;
   --marronNoisette70: #c07a61;
@@ -116,6 +117,25 @@
 
 
 /*---------------------------------- 
+              BOUTON                |
+-----------------------------------*/
+
+.btn-submit {
+  /* border: 1px solid; */
+  border-radius: 6px;
+  padding: 10px 4px;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* .btn-submit:hover {
+  background: #63362d;
+} */
+
+
+
+/*---------------------------------- 
               OTHER                 |
 -----------------------------------*/
 
@@ -123,8 +143,6 @@
 
 
 @layer components {
-
-  /* @import "@fortawesome/fontawesome-svg-core/styles.css"; */
 
   .hoverMarron:hover {
     color: var(--marronNoisetteMid);
