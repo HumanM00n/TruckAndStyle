@@ -109,7 +109,7 @@ export default function InscriptionPage() {
 
                     <div className="mt-6 flex justify-center">
                         <button type="submit" className="btn btn-outline-light rounded-xs hover:bg-white hover:text-[#733E34]">
-                            S inscrire
+                            Créer mon compte
                         </button>
                     </div>
 
