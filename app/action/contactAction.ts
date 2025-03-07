@@ -10,17 +10,17 @@ export async function sendPostContact(FormData: FormData) {
 
     // Vérification des champs vides
     if (!email || !telephone || !content) {
-        return { success: false, message: "Tous les champs* doivent être renseignés." };
+        return { success: false, message: "Tous les champs * doivent être renseignés." };
     }
 
     // Vérifie la longueur du numéro de téléphone
     if (telephone.length !== 10) {
-        return { success: false, message: "Le numéro de téléphone est inorrecte." };
+        return { success: false, message: "Le numéro de téléphone est incorrecte." };
     }
 
 
     if (content.length < 20) {
-        return { success: false, message: "Le text doit contenir au moins 20 caractères" }
+        return { success: false, message: "Le texte doit contenir au moins 20 caractères" }
         
     }
 
@@ -35,7 +35,7 @@ export async function sendPostContact(FormData: FormData) {
         ]);
 
         console.log(email, telephone, content);
-        return { succes: true, message: "Votre message a été envoyé !" };
+        return { success: true, message: "Votre message a été envoyé !" };
 
     } catch (error) {
         console.error("Erreur MySQL:", error);
