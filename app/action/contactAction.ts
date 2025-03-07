@@ -4,9 +4,9 @@ import pool from "../_lib/db";
 import { console } from "inspector";
 
 export async function sendPostContact(FormData: FormData) {
-    const email = FormData.get("inputEmail");
-    const telephone = FormData.get("phoneNumber") as string;
-    const content = FormData.get("contentTextarea") as string;
+    const email = FormData.get("inputEmail")?.toString().trim(); 
+    const telephone = FormData.get("phoneNumber")?.toString().trim()
+    const content = FormData.get("contentTextarea")?.toString().trim();
 
     // Vérification des champs vides
     if (!email || !telephone || !content) {
@@ -20,8 +20,7 @@ export async function sendPostContact(FormData: FormData) {
 
 
     if (content.length < 20) {
-        return { success: false, message: "Le texte doit contenir au moins 20 caractères" }
-        
+        return { success: false, message: "Le texte doit contenir au moins 20 caractères" }   
     }
 
 
