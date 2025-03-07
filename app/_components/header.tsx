@@ -44,7 +44,8 @@ export default function Header() {
                 {/* Connexion et Inscription */}
                 <div className="hidden lg:flex h-20 w-60 justify-center gap-6 items-center">
                     <Link className="hoverMarron" href="/connexion">Connexion</Link> {/* Lien ajouté pour faire des tests */}
-                    <Link className="hoverMarron" href="/">Inscription</Link>
+                    <Link className="hoverMarron" href="/inscription">Inscription</Link>
+
                 </div>
 
 
@@ -65,7 +66,8 @@ export default function Header() {
                     <Link className="hoverMarron" href="/">À propos</Link>
                     <Link className="hoverMarron" href="/">Contactez-nous</Link>
                     <Link className="hoverMarron" href="/connexion">Connexion</Link>
-                    <Link className="hoverMarron" href="/">Inscription</Link>
+                    <Link className="hoverMarron" href="/inscription">Inscription</Link>
+
                 </div>
             )}
         </header>

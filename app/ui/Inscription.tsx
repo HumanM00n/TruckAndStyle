@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
+
 import Toastify from "toastify-js";
 import { registerUser } from "../action/inscriptionAction";
 
 export default function Inscription() {
+    
     const [formData, setFormData] = useState({
         nom: "",
         prenom: "",
@@ -29,15 +31,15 @@ export default function Inscription() {
             text: sendResult.message,
             duration: 5000,
             style: {
-                width: "275px",
+                width: "200px",
                 display: "flex",
                 background: sendResult.success ? "#4F5372" : "#810a0a",
                 color: "white",
-                padding: "10px 10px 10px 46px",
+                padding: "15px 10px 10px 46px",
                 position: "absolute",
                 right: "20px",
-                top: "20px",
-                borderRadius: "8px",
+                top: "10px",
+                borderRadius: "10px",
                 zIndex: "9999",
                 fontSize: "14px",
             }

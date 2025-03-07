@@ -6,6 +6,9 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 
+
+    
+
 export default function InscriptionPage() {
     const [formData, setFormData] = useState({
         nom: "",
@@ -16,7 +19,13 @@ export default function InscriptionPage() {
         codePostal: "",
         ville: "",
         password: ""
+        
     });
+
+      
+    
+    
+
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -46,7 +55,9 @@ export default function InscriptionPage() {
     };
 
     return (
-        <div className="md:w-full h-[715px] flex items-center justify-center relative bg-black">
+        <div className="md:w-full h-[715px] flex items-center justify-center relative  --grisArdoise: #333140;">
+            <Link className="hoverMarron" href="/inscription">inscription</Link>
+
             {/* IMAGE */}
             <div className="hidden lg:w-2/5 md:block h-full relative left-96">
                 <img
@@ -98,7 +109,7 @@ export default function InscriptionPage() {
 
                     <div className="mt-6 flex justify-center">
                         <button type="submit" className="btn btn-outline-light rounded-xs hover:bg-white hover:text-[#733E34]">
-                            Sinscrire
+                            S inscrire
                         </button>
                     </div>
 
