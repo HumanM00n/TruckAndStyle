@@ -11,7 +11,7 @@ export default function ContactezNous() {
     async function handleSubmit(FormData: FormData) {
         const sendResult = await sendPostContact(FormData);
 
-        if (sendResult.succes) {
+        if (sendResult.success) {
             Toastify({
                 text: sendResult.message,
                 duration: 5000,
