@@ -6,7 +6,7 @@ export default function MonCompte() {
     return (
         <section className="w-full text-white">
             <h1 className="text-3xl text-center md:w-1/4 md:text-2xl md:text-center md:pl-8">Mon compte</h1>
-            <div className=" flex flex-col justify-center items-center gap-8 md:flex-row md:justify-around md:items-start">
+            <div className="flex flex-col justify-center items-center gap-8 md:flex-row md:justify-around md:items-start">
                 <div className="rounded-md px-36 py-9 mt-3 bg--form">
                     <p className="mb-2">Mes Informations</p>
                     <p>Mes réservations</p>
@@ -21,19 +21,18 @@ export default function MonCompte() {
                             className="form-control border-none md:text-sm md:h-10"
                             name=""
                             id=""
-                            value={"Rouy"}
                         />
                     </div>
 
                     {/* PRENOM */}
                     <div className="w-40 md:w-48">
-                        <input className="form-control border-none text-sm md:text-sm md:h-10" type="text" name="" id="" value={"Mathis"}/>
+                        <input className="form-control border-none text-sm md:text-sm md:h-10" type="text" name="" id=""/>
                     </div>
 
 
                     {/* N° Téléphone */}
                     <div className="w-40 ml-7 md:w-48 md:ml-0">
-                        <input className="form-control border-none text-sm h-10" type="number" name="" id="" value={"0616250830"} />
+                        <input className="form-control border-none text-sm h-10" type="tel" name="" id="" />
                     </div>
 
 
@@ -47,7 +46,7 @@ export default function MonCompte() {
                     {/* MOT DE PASSE */}
                     <div className="w-full col-span-full px-7
                     md:ml-0 md:w-1/2 md:px-0 md:col-span-2">
-                        <input className="form-control border-none text-sm h-10" type="password" name="" value={"caefdzefzefzefzef"}/>
+                        <input className="form-control border-none text-sm h-10" type="password" name=""/>
                     </div>
 
 
@@ -77,8 +76,13 @@ export default function MonCompte() {
                         </button>
                     </div>
                 </form>
-
-                {/* <div className="w-2/3 flex justify-end relative bottom-5">
+            </div>
+            <div className="w-2/3 flex justify-end relative bottom-5
+            md:w-full
+            md:relative
+            md:bottom-72
+            md:right-40
+            ">
                     <button className="
                     bg-[#333140] 
                     border 
@@ -86,9 +90,7 @@ export default function MonCompte() {
                     px-5 
                     py-2
                     hover:bg-[#25232e]">Se déconnecter</button>
-                </div> */}
-
-            </div>
+                </div>
         </section>
 
     )
