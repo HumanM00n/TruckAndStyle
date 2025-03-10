@@ -35,7 +35,7 @@ export async function registerUser(formData: FormData) {
 
     try {
         //  Envoi des données à l’API d’inscription
-        const response = await fetch("/api/register", {
+        const response = await fetch("/api/auth/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
