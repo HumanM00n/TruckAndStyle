@@ -1,7 +1,7 @@
-import MonCompte from "@/app/ui/monCompte";
+import MesInfos from "@/app/ui/monCompte";
 
 export default function page() {
     return (
-        <MonCompte />
+        <MesInfos />
     );
 }
