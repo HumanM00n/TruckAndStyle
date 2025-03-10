@@ -1,8 +1,30 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getPersonalInfo, updatPersonalInfo } from "../action/infosPersosAction";
 
-export default function MonCompte() {
+export default function PersonalInfoForm() {
+
+    const [originalDataUtil, setOriginalDataUtil] = useState(null);
+    const [formData, setFormData] = useState({ lastname: "", firstname: "", phone: "", email: "", passsword: "" });
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await getPersonalInfo();
+            if (data) {
+                setOriginalDataUtil(data);
+                setFormData(data);
+            }
+        };
+        fetchData();
+    }, []);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
+
+    
+
     return (
         <section className="w-full text-white">
             <h1 className="text-3xl text-center md:w-1/4 md:text-2xl md:text-center md:pl-8">Mon compte</h1>
@@ -25,8 +47,8 @@ export default function MonCompte() {
                             border-none 
                             focus:ring-2 focus:ring-[#C29A7E]
                             md:text-sm md:h-10"
-                            name=""
-                            id=""
+                            name="viewName"
+                            placeholder="nom"
                         />
                     </div>
 
@@ -37,7 +59,9 @@ export default function MonCompte() {
                         border-none 
                         text-sm 
                         focus:ring-2 focus:ring-[#C29A7E]
-                        md:text-sm md:h-10" type="text" name="" id=""/>
+                        md:text-sm md:h-10"
+                            type="text"
+                            name="viewFristName" placeholder="prenom" />
                     </div>
 
 
@@ -48,8 +72,9 @@ export default function MonCompte() {
                         border-none 
                         text-sm 
                         h-10
-                        focus:ring-2 focus:ring-[#C29A7E]
-                        " type="tel" name="" id="" />
+                        focus:ring-2 focus:ring-[#C29A7E]"
+                            type="tel"
+                            name="viewPhoneNumber" placeholder="num tel" />
                     </div>
 
 
@@ -61,8 +86,8 @@ export default function MonCompte() {
                         border-none 
                         text-sm 
                         h-10
-                        focus:ring-2 focus:ring-[#C29A7E]" 
-                        type="email" name="" />
+                        focus:ring-2 focus:ring-[#C29A7E]"
+                            type="email" name="viewEmail" placeholder="email" />
                     </div>
 
 
@@ -74,8 +99,8 @@ export default function MonCompte() {
                         border-none 
                         text-sm 
                         h-10
-                        focus:ring-2 focus:ring-[#C29A7E]" 
-                        type="password" name=""/>
+                        focus:ring-2 focus:ring-[#C29A7E]"
+                            type="password" name="viewPassword" placeholder="password" />
                     </div>
 
 
@@ -116,7 +141,7 @@ export default function MonCompte() {
             md:top-2/4 
             md:mt-5 
                 ">
-                    <button className="
+                <button className="
                     bg-[#333140] 
                     border 
                     rounded-sm  
@@ -125,8 +150,12 @@ export default function MonCompte() {
                     static
                     transition
                     hover:bg-[#25232e]">Se déconnecter</button>
-                </div>
+            </div>
         </section>
 
     )
+}
+
+function async() {
+    throw new Error("Function not implemented.");
 }
