@@ -12,13 +12,19 @@ export default function MonCompte() {
                     <p>Mes réservations</p>
                 </div>
 
-                <form className="rounded-md bg--form grid grid-cols-2 gap-4 py-9 px-7 mb-[305px] 
-                md:2/4 md:grid md:grid-cols-3" action="">
+                <form action="" className="rounded-md bg--form grid grid-cols-2 gap-4 py-9 px-7 mb-16
+                md:mb-[305px] 
+                md:grid 
+                md:grid-cols-3">
 
                     {/* NOM */}
                     <div className="w-40 ml-7 md:w-48 md:ml-0">
                         <input type="text"
-                            className="form-control border-none md:text-sm md:h-10"
+                            className="
+                            form-control 
+                            border-none 
+                            focus:ring-2 focus:ring-[#C29A7E]
+                            md:text-sm md:h-10"
                             name=""
                             id=""
                         />
@@ -26,27 +32,50 @@ export default function MonCompte() {
 
                     {/* PRENOM */}
                     <div className="w-40 md:w-48">
-                        <input className="form-control border-none text-sm md:text-sm md:h-10" type="text" name="" id=""/>
+                        <input className="
+                        form-control 
+                        border-none 
+                        text-sm 
+                        focus:ring-2 focus:ring-[#C29A7E]
+                        md:text-sm md:h-10" type="text" name="" id=""/>
                     </div>
 
 
                     {/* N° Téléphone */}
                     <div className="w-40 ml-7 md:w-48 md:ml-0">
-                        <input className="form-control border-none text-sm h-10" type="tel" name="" id="" />
+                        <input className="
+                        form-control 
+                        border-none 
+                        text-sm 
+                        h-10
+                        focus:ring-2 focus:ring-[#C29A7E]
+                        " type="tel" name="" id="" />
                     </div>
 
 
                     {/* EMAIL */}
                     <div className="w-40 
                     md:ml-0 md:w-56">
-                        <input className="form-control border-none text-sm h-10" type="email" name="" />
+                        <input className="
+                        form-control 
+                        border-none 
+                        text-sm 
+                        h-10
+                        focus:ring-2 focus:ring-[#C29A7E]" 
+                        type="email" name="" />
                     </div>
 
 
                     {/* MOT DE PASSE */}
                     <div className="w-full col-span-full px-7
                     md:ml-0 md:w-1/2 md:px-0 md:col-span-2">
-                        <input className="form-control border-none text-sm h-10" type="password" name=""/>
+                        <input className="
+                        form-control 
+                        border-none 
+                        text-sm 
+                        h-10
+                        focus:ring-2 focus:ring-[#C29A7E]" 
+                        type="password" name=""/>
                     </div>
 
 
@@ -77,18 +106,24 @@ export default function MonCompte() {
                     </div>
                 </form>
             </div>
-            <div className="w-2/3 flex justify-end relative bottom-5
-            md:w-full
-            md:relative
-            md:bottom-72
-            md:right-40
-            ">
+
+            <div className="
+            absolute
+            right-28
+            bottom-[160px]
+            md:absolute 
+            md:right-44 
+            md:top-2/4 
+            md:mt-5 
+                ">
                     <button className="
                     bg-[#333140] 
                     border 
                     rounded-sm  
                     px-5 
                     py-2
+                    static
+                    transition
                     hover:bg-[#25232e]">Se déconnecter</button>
                 </div>
         </section>
