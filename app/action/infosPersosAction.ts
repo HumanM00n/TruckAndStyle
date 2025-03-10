@@ -1,5 +1,6 @@
 'use server';
 
+import { useState } from "react";
 import pool from "../_lib/db";
 import { console } from "inspector";
 
@@ -9,7 +10,7 @@ export const getPersonalInfo = async () => {
     try {
         // Le premier any[] contient les resultats de la requêtes 
         // Le deuxième any[] contient les métadonnées des colonnes 
-        const [pullPersonnalInfos]: [any[], any] = await pool.query("SELECT user_lastname, user_firstname, user_email, user_phone_number, user_password FROM tns_users WHERE user_lastname = 'Rouy' ");
+        const [pullPersonnalInfos]: [any[], any] = await pool.query("SELECT user_lastname, user_firstname, user_email, user_phone_number, user_password FROM tns_users WHERE id_users = 1; ");
 
         if (!pullPersonnalInfos || pullPersonnalInfos.length === 0) {
             throw new Error("Une erreur lors de la récupérations des informations:")
@@ -35,7 +36,7 @@ export const updatPersonalInfo = async (newInfo: { lastname: string; firstname: 
                             user_email = COALESCE(?, user_email),
                             user_password = COALESCE(?, user_password),
                             user_phone_number = COALESCE(?, user_phone_number)
-                          WHERE id_users = 1 ;`,
+                          WHERE id_users = ? ;`,
             [newInfo.lastname, newInfo.firstname, newInfo.phone, newInfo.email, newInfo.password]);
         return { ...newInfo }; // Retourne infos après mise à jour
     
