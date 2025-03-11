@@ -1,5 +1,6 @@
 'use server';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useState } from "react";
 import pool from "../_lib/db";
 import { console } from "inspector";
@@ -10,6 +11,7 @@ export const getPersonalInfo = async () => {
     try {
         // Le premier any[] contient les resultats de la requêtes 
         // Le deuxième any[] contient les métadonnées des colonnes 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const [pullPersonnalInfos]: [any[], any] = await pool.query("SELECT user_lastname, user_firstname, user_email, user_phone_number, user_password FROM tns_users WHERE id_users = 1; ");
 
         if (!pullPersonnalInfos || pullPersonnalInfos.length === 0) {
