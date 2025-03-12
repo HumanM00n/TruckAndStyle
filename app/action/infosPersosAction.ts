@@ -1,6 +1,5 @@
 'use server';
 
-import { useState } from "react";
 import pool from "../_lib/db";
 import { console } from "inspector";
 
@@ -26,22 +25,26 @@ export const getPersonalInfo = async () => {
 };
 
 
-export const updatPersonalInfo = async (newInfo: { lastname: string; firstname: string; phone: string; email: string; password: string }) => {
-
+export const updatPersonalInfo = async (newInfo: Partial<{ lastname: string; firstname: string; phone: string; email: string; password: string }>) => {
     try {
-        await pool.query(`UPDATE tns_users 
-                          SET
-                            user_lastname = COALESCE(?, user_lastname),
-                            user_firstname = COALESCE(?, user_firstname),
-                            user_email = COALESCE(?, user_email),
-                            user_password = COALESCE(?, user_password),
-                            user_phone_number = COALESCE(?, user_phone_number)
-                          WHERE id_users = ? ;`,
-            [newInfo.lastname, newInfo.firstname, newInfo.phone, newInfo.email, newInfo.password]);
-        return { ...newInfo }; // Retourne infos après mise à jour
-    
+        const queryParts: string[] = []; 
+        const values: any[] = []; 
+
+        Object.entries(newInfo).forEach(([key, val]) => {
+            if (val !== undefined && val !== "") { // Évite d'inclure des valeurs vides
+                queryParts.push(`${key} = ?`);
+                values.push(val);
+            }
+        });
+
+        if (queryParts.length === 0) return null; // Aucun changement
+
+        const updateUserQuery = `UPDATE tns_users SET ${queryParts.join(", ")} WHERE id_users = 1`;
+        await pool.query(updateUserQuery, values);
+
+        return { ...newInfo }; // Retourne les nouvelles données mises à jour
     } catch (error) {
-        console.error("Erreur lors de la mise à jour des informations :", error)
+        console.error("Erreur lors de la mise à jour des informations :", error);
         return null;
     }
 };
