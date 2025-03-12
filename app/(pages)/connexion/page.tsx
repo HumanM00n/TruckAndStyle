@@ -77,7 +77,7 @@ export default function loginPage() {
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder="Mot de passe"
                         />
-                        <FontAwesomeIcon 
+                        <FontAwesomeIcon
                             icon={showPassword ? faEye : faEyeSlash}
                             className="w-10 relative bottom-14 left-[15.5rem] m-0 p-0"
                             onClick={() => setShowPassword(!showPassword)}
@@ -90,11 +90,9 @@ export default function loginPage() {
                     </div>
 
                     <div className="mt-4 flex justify-end">
-                        <Link href={"/register"}>
-                            <button type="submit" className="btn btn-outline-light rounded-xs hover:bg-white hover:text-[#733E34]">
-                                Se connecter
-                            </button>
-                        </Link>
+                        <button type="submit" className="btn btn-outline-light rounded-xs hover:bg-white hover:text-[#733E34]">
+                            Se connecter
+                        </button>
                     </div>
 
                     <div className="flex items-center my-10">
@@ -104,7 +102,7 @@ export default function loginPage() {
                     </div>
 
                     <div className="underline underline-offset-1 text-light font-montserrat mt-6 text-xs">
-                        <Link href={"#"}>Vous n&apos;avez pas de compte ? Créez-en un !</Link>
+                        <Link href={"inscrption"}>Vous n&apos;avez pas de compte ? Créez-en un !</Link>
                     </div>
 
                     <div className="mt-3">
