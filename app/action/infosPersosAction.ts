@@ -4,7 +4,7 @@ import pool from "../_lib/db";
 import { console } from "inspector";
 
 // async (userId: string)  
-export const getPersonalInfo = async () => {
+export const getPersonalInfo = async (userId: string | 1) => {
 
     try {
         // Le premier any[] contient les resultats de la requêtes 
