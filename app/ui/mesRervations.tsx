@@ -3,17 +3,18 @@
 // Import des fonction 'Actions';
 
 export default function MyBookings() {
+
   return (
-    <section className="border-2 border-blue-700 w-full text-white md:min-h-auto">
-      <div className="border flex flex-col justify-center items-center gap-8 md:flex-row md:justify-around md:items-start">
+    <section className="w-full text-white md:min-h-auto border">
+      <div className="flex flex-col justify-center items-center gap-8 md:flex-row md:justify-around md:items-start">
         <div className="rounded-md px-36 py-9 mt-3 bg--form">
           <p className="mb-2">Mes Informations</p>
-          <p>Mes réservations</p>
+          <p className="font-bold ">Mes réservations</p>
         </div>
 
-        <div className="border-1 border-red-500 w-[420px]">
-          <h2 className="py-3 card-title font-bold">Mes rendez-vous</h2>
-          <form className="card w-full border-2 border-purple-500 rounded-md py-3 bg--form flex flex-row text-white">
+        <div className="w-[420px] mb-14 ">
+          <h2 className="pb-3 card-title font-bold">Mes rendez-vous</h2>
+          <form className="card w-full rounded-md py-3 bg--form flex flex-row text-white">
             <div className="card-body">
               <h4 className="card-title font-semibold pb-2">
                 30 janvier 2025 à 16h30{" "}
