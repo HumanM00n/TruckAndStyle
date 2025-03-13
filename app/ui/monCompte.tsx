@@ -1,10 +1,12 @@
 'use client';
 
 import { useState, useEffect } from "react";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { getPersonalInfo, updatPersonalInfo } from "../action/infosPersosAction";
 
 export default function PersonalInfoForm() {
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [originalDataUtil, setOriginalDataUtil] = useState(null);
     const [formData, setFormData] = useState({ lastname: "", firstname: "", phone: "", email: "", passsword: "" });
 
@@ -19,6 +21,7 @@ export default function PersonalInfoForm() {
         fetchData();
     }, []);
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
@@ -156,6 +159,7 @@ export default function PersonalInfoForm() {
     )
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function async() {
     throw new Error("Function not implemented.");
 }
