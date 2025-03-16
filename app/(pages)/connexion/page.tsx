@@ -53,7 +53,7 @@ export default function loginPage() {
             </div>
 
             {/* FORMULAIRE DE CONNEXION */}
-            <div className="shrink-0 absolute left-2/4 transform -translate-x-3/4 bg--form p-12 px-40 rounded-md text-sm shadow-lg w-[600px]">
+            <div className="shrink-0 md:absolute md:left-2/4 md:transform md:-translate-x-3/4 bg--form p-12 px-40 rounded-md text-sm shadow-lg w-[600px]">
                 <form onSubmit={handleLogin} className="font-montserrat z-10">
                     <h1 className="text-light text-3xl font-[500] font-playfair text-center">Connexion</h1>
 
