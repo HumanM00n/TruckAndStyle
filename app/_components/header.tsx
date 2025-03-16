@@ -61,7 +61,7 @@ export default function Header() {
 
             {/* Menu Mobile (Affiché si menuOpen est vrai) */}
             {menuOpen && (
-                <div className="lg:hidden absolute bg-black top-20 left-0 w-full flex flex-col items-center gap-4 py-4 mt-14 z-10">
+                <div className="lg:hidden absolute bg--grisArdoise top-20 left-0 w-full flex flex-col items-center gap-4 py-4 mt-14 z-10 transition">
                     <Link className="hoverMarron" href="/pages">Réservations</Link>
                     <Link className="hoverMarron" href="/">À propos</Link>
                     <Link className="hoverMarron" href="/">Contactez-nous</Link>
