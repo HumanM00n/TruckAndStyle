@@ -1,31 +1,61 @@
 'use client';
 
 import { useState, useEffect } from "react";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { getPersonalInfo, updatPersonalInfo } from "../action/infosPersosAction";
 
 export default function PersonalInfoForm() {
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [originalDataUtil, setOriginalDataUtil] = useState(null);
-    const [formData, setFormData] = useState({ lastname: "", firstname: "", phone: "", email: "", passsword: "" });
+    const userId = 1;
+    const [formData, setFormData] = useState({ lastname: "", firstname: "", phone: "", email: "", password: "" });
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await getPersonalInfo();
-            if (data) {
-                setOriginalDataUtil(data);
-                setFormData(data);
+            const resultData = await getPersonalInfo(userId);
+            if(resultData) {
+                setFormData({
+                    lastname: resultData.user_lastname || "",
+                    firstname: resultData.user_firstname || "",
+                    phone: resultData.user_phone_number || "",
+                    email: resultData.user_email || "",
+                    password: resultData.user_password || "",
+                });
+
+                console.log(setFormData);
             }
         };
+
         fetchData();
     }, []);
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    }
+    const handleUpdateUser = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
 
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        
+        console.log("✅ handleSubmit appelé !");
+        console.log("Données envoyées :", formData);
+    
+        try {
+            console.log("Envoi des données à updatPersonalInfo...");
+            const updatedInfo = await updatPersonalInfo(formData);
+            console.log("✅ Réponse de updatPersonalInfo :", updatedInfo);
+    
+            if (updatedInfo) {
+                alert("Informations mises à jour avec succès !");
+            } else {
+                console.log("❌ Erreur lors de la requête");
+                alert("Erreur lors de la mise à jour des informations.");
+            }
+        } catch (error) {
+            console.error("⚠️ Erreur dans handleSubmit :", error);
+        }
+    };
+    
     
 
     return (
@@ -37,7 +67,7 @@ export default function PersonalInfoForm() {
                     <p>Mes réservations</p>
                 </div>
 
-                <form action="" className="rounded-md bg--form grid grid-cols-2 gap-4 py-9 px-7 mb-16
+                <form onSubmit={handleSubmit} className="rounded-md bg--form grid grid-cols-2 gap-4 py-9 px-7 mb-16
                 md:mb-[305px] 
                 md:grid 
                 md:grid-cols-3">
@@ -50,7 +80,9 @@ export default function PersonalInfoForm() {
                             border-none 
                             focus:ring-2 focus:ring-[#C29A7E]
                             md:text-sm md:h-10"
-                            name="viewName"
+                            name="lastname"
+                            defaultValue={formData.lastname} 
+                            onChange={handleUpdateUser}
                             placeholder="nom"
                         />
                     </div>
@@ -64,7 +96,10 @@ export default function PersonalInfoForm() {
                         focus:ring-2 focus:ring-[#C29A7E]
                         md:text-sm md:h-10"
                             type="text"
-                            name="viewFristName" placeholder="prenom" />
+                            name="firstname" 
+                            defaultValue={formData.firstname} 
+                            onChange={handleUpdateUser}
+                            placeholder="prenom" />
                     </div>
 
 
@@ -77,7 +112,10 @@ export default function PersonalInfoForm() {
                         h-10
                         focus:ring-2 focus:ring-[#C29A7E]"
                             type="tel"
-                            name="viewPhoneNumber" placeholder="num tel" />
+                            name="phone" 
+                            defaultValue={formData.phone}
+                            onChange={handleUpdateUser}
+                            placeholder="num tel" />
                     </div>
 
 
@@ -90,7 +128,11 @@ export default function PersonalInfoForm() {
                         text-sm 
                         h-10
                         focus:ring-2 focus:ring-[#C29A7E]"
-                            type="email" name="viewEmail" placeholder="email" />
+                            type="email" 
+                            name="email"
+                            defaultValue={formData.email}
+                            onChange={handleUpdateUser} 
+                            placeholder="email" />
                     </div>
 
 
@@ -103,7 +145,11 @@ export default function PersonalInfoForm() {
                         text-sm 
                         h-10
                         focus:ring-2 focus:ring-[#C29A7E]"
-                            type="password" name="viewPassword" placeholder="password" />
+                            type="password" 
+                            name="password" 
+                            defaultValue={formData.password}
+                            onChange={handleUpdateUser}
+                            placeholder="password" />
                     </div>
 
 
@@ -119,7 +165,7 @@ export default function PersonalInfoForm() {
                             Annuler
                         </button>
 
-                        <button type="submit" className="
+                        <button type="submit" onSubmit={handleSubmit} className="
                         btn-submit 
                         py-2 
                         px-3 
@@ -157,9 +203,4 @@ export default function PersonalInfoForm() {
         </section>
 
     )
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function async() {
-    throw new Error("Function not implemented.");
 }

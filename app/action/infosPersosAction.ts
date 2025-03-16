@@ -1,16 +1,16 @@
 'use server';
 
-// import { useState } from "react";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { useState } from "react";
 import pool from "../_lib/db";
 import { console } from "inspector";
 
 // async (userId: string)  
-export const getPersonalInfo = async () => {
+export const getPersonalInfo = async (userId: string | 1) => {
 
     try {
         // Le premier any[] contient les resultats de la requêtes 
         // Le deuxième any[] contient les métadonnées des colonnes 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const [pullPersonnalInfos]: [any[], any] = await pool.query("SELECT user_lastname, user_firstname, user_email, user_phone_number, user_password FROM tns_users WHERE id_users = 1; ");
 
         if (!pullPersonnalInfos || pullPersonnalInfos.length === 0) {
@@ -27,22 +27,36 @@ export const getPersonalInfo = async () => {
 };
 
 
-export const updatPersonalInfo = async (newInfo: { lastname: string; firstname: string; phone: string; email: string; password: string }) => {
-
+export const updatPersonalInfo = async (newInfo: Partial<{ lastname: string; firstname: string; phone: string; email: string; password: string }>) => {
     try {
-        await pool.query(`UPDATE tns_users 
-                          SET
-                            user_lastname = COALESCE(?, user_lastname),
-                            user_firstname = COALESCE(?, user_firstname),
-                            user_email = COALESCE(?, user_email),
-                            user_password = COALESCE(?, user_password),
-                            user_phone_number = COALESCE(?, user_phone_number)
-                          WHERE id_users = ? ;`,
-            [newInfo.lastname, newInfo.firstname, newInfo.phone, newInfo.email, newInfo.password]);
-        return { ...newInfo }; // Retourne infos après mise à jour
-    
+        console.log("📥 Données reçues par updatPersonalInfo :", newInfo);
+
+        const queryParts: string[] = []; 
+        const values: any[] = []; 
+
+        Object.entries(newInfo).forEach(([key, val]) => {
+            if (val !== undefined && val !== "") { // Évite d'inclure des valeurs vides
+                queryParts.push(`${key} = ?`);
+                values.push(val);
+            }
+        });
+        
+        console.error("Partie de la requête :", queryParts);
+        console.log("Valeurs envoyées :", values);
+        
+
+        if (queryParts.length === 0) return null; // Aucun changement
+
+        const updateUserQuery = `UPDATE tns_users SET ${queryParts.join(", ")} WHERE id_users = 1`;
+        console.log("Requête Final :", updateUserQuery);
+
+        await pool.query(updateUserQuery, values);
+
+        console.log("✅ Mise à jour des données réussie !");
+        
+        return { ...newInfo }; // Retourne les nouvelles données mises à jour
     } catch (error) {
-        console.error("Erreur lors de la mise à jour des informations :", error)
+        console.error("Erreur lors de la mise à jour des informations :", error);
         return null;
     }
 };
