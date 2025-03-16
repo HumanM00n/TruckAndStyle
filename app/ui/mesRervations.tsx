@@ -5,7 +5,7 @@
 export default function MyBookings() {
 
   return (
-    <section className="w-full text-white md:min-h-[390px] border">
+    <section className="w-full text-white md:min-h-[390px]">
       <div className="flex flex-col justify-center items-center gap-8 md:flex-row md:justify-around md:items-start">
         <div className="rounded-md px-36 py-9 mt-3 bg--form">
           <p className="mb-2">Mes Informations</p>
@@ -14,7 +14,7 @@ export default function MyBookings() {
 
         <div className="w-[420px] mb-14">
           <h2 className="pb-3 card-title font-bold">Mes rendez-vous</h2>
-          <form className="card w-full rounded-md mb-3 py-3 bg--form flex flex-row text-white border-1">
+          <form className="card w-full rounded-md mb-3 py-3 bg--form flex flex-row text-white">
             <div className="card-body">
               <h4 className="card-title font-semibold pb-2">
                 30 janvier 2025 à 16h30{" "}
