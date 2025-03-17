@@ -11,7 +11,7 @@ export default function PersonalInfoForm() {
     useEffect(() => {
         const fetchData = async () => {
             const resultData = await getPersonalInfo(userId);
-            if (resultData) {
+            if(resultData) {
                 setFormData({
                     lastname: resultData.user_lastname || "",
                     firstname: resultData.user_firstname || "",
@@ -36,15 +36,15 @@ export default function PersonalInfoForm() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
+        
         console.log("✅ handleSubmit appelé !");
         console.log("Données envoyées :", formData);
-
+    
         try {
             console.log("Envoi des données à updatPersonalInfo...");
             const updatedInfo = await updatPersonalInfo(formData);
             console.log("✅ Réponse de updatPersonalInfo :", updatedInfo);
-
+    
             if (updatedInfo) {
                 alert("Informations mises à jour avec succès !");
             } else {
@@ -55,11 +55,20 @@ export default function PersonalInfoForm() {
             console.error("⚠️ Erreur dans handleSubmit :", error);
         }
     };
-
-
+    
+    
 
     return (
-            <>
+        <section className="w-full text-white md:min-h-[390px]">
+            <h1 className="text-3xl text-center md:w-1/4 md:text-2xl md:text-center md:pl-8">Mon compte</h1>
+            <div className="flex flex-col justify-center items-center gap-8 md:flex-row md:justify-around md:items-start">
+                <div className="flex flex-col rounded-md px-36 py-9 mt-3 bg--form">
+                    <button className="mb-2 transition-transform duration-200 hover:scale-105 hover:shadow-xl"
+                    >Mes Informations</button>
+                    <button className="transition-transform duration-200 hover:scale-105 hover:shadow-xl"
+                    >Mes réservations</button>
+                </div>
+
                 <form onSubmit={handleSubmit} className="rounded-md bg--form grid grid-cols-2 gap-4 py-9 px-7 mb-16
                 md:mb-[305px] 
                 md:grid 
@@ -172,14 +181,17 @@ export default function PersonalInfoForm() {
                         </button>
                     </div>
                 </form>
+            </div>
 
-
-<div
-    className="
-    absolute right-28 bottom-[160px] 
-    md:absolute md:right-44 md:top-2/4 md:mt-5"
->
-
+            <div className="
+            absolute
+            right-28
+            bottom-[160px]
+            md:absolute 
+            md:right-44 
+            md:top-2/4 
+            md:mt-5 
+                ">
                 <button className="
                     bg-[#333140] 
                     border 
@@ -190,6 +202,7 @@ export default function PersonalInfoForm() {
                     transition
                     hover:bg-[#25232e]">Se déconnecter</button>
             </div>
-            </>
+        </section>
+
     )
 }
