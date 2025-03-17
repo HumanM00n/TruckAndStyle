@@ -58,7 +58,7 @@ export async function GET(req: Request) {
 
     // Mise à jour de l'uilisateur 
     export async function PUT(req: Request) {
-        const { id, lastName, firstName, email, password, phone_number, city } = await req.json();
+        const { id, lastName, firstName, email, password, phone_number } = await req.json();
 
     try {
       let hashedPassword;
@@ -74,10 +74,9 @@ export async function GET(req: Request) {
                      user_email = COALESCE(?, user_email),
                      user_password = COALESCE(?, user_password),
                      user_phone_number = COALESCE(?, user_phone_number),
-                     user_city = COALESCE(?, user_city)
                    WHERE id_users = ?`;
 
-    const values = [id, lastName, firstName, email, hashedPassword, phone_number, city];
+    const values = [id, lastName, firstName, email, hashedPassword, phone_number];
     const [result] = await pool.execute<ResultSetHeader>(query, values);
     
 
