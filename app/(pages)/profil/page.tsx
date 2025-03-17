@@ -1,11 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import PersonalInfoForm from "@/app/ui/monCompte";
-import MyBookings from "@/app/ui/mesRervations";
+import MonCompte from "@/app/ui/monCompte";
 
 export default function page() {
     return (
-        // <PersonalInfoForm/>
-        <MyBookings />
-
+        <MonCompte/> 
     );
 }
