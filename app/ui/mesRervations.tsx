@@ -5,11 +5,12 @@
 export default function MyBookings() {
 
   return (
+    <>
     <section className="w-full text-white md:min-h-[390px]">
       <div className="flex flex-col justify-center items-center gap-8 md:flex-row md:justify-around md:items-start">
-        <div className="rounded-md px-36 py-9 mt-3 bg--form">
-          <p className="mb-2">Mes Informations</p>
-          <p className="font-bold ">Mes réservations</p>
+        <div className="flex flex-col rounded-md px-36 py-9 mt-3 bg--form">
+          <button className="mb-2 transition-transform duration-200 hover:scale-105 hover:shadow-xl">Mes Informations</button>
+          <button className="transition-transform duration-200 hover:scale-105 hover:shadow-xl">Mes réservations</button>
         </div>
 
         <div className="w-[420px] mb-14">
@@ -98,5 +99,7 @@ export default function MyBookings() {
         </div>
       </div>
     </section>
+
+    </>
   );
 }
