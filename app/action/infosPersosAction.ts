@@ -1,7 +1,6 @@
 'use server';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { useState } from "react";
 import pool from "../_lib/db";
 import { console } from "inspector";
 
