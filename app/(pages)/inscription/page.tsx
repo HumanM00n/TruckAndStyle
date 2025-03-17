@@ -6,9 +6,6 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 
-
-    
-
 export default function InscriptionPage() {
     const [formData, setFormData] = useState({
         nom: "",
@@ -21,11 +18,6 @@ export default function InscriptionPage() {
         password: ""
         
     });
-
-      
-    
-    
-
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -59,7 +51,7 @@ export default function InscriptionPage() {
             <Link className="hoverMarron" href="/inscription">inscription</Link>
 
             {/* IMAGE */}
-            <div className="hidden lg:w-2/5 md:block h-full relative left-96">
+            <div className="hidden md:w-2/5 md:block h-full relative left-96">
                 <img
                     src="/assets/photoTondeuse.jpg"
                     className="w-full h-full object-cover"
