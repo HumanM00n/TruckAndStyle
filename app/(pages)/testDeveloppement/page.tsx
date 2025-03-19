@@ -13,7 +13,6 @@ export default function page() {
     return (
         <>
             <div className="
-            
             w-full 
             h-auto 
             flex 
@@ -23,11 +22,10 @@ export default function page() {
             md:pb-0
             ">
                 <form className="
-                 
                 w-[600px]
                 grid-cols-1 
                 bg--form 
-                px-10 
+                px-14
                 py-9
                 rounded-md 
                 md:mt-10
@@ -54,7 +52,7 @@ export default function page() {
                     </div>
 
                     {/* N° TEL & DDN */}
-                    <div className=" flex justify-center gap-4 mb-4">
+                    <div className=" flex justify-center relative gap-4 mb-4">
                         <input className="
                         form-control 
                         text-[15px]
@@ -70,6 +68,14 @@ export default function page() {
                         type="date" 
                         data-placeholder="Date de naissance"
                         id="dateNaissance" />
+                        <span className="
+                        absolute 
+                        text-xs 
+                        top-10
+                        right-[115px]
+                        italic
+                        color--noir
+                        ">*Date de naissance*</span>
                     </div>
 
                     {/* EMAIL */}

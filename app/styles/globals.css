@@ -157,6 +157,18 @@
     color: var(--marronNoisetteMid);
   }
 
+  #dateNaissance[type="date"]::-webkit-datetime-edit {
+    color: #8C5744;
+    /* color: red; */
+    opacity: 70;
+    content: attr(data-placeholder);
+  }
+
+
+  #dateNaissance[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+  }
+
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
