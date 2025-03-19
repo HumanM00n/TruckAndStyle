@@ -1,16 +1,33 @@
 'use client';
 
-import Link from "next/link";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
-import { faCalendar, faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { useRef } from "react";
 
 
 export default function page() {
 
     const inputRef = useRef<HTMLInputElement | null>(null);
+
+    const [formData, setFormData] = useState({
+        nom: "",
+        prenom: "",
+        telephone: "",
+        dateNaissance: "",
+        email: "",
+        motDePasse: "",
+        departement: "",
+        codePostal: "",
+        ville: ""
+    });
+
+    function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+        setFormData({ ...formData, [event.target.name]: event.target.value });
+    }
+
+
     const [showPassword, setshowPassword] = useState(false);
 
     return (
@@ -44,6 +61,9 @@ export default function page() {
                         text-[15px]
                         placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
                             type="text"
+                            name="nom"
+                            value={formData.nom}
+                            onChange={handleChange}
                             placeholder="Nom" />
 
                         <input className="
@@ -51,6 +71,9 @@ export default function page() {
                         text-[15px]
                         placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
                             type="text"
+                            name="prenom"
+                            value={formData.prenom}
+                            onChange={handleChange}
                             placeholder="Prénom" />
                     </div>
 
@@ -61,7 +84,9 @@ export default function page() {
                         text-[15px]
                         placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
                             type="tel"
-                            id=""
+                            name="telephone"
+                            value={formData.telephone}
+                            onChange={handleChange}
                             placeholder="N° Tel" />
 
                         <input className="
@@ -71,6 +96,9 @@ export default function page() {
                             type="date"
                             data-placeholder="Date de naissance"
                             id="dateNaissance"
+                            name="dateNaissance"
+                            value={formData.dateNaissance}
+                            onChange={handleChange}
                             ref={inputRef} />
 
                         <FontAwesomeIcon
@@ -97,8 +125,10 @@ export default function page() {
                         text-[15px]
                         placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
                             type="email"
-                            placeholder="Email"
-                            id="" />
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            placeholder="Email" />
                     </div>
 
                     <div className="relative w-full mb-4">
@@ -110,7 +140,11 @@ export default function page() {
                             rounded-md 
                             border border-gray-300 
                             placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
+                            name="motDePasse"
+                            value={formData.motDePasse}
+                            onChange={handleChange}
                             placeholder="Mot de passe"
+                            
                         />
 
                         <FontAwesomeIcon
@@ -136,17 +170,21 @@ export default function page() {
                         form-control 
                         text-[15px]
                         placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
-                            type="text"
-                            // value={}
-                            id=""
-                            placeholder="Département" />
+                        type="text"
+                        name="departement"
+                        value={formData.departement}
+                        onChange={handleChange}
+                        placeholder="Département" />
 
                         <input className="
                         form-control 
                         text-[15px]
                         placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
-                            type="number"
-                            placeholder="Code Postal" />
+                        type="number"
+                        name="codePostal"
+                        value={formData.codePostal}
+                        onChange={handleChange}
+                        placeholder="Code Postal" />
                     </div>
 
                     {/* VILLE */}
@@ -154,8 +192,11 @@ export default function page() {
                         <input className="form-control 
                         text-[15px]
                         placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
-                            type="text"
-                            placeholder="Ville" />
+                        type="text"
+                        name="ville"
+                        value={formData.ville}
+                        onChange={handleChange}
+                        placeholder="Ville" />
                     </div>
 
                     {/* BTN */}
