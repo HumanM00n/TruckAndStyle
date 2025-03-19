@@ -4,10 +4,13 @@ import Link from "next/link";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
+import { faCalendar, faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import { useRef } from "react";
 
 
 export default function page() {
 
+    const inputRef = useRef<HTMLInputElement | null>(null);
     const [showPassword, setshowPassword] = useState(false);
 
     return (
@@ -39,16 +42,16 @@ export default function page() {
                         <input className="
                         form-control 
                         text-[15px]
-                        placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition" 
-                        type="text" 
-                        placeholder="Nom" />
+                        placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
+                            type="text"
+                            placeholder="Nom" />
 
                         <input className="
                         form-control 
                         text-[15px]
-                        placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition" 
-                        type="text" 
-                        placeholder="Prénom" />
+                        placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
+                            type="text"
+                            placeholder="Prénom" />
                     </div>
 
                     {/* N° TEL & DDN */}
@@ -56,26 +59,35 @@ export default function page() {
                         <input className="
                         form-control 
                         text-[15px]
-                        placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition" 
-                        type="tel" 
-                        id="" 
-                        placeholder="N° Tel" />
+                        placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
+                            type="tel"
+                            id=""
+                            placeholder="N° Tel" />
 
                         <input className="
                         form-control 
                         text-[15px]
-                        placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition" 
-                        type="date" 
-                        data-placeholder="Date de naissance"
-                        id="dateNaissance" />
-                        <span className="
-                        absolute 
+                        placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition appearance-none cursor-pointer"
+                            type="date"
+                            data-placeholder="Date de naissance"
+                            id="dateNaissance"
+                            ref={inputRef} />
+
+                        <FontAwesomeIcon
+                            icon={faCalendarAlt}
+                            className="w-5 h-4 absolute right-3 top-1/2 transform -translate-y-1/2 color--marronNoisetteMid"
+                            onClick={() => inputRef.current?.showPicker()}
+                        />
+
+                        <span className="absolute 
                         text-xs 
                         top-10
                         right-[115px]
                         italic
-                        color--noir
+                        text-black
+                        font-[530]
                         ">*Date de naissance*</span>
+
                     </div>
 
                     {/* EMAIL */}
@@ -83,10 +95,10 @@ export default function page() {
                         <input className="
                         form-control 
                         text-[15px]
-                        placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition" 
-                        type="email" 
-                        placeholder="Email" 
-                        id="" />
+                        placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
+                            type="email"
+                            placeholder="Email"
+                            id="" />
                     </div>
 
                     <div className="relative w-full mb-4">
@@ -110,7 +122,9 @@ export default function page() {
                             right-3 
                             top-1/2 transform -translate-y-1/2 
                             cursor-pointer
-                            placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
+                            transition
+                            color--marronNoisetteMid
+                            "
                             onClick={() => setshowPassword(!showPassword)}
                         />
                     </div>
@@ -121,27 +135,27 @@ export default function page() {
                         <input className="
                         form-control 
                         text-[15px]
-                        placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition" 
-                        type="text" 
-                        // value={}
-                        id=""
-                        placeholder="Département" />
+                        placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
+                            type="text"
+                            // value={}
+                            id=""
+                            placeholder="Département" />
 
                         <input className="
                         form-control 
                         text-[15px]
-                        placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition" 
-                        type="number" 
-                        placeholder="Code Postal" />
+                        placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
+                            type="number"
+                            placeholder="Code Postal" />
                     </div>
 
                     {/* VILLE */}
                     <div className="flex justify-center gap-4 mb-4">
                         <input className="form-control 
                         text-[15px]
-                        placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition" 
-                        type="text" 
-                        placeholder="Ville" />
+                        placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
+                            type="text"
+                            placeholder="Ville" />
                     </div>
 
                     {/* BTN */}
@@ -158,8 +172,8 @@ export default function page() {
                 md:w-2/5
                 md:block">
                     <img
-                    src="/assets/photoTondeuse.jpg"
-                    className="w-full h-[650px] object-cover"
+                        src="/assets/photoTondeuse.jpg"
+                        className="w-full h-[650px] object-cover"
                     />
 
                 </div>
