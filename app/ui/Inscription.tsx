@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import Toastify from "toastify-js";
-import { registerUser } from "../action/inscriptionAction";
+import { registerUser } from "../_action/inscriptionAction";
 
 export default function Inscription() {
     

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { getPersonalInfo, updatPersonalInfo } from "../action/infosPersosAction";
+import { getPersonalInfo, updatPersonalInfo } from "../_action/infosPersosAction";
 
 export default function PersonalInfoForm() {
 

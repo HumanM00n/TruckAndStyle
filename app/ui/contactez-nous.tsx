@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Toastify from "toastify-js";
-import { sendPostContact } from "../action/contactAction";
+import { sendPostContact } from "../_action/contactAction";
 
 export default function ContactezNous() {
 
