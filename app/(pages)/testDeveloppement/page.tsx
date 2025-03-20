@@ -1,17 +1,19 @@
 'use client';
 
-import { ReactElement, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { registerUser } from "@/app/_action/inscriptionAction";
+import Toastify from "toastify-js";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { useRef } from "react";
-import { log } from "console";
 
 
 export default function page() {
+
+    const [message] = useState("");
 
     const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -37,6 +39,7 @@ export default function page() {
 
     async function handleSubmit(event: React.FormEvent) {
         event.preventDefault();
+        
         const formDataToSend = new FormData();
         Object.entries(formData).forEach(([key, value]) => formDataToSend.append(key, value));
 
@@ -46,11 +49,59 @@ export default function page() {
         }
 
         const response = await registerUser(formDataToSend); // Appel de la function du fichier Server Action
-
         console.log("Reponse du serveur :", response);
-        
-        alert(response.message); 
+
+        if (response.success) {
+            Toastify({
+                text: response.message,
+                duration: 5000,
+                style: {
+                    width: "275px",
+                    //
+                    display: "flex",
+                    //
+                    background: "#4F5372",
+                    color: "white",
+                    //
+                    padding: "10px 10px 10px 46px",
+                    position: "absolute",
+                    right: "20px",
+                    top: "20px",
+                    //
+                    borderRadius: "8px",
+                    zIndex: "9999",
+                    fontSize: "14px",
+                }
+            }).showToast();
+
+        } else {
+
+            const toast = Toastify({
+                text: response.message,
+                duration: 5000,
+                gravity: "top",
+                position: "right",
+                style: {
+                    width: "300px",
+                    //
+                    display: "flex",
+                    //
+                    background: "#810a0a",
+                    color: "white",
+                    //
+                    padding: "10px 10px 10px 17px",
+                    position: "absolute",
+                    right: "20px",
+                    top: "20px",
+                    //
+                    borderRadius: "8px",
+                    zIndex: "9999",
+                    fontSize: "14px",
+                }
+            }).showToast();
+        }
     }
+
 
     return (
         <>
@@ -166,7 +217,7 @@ export default function page() {
                             value={formData.motDePasse}
                             onChange={handleChange}
                             placeholder="Mot de passe"
-                            
+
                         />
 
                         <FontAwesomeIcon
@@ -192,21 +243,21 @@ export default function page() {
                         form-control 
                         text-[15px]
                         placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
-                        type="text"
-                        name="departement"
-                        value={formData.departement}
-                        onChange={handleChange}
-                        placeholder="Département" />
+                            type="text"
+                            name="departement"
+                            value={formData.departement}
+                            onChange={handleChange}
+                            placeholder="Département" />
 
                         <input className="
                         form-control 
                         text-[15px]
                         placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
-                        type="number"
-                        name="codePostal"
-                        value={formData.codePostal}
-                        onChange={handleChange}
-                        placeholder="Code Postal" />
+                            type="number"
+                            name="codePostal"
+                            value={formData.codePostal}
+                            onChange={handleChange}
+                            placeholder="Code Postal" />
                     </div>
 
                     {/* VILLE */}
@@ -214,19 +265,19 @@ export default function page() {
                         <input className="form-control 
                         text-[15px]
                         placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
-                        type="text"
-                        name="ville"
-                        value={formData.ville}
-                        onChange={handleChange}
-                        placeholder="Ville" />
+                            type="text"
+                            name="ville"
+                            value={formData.ville}
+                            onChange={handleChange}
+                            placeholder="Ville" />
                     </div>
 
                     {/* BTN */}
                     <div className="flex justify-center gap-4 mb-4 text-white">
-                        <button className="btn btn-outline-light text-[15px] rounded-xs hover:bg-white hover:text-[#733E34]" 
+                        <button className="btn btn-outline-light text-[15px] rounded-xs hover:bg-white hover:text-[#733E34]"
                             type="submit"
                             onClick={handleSubmit}>
-                                Créer mon compte
+                            Créer mon compte
                         </button>
                     </div>
 
@@ -241,7 +292,7 @@ export default function page() {
                     </div>
                 </form>
 
-                
+
 
                 <div className="
                 hidden 
