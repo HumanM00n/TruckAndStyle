@@ -50,7 +50,7 @@ export async function registerUser(formData: FormData) {
         const [existingUsers] = await pool.query("SELECT * FROM tns_users WHERE user_email = ?", [user_email]);
 
         if ((existingUsers as any[]).length > 0) {
-            return { success: false, message: "L'utilisateur existe déjà." };
+            return { success: false, message: "Cette adresse mail est déjà utilisée. Veuillez en choisir une autre." };
         }
 
         // Hasher le mot de passe
