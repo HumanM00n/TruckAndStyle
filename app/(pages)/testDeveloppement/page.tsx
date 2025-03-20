@@ -51,7 +51,7 @@ export default function page() {
                 px-14
                 py-9
                 rounded-md 
-                md:mt-10
+                lg:mt-10
                 md:translate-x-1/2
                 md:z-50
                 md:max-h-[650px]">
