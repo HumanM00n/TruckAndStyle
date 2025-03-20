@@ -1,6 +1,9 @@
 'use client';
 
 import { useState } from "react";
+import Link from "next/link";
+import { registerUser } from "@/app/_action/inscriptionAction";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
@@ -51,7 +54,7 @@ export default function page() {
                 md:mt-10
                 md:translate-x-1/2
                 md:z-50
-                md:max-h-[550px]">
+                md:max-h-[650px]">
                     <h1 className="text-white text-center mb-4 text-2xl">Inscription</h1>
 
                     {/* NOM & PRENOM */}
@@ -203,7 +206,19 @@ export default function page() {
                     <div className="flex justify-center gap-4 mb-4 text-white">
                         <button className="btn btn-outline-light text-[15px] rounded-xs hover:bg-white hover:text-[#733E34]" type="submit">Créer mon compte</button>
                     </div>
+
+                    <div className="flex items-center my-10">
+                        <hr className="flex-grow border-white" />
+                        <span className="mx-4 text-light">OU</span>
+                        <hr className="flex-grow border-white" />
+                    </div>
+
+                    <div className="underline underline-offset-1 text-light font-montserrat mt-6 text-xs text-center">
+                        <Link href={"connexion"}>Vous n&apos;avez pas de compte ? Créez-en un !</Link>
+                    </div>
                 </form>
+
+                
 
                 <div className="
                 hidden 
@@ -214,7 +229,7 @@ export default function page() {
                 md:block">
                     <img
                         src="/assets/photoTondeuse.jpg"
-                        className="w-full h-[650px] object-cover"
+                        className="w-full h-[718px] object-cover"
                     />
 
                 </div>
