@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 import Link from "next/link";
 import { registerUser } from "@/app/_action/inscriptionAction";
 
@@ -8,19 +8,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { useRef } from "react";
+import { log } from "console";
 
 
 export default function page() {
 
     const inputRef = useRef<HTMLInputElement | null>(null);
 
+    // Affichage du mot de passe
+    const [showPassword, setshowPassword] = useState(false);
+
     const [formData, setFormData] = useState({
         nom: "",
         prenom: "",
         telephone: "",
-        dateNaissance: "",
         email: "",
         motDePasse: "",
+        dateNaissance: "",
         departement: "",
         codePostal: "",
         ville: ""
@@ -31,7 +35,22 @@ export default function page() {
     }
 
 
-    const [showPassword, setshowPassword] = useState(false);
+    async function handleSubmit(event: React.FormEvent) {
+        event.preventDefault();
+        const formDataToSend = new FormData();
+        Object.entries(formData).forEach(([key, value]) => formDataToSend.append(key, value));
+
+        //Affiche les données envoyées 
+        for (let pair of formDataToSend.entries()) {
+            console.log(`${pair[0]}: ${pair[1]}`);
+        }
+
+        const response = await registerUser(formDataToSend); // Appel de la function du fichier Server Action
+
+        console.log("Reponse du serveur :", response);
+        
+        alert(response.message); 
+    }
 
     return (
         <>
@@ -204,7 +223,11 @@ export default function page() {
 
                     {/* BTN */}
                     <div className="flex justify-center gap-4 mb-4 text-white">
-                        <button className="btn btn-outline-light text-[15px] rounded-xs hover:bg-white hover:text-[#733E34]" type="submit">Créer mon compte</button>
+                        <button className="btn btn-outline-light text-[15px] rounded-xs hover:bg-white hover:text-[#733E34]" 
+                            type="submit"
+                            onClick={handleSubmit}>
+                                Créer mon compte
+                        </button>
                     </div>
 
                     <div className="flex items-center my-10">
@@ -214,7 +237,7 @@ export default function page() {
                     </div>
 
                     <div className="underline underline-offset-1 text-light font-montserrat mt-6 text-xs text-center">
-                        <Link href={"connexion"}>Vous n&apos;avez pas de compte ? Créez-en un !</Link>
+                        <Link href={"connexion"}>Vous avez déjà un compte ? Connectez-vous !</Link>
                     </div>
                 </form>
 
