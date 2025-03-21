@@ -1,10 +1,12 @@
 'use client';
 
-import { useState } from "react";
 import Link from "next/link";
+import { useState, useEffect, } from "react";
 import { registerUser } from "@/app/_action/inscriptionAction";
-import Toastify from "toastify-js";
+import { useRouter } from "next/navigation"; 
 
+
+import Toastify from "toastify-js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
@@ -13,7 +15,9 @@ import { useRef } from "react";
 
 export default function Inscription() {
 
-    const [message] = useState("");
+    const [message, setMessage] = useState("");
+    const [success, setSuccess] = useState(false);
+    const router = useRouter();
 
     const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -43,11 +47,6 @@ export default function Inscription() {
         const formDataToSend = new FormData();
         Object.entries(formData).forEach(([key, value]) => formDataToSend.append(key, value));
 
-        //Affiche les données envoyées 
-        for (let pair of formDataToSend.entries()) {
-            console.log(`${pair[0]}: ${pair[1]}`);
-        }
-
         const response = await registerUser(formDataToSend); // Appel de la function du fichier Server Action
         console.log("Reponse du serveur :", response);
 
@@ -63,7 +62,7 @@ export default function Inscription() {
                     background: "#4F5372",
                     color: "white",
                     //
-                    padding: "10px 10px 10px 46px",
+                    padding: "10px 10px 10px 20px",
                     position: "absolute",
                     right: "20px",
                     top: "20px",
@@ -73,6 +72,8 @@ export default function Inscription() {
                     fontSize: "14px",
                 }
             }).showToast();
+
+            setSuccess(true);            
 
         } else {
 
@@ -101,6 +102,14 @@ export default function Inscription() {
             }).showToast();
         }
     }
+
+    useEffect(() => {
+        if(success) {
+            setTimeout(() => {
+                router.push('/connexion');
+            }, 2500);
+        }
+    }, [success, router]);
 
 
     return (
