@@ -37,7 +37,7 @@ export async function registerUser(formData: FormData) {
         const [existingPhoneNumber] = await pool.query("SELECT * FROM tns_users WHERE user_phone_number = ?", [user_phone_number]);
 
         if ((existingPhoneNumber as any[]).length > 0) {
-            return { success: false, message: "Le numéro de téléphone est déjà attribué à un utilisateur." };
+            return { success: false, message: "Le numéro de téléphone est déjà associé à un utilisateur." };
         }
 
     } catch(error) {
@@ -69,7 +69,7 @@ export async function registerUser(formData: FormData) {
             return { success: false, message: "Erreur lors de la création du compte." };
         }
 
-        return { success: true, message: "Inscription réussie !" };
+        return { success: true, message: "Votre compte a bien été crée ! Vous allez être redirigé." };
 
     } catch (error) {
         console.error("Erreur serveur :", error);
