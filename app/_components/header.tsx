@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-// import { useSession, signIn } from "next-auth/react"; 
+import { useSession, signIn } from "next-auth/react"; 
 
 export default function Header() {
     // MENU BURGER
