@@ -37,7 +37,7 @@ export async function registerUser(formData: FormData) {
         const [existingPhoneNumber] = await pool.query("SELECT * FROM tns_users WHERE user_phone_number = ?", [user_phone_number]);
 
         if ((existingPhoneNumber as any[]).length > 0) {
-            return { success: false, message: "Le numéro de téléphone est déjà utilisé" };
+            return { success: false, message: "Le numéro de téléphone est déjà attribué à un utilisateur." };
         }
 
     } catch(error) {
