@@ -9,18 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/core": "^0.38.0",
     "@fontsource/playfair-display": "^5.1.1",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
     "@fortawesome/free-regular-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
-
     "@tailwindcss/vite": "^4.0.5",
-
     "autoprefixer": "^10.4.20",
     "bcrypt": "^5.1.1",
-
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.3",
     "dotenv": "^16.4.7",
@@ -28,7 +26,7 @@
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.12.0",
     "next": "15.1.4",
-    "next-auth": "^4.24.11",
+    "next-auth": "^4.24.7",
     "node-fetch": "^3.3.2",
     "npm": "^11.1.0",
     "ou": "^0.0.2",
