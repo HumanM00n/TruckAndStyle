@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { connectionUser } from "../_action/connexionAction";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
@@ -16,7 +16,6 @@ export default function LoginPage() {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [password, setPassword] = useState("");
     const [error, setError] = useState<string | null>(null);
-    const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
 
 
@@ -28,7 +27,7 @@ export default function LoginPage() {
         if (result.error) {
             setError(result.error);
         } else {
-            router.push("/"); // Rediriger l'utilisateur après connexion
+            redirect("/"); // Rediriger l'utilisateur après connexion
         }
     };
 
