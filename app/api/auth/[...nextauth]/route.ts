@@ -1,4 +1,4 @@
-import NextAuth from 'next-auth';
+import NextAuth, { type AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import jwt from 'jsonwebtoken'; 
 import pool from '@/app/_lib/db';
@@ -19,14 +19,14 @@ export const authOptions = {
                 const [users] = await pool.query("SELECT * FROM tns_users WHERE user_email = ?", [email]);
 
                 if ((users as any[]).length === 0) {
-                    return null; // L'utilisateur n'existe pas
+                    return null; // L'utilisateur n'existe pas || Ajouter un message d'erreur
                 }
 
                 const user = (users as any[])[0];
 
                 // Vérifie le mot de passe (ici on le compare de manière simple)
                 if (password !== user.user_password) {
-                    return null; // Mot de passe incorrect
+                    return null; // Mot de passe incorrect || Ajouter un message d'erreur
                 }
 
                 // Génération du Toekn pour l'utilisateur
@@ -57,11 +57,11 @@ export const authOptions = {
     },
 
     session: {
-        strategy: 'jwt' as 'jwt',  // Utilisation explicite de la valeur 'jwt'
+        strategy: 'jwt' as 'jwt',  // Utilisation de la valeur 'jwt'
     },    
 
-    secret: process.env.JWT_SECRET,  // Assure-toi que cette clé est définie dans ton .env
+    secret: process.env.JWT_SECRET, 
 };
 
-const handler = NextAuth(authOptions);  // Utilisation de authOptions ici
+const handler = NextAuth(authOptions); 
 export { handler as GET, handler as POST };
