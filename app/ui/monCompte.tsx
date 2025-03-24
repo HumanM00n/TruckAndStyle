@@ -19,8 +19,8 @@ export default function MonCompte() {
                     <button className="transition-transform duration-200 hover:scale-105 hover:shadow-xl"
                     >Mes réservations</button>
                 </div>
-                    {/* <PersonalInfoForm /> */}
-                    <MyBookings />
+                    <PersonalInfoForm />
+                    {/* <MyBookings /> */}
 
 
             </div>
