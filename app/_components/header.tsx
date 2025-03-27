@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { useSession, signIn } from "next-auth/react"; 
 
 export default function Header() {
     // MENU BURGER
@@ -37,7 +36,7 @@ export default function Header() {
                 {/* Barre de navigation */}
                 <nav className="hidden lg:flex h-20 border border-gray-300 rounded-md items-center py-6 px-6 gap-16">
                     <Link className="hoverMarron" href="/">Réservations</Link>
-                    <Link className="hoverMarron" href="/">À propos</Link>
+                    <Link className="hoverMarron" href="/a-propos">À propos</Link>
                     <Link className="hoverMarron" href="/contactez-nous">Contactez-nous</Link>
                 </nav>
 

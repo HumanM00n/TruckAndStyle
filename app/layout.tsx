@@ -15,6 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     const titlePage = pathnameUrl[1] || "Accueil";
     
   return (
+    
     <html lang="en">
       <head>
         <meta charSet="UTF-8" />

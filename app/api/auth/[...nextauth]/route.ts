@@ -1,9 +1,12 @@
-import NextAuth, { type AuthOptions } from "next-auth";
+/* eslint-disable @typescript-eslint/prefer-as-const */
+import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import jwt from 'jsonwebtoken'; 
 import pool from '@/app/_lib/db';
+import { cookies } from "next/headers";
 
 export const authOptions = {
+
     providers: [
         CredentialsProvider({
             name: "Credentials",
@@ -32,6 +35,14 @@ export const authOptions = {
                 // Génération du Toekn pour l'utilisateur
                 const secret = process.env.JWT_SECRET;
                 const token = jwt.sign({ id: user.id_users, email: user.user_email }, secret!, { expiresIn: "1h" });
+
+                (await cookies()).set("token", token, {
+                    httpOnly: true,
+                    maxAge: 3600, //Expire dans 1h
+                    // path: '/'
+                });
+
+                console.log('Token envoyé', token);
 
                 return { id: user.id_users, email: user.user_email, token };
             },

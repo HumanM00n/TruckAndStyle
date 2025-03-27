@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/navigation"; // Utiliser useRouter pour la redirection
+// import { useRouter } from "next/navigation"; // Utiliser useRouter pour la redirection
 import { signIn } from "next-auth/react"; // Importer signIn
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
@@ -13,7 +13,7 @@ export default function LoginPage() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState<string | null>(null);
     const [showPassword, setShowPassword] = useState(false);
-    const router = useRouter(); // Hook pour la navigation
+    // const router = useRouter(); 
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -27,7 +27,7 @@ export default function LoginPage() {
         if (result?.error) {
             setError("Échec de la connexion, vérifiez vos informations.");
         } else {
-            router.push("/"); // Redirige vers la page souhaitée après connexion
+            // router.push("/"); 
         }
     };
 
