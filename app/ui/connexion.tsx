@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-// import { useRouter } from "next/navigation"; // Utiliser useRouter pour la redirection
+import router from "next/router";
 import { signIn } from "next-auth/react"; // Importer signIn
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
