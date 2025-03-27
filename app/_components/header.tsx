@@ -5,6 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { useSession } from "next-auth/react";
 
 export default function Header() {
     // MENU BURGER
@@ -14,6 +16,8 @@ export default function Header() {
         setMenuOpen(!menuOpen);
         console.log(menuOpen);
     };
+
+    const { data: session, status } = useSession();
 
     return (
         <header className="w-full h-auto flex justify-center font-montserrat bg--noir text-base text-white z-50">
@@ -40,12 +44,21 @@ export default function Header() {
                     <Link className="hoverMarron" href="/contactez-nous">Contactez-nous</Link>
                 </nav>
 
-                {/* Connexion et Inscription */}
-                <div className="hidden lg:flex h-20 w-60 justify-center gap-6 items-center">
-                    <Link className="hoverMarron" href="/connexion">Connexion</Link> {/* Lien ajouté pour faire des tests */}
-                    <Link className="hoverMarron" href="/inscription">Inscription</Link>
+                {session ? (
+                    <div className="hidden lg:flex h-20 w-60 justify-center gap-6 items-center">
+                        <Link className="hoverMarron" href="/profil"><FontAwesomeIcon icon={faUser} /></Link>
+                    </div>
+                ) : (
+                    <>
+                        {/* Connexion et Inscription */}
+                        <div className="hidden lg:flex h-20 w-60 justify-center gap-6 items-center">
+                            <Link className="hoverMarron" href="/connexion">Connexion</Link>
+                            <Link className="hoverMarron" href="/inscription">Inscription</Link>
+                        </div>
+                    </>
+                )}
 
-                </div>
+
 
 
                 {/*---------------------------------------------
@@ -59,16 +72,18 @@ export default function Header() {
             </div>
 
             {/* Menu Mobile (Affiché si menuOpen est vrai) */}
-            {menuOpen && (
-                <div className="lg:hidden absolute bg--grisArdoise top-20 left-0 w-full flex flex-col items-center gap-4 py-4 mt-14 z-10 transition">
-                    <Link className="hoverMarron" href="/pages">Réservations</Link>
-                    <Link className="hoverMarron" href="/">À propos</Link>
-                    <Link className="hoverMarron" href="/">Contactez-nous</Link>
-                    <Link className="hoverMarron" href="/connexion">Connexion</Link>
-                    <Link className="hoverMarron" href="/inscription">Inscription</Link>
+            {
+                menuOpen && (
+                    <div className="lg:hidden absolute bg--grisArdoise top-20 left-0 w-full flex flex-col items-center gap-4 py-4 mt-14 z-10 transition">
+                        <Link className="hoverMarron" href="/pages">Réservations</Link>
+                        <Link className="hoverMarron" href="/">À propos</Link>
+                        <Link className="hoverMarron" href="/">Contactez-nous</Link>
+                        <Link className="hoverMarron" href="/connexion">Connexion</Link>
+                        <Link className="hoverMarron" href="/inscription">Inscription</Link>
 
-                </div>
-            )}
-        </header>
+                    </div>
+                )
+            }
+        </header >
     );
 }

@@ -2,8 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { getPersonalInfo, updatPersonalInfo } from "../_action/infosPersosAction";
+import { useSession } from "next-auth/react";
 
 export default function PersonalInfoForm() {
+
+    const { data: session, status } = useSession(); 
 
     const userId = 1;
     const [formData, setFormData] = useState({ lastname: "", firstname: "", phone: "", email: "", password: "" });

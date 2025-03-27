@@ -27,7 +27,7 @@ export default function LoginPage() {
         if (result?.error) {
             setError("Échec de la connexion, vérifiez vos informations.");
         } else {
-            // router.push("/"); 
+            router.push("/"); 
         }
     };
 
