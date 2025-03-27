@@ -1,16 +1,33 @@
 'use server';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { NextApiRequest, NextApiResponse } from 'next';
 import pool from "../_lib/db";
+import verifyToken from '../_lib/auth';
 import { console } from "inspector";
 
 // async (userId: string)  
-export const getPersonalInfo = async (userId: string | 1) => {
+export const getPersonalInfo = async (req: NextApiRequest, res: NextApiResponse) => {
+
+    const token = req.headers.authorization?.split(' ')[1]; // Récupe le token du header 
+
+    if(!token) {
+        return res.status(401).json({ message: 'Token manquant' });
+    }
+
+
+    const decoded = verifyToken(token);  // Vérifier et décoder le token
+
+    if (!decoded) {
+        return res.status(401).json({ message: 'Token invalide' });
+    }
+
+    // const userId = decoded.id;
 
     try {
         // Le premier any[] contient les resultats de la requêtes 
         // Le deuxième any[] contient les métadonnées des colonnes 
-        const [pullPersonnalInfos]: [any[], any] = await pool.query("SELECT user_lastname, user_firstname, user_email, user_phone_number, user_password FROM tns_users WHERE id_users = 1; ");
+        const [pullPersonnalInfos]: [any[], any] = await pool.query(`SELECT user_lastname, user_firstname, user_email, user_phone_number, user_password FROM tns_users WHERE id_users = ?;`, userId);
 
         if (!pullPersonnalInfos || pullPersonnalInfos.length === 0) {
             throw new Error("Une erreur lors de la récupérations des informations:")
@@ -46,7 +63,7 @@ export const updatPersonalInfo = async (newInfo: Partial<{ lastname: string; fir
 
         if (queryParts.length === 0) return null; // Aucun changement
 
-        const updateUserQuery = `UPDATE tns_users SET ${queryParts.join(", ")} WHERE id_users = 1`;
+        const updateUserQuery = `UPDATE tns_users SET ${queryParts.join(", ")} WHERE id_users = ?`;
         console.log("Requête Final :", updateUserQuery);
 
         await pool.query(updateUserQuery, values);
