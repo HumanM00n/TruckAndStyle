@@ -17,6 +17,7 @@ export default function Header() {
         console.log(menuOpen);
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { data: session, status } = useSession();
 
     return (
