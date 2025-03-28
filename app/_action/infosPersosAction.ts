@@ -7,27 +7,27 @@ import verifyToken from '../_lib/auth';
 import { console } from "inspector";
 
 // async (userId: string)  
-export const getPersonalInfo = async (req: NextApiRequest, res: NextApiResponse) => {
+export const getPersonalInfo = async (req: NextApiRequest, res: NextApiResponse) => { 
 
-    const token = req.headers.authorization?.split(' ')[1]; // Récupe le token du header 
+    // const token = req.headers.authorization?.split(' ')[1]; // Récupe le token du header 
 
-    if(!token) {
-        return res.status(401).json({ message: 'Token manquant' });
-    }
+    // if(!token) {
+    //     return res.status(401).json({ message: 'Token manquant' });
+    // }
 
 
-    const decoded = verifyToken(token);  // Vérifier et décoder le token
+    // const decoded = verifyToken(token);  // Vérifier et décoder le token
 
-    if (!decoded) {
-        return res.status(401).json({ message: 'Token invalide' });
-    }
+    // if (!decoded) {
+    //     return res.status(401).json({ message: 'Token invalide' });
+    // }
 
     // const userId = decoded.id;
 
     try {
         // Le premier any[] contient les resultats de la requêtes 
         // Le deuxième any[] contient les métadonnées des colonnes 
-        const [pullPersonnalInfos]: [any[], any] = await pool.query(`SELECT user_lastname, user_firstname, user_email, user_phone_number, user_password FROM tns_users WHERE id_users = ?;`, userId);
+        const [pullPersonnalInfos]: [any[], any] = await pool.query(`SELECT user_lastname, user_firstname, user_email, user_phone_number, user_password FROM tns_users WHERE id_users = 1;`);
 
         if (!pullPersonnalInfos || pullPersonnalInfos.length === 0) {
             throw new Error("Une erreur lors de la récupérations des informations:")
