@@ -3,7 +3,6 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import jwt from 'jsonwebtoken'; 
 import pool from '@/app/_lib/db';
-import { cookies } from "next/headers";
 
 export const authOptions = {
 
@@ -36,14 +35,6 @@ export const authOptions = {
                 const secret = process.env.JWT_SECRET;
                 const token = jwt.sign({ id: user.id_users, email: user.user_email }, secret!, { expiresIn: "1h" });
 
-                (await cookies()).set("token", token, {
-                    httpOnly: true,
-                    maxAge: 3600, //Expire dans 1h
-                    // path: '/'
-                });
-
-                console.log('Token envoyé', token);
-
                 return { id: user.id_users, email: user.user_email, token };
             },
         }),
@@ -55,7 +46,6 @@ export const authOptions = {
                 // Si un utilisateur se connecte, on lui ajoute le token JWT
                 token.accessToken = user.token;
             }
-
             return token;
         },
 
@@ -68,7 +58,8 @@ export const authOptions = {
     },
 
     session: {
-        strategy: 'jwt' as 'jwt',  // Utilisation de la valeur 'jwt'
+        strategy: 'jwt' as 'jwt',
+        maxAge: 3600  // Utilisation de la valeur 'jwt'
     },    
 
     secret: process.env.JWT_SECRET, 
