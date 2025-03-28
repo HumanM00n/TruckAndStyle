@@ -1,5 +1,3 @@
-'use client';
-
 import Providers from "../_components/providers";
 import Header from "../_components/header";
 import Footer from "../_components/footer";
