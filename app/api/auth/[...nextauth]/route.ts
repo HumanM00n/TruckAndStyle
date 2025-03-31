@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/prefer-as-const */
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import jwt from 'jsonwebtoken'; 
 import pool from '@/app/_lib/db';
 
 export const authOptions = {
 
     providers: [
         CredentialsProvider({
-            name: "Credentials",
+            name: "credentials",
             credentials: {
                 email: { type: "email" },
                 password: { type: "password" }
@@ -31,11 +30,7 @@ export const authOptions = {
                     return null; // Mot de passe incorrect || Ajouter un message d'erreur
                 }
 
-                // Génération du Toekn pour l'utilisateur
-                const secret = process.env.JWT_SECRET;
-                const token = jwt.sign({ id: user.id_users, email: user.user_email }, secret!, { expiresIn: "1h" });
-
-                return { id: user.id_users, email: user.user_email, token };
+                return { id: user.id_users, email: user.user_email };
             },
         }),
     ],
@@ -44,26 +39,31 @@ export const authOptions = {
         async jwt({ token, user }: any) {
             if (user) {
                 // Si un utilisateur se connecte, on lui ajoute le token JWT
-                token.accessToken = user.token;
+
+                token.id = user.id;
+                token.email = user.email;
             }
             return token;
         },
 
         async session({ session, token }: any) {
-            if (token) {
-                session.user.accessToken = token.accessToken;
-            }
+                session.user.id = token.id;
+                session.user.email = token.email;
+
             return session;
         },
     },
 
     session: {
         strategy: 'jwt' as 'jwt',
-        maxAge: 3600  // Utilisation de la valeur 'jwt'
+        maxAge: 3600
     },    
 
     secret: process.env.JWT_SECRET, 
 };
 
 const handler = NextAuth(authOptions); 
-export { handler as GET, handler as POST };
+
+export const GET = handler;
+export const POST = handler;
+
