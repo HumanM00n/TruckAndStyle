@@ -3,19 +3,20 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import router from "next/router";
-import { signIn } from "next-auth/react"; // Importer signIn
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react"; 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState<string | null>(null);
     const [showPassword, setShowPassword] = useState(false);
-    // const router = useRouter(); 
-
+    const [error, setError] = useState<string | null>(null);
+    const router = useRouter(); 
+    
     const handleLogin = async (e: React.FormEvent) => {
+        
         e.preventDefault();
 
         const result = await signIn("credentials", {
