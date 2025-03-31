@@ -7,7 +7,9 @@ import MyBookings from "@/app/ui/mesRervations";
 import { redirect } from "next/navigation";
 
 export default function MonCompte() {
-    const { data: session, status } = useSession();
+    const { data, status } = useSession();
+
+    console.log(data)
 
     const [mesInfosPersos, setMesInfosPersos] = useState(true);
 
