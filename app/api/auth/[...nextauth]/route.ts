@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/prefer-as-const */
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import bcrypt from "bcryptjs"; 
 import pool from '@/app/_lib/db';
 
 export const authOptions = {
@@ -20,14 +21,16 @@ export const authOptions = {
                 const [users] = await pool.query("SELECT * FROM tns_users WHERE user_email = ?", [email]);
 
                 if ((users as any[]).length === 0) {
-                    return null; // L'utilisateur n'existe pas || Ajouter un message d'erreur
+                    return null; // L'utilisateur n'existe pas
                 }
 
                 const user = (users as any[])[0];
 
-                // Vérifie le mot de passe (ici on le compare de manière simple)
-                if (password !== user.user_password) {
-                    return null; // Mot de passe incorrect || Ajouter un message d'erreur
+                // Vérifie le mot de passe hashé
+                const passwordMatch = await bcrypt.compare(password, user.user_password);
+
+                if (!passwordMatch) {
+                    return null; // Mot de passe incorrect
                 }
 
                 return { id: user.id_users, email: user.user_email };
@@ -47,9 +50,8 @@ export const authOptions = {
         },
 
         async session({ session, token }: any) {
-                session.user.id = token.id;
-                session.user.email = token.email;
-
+            session.user.id = token.id;
+            session.user.email = token.email;
             return session;
         },
     },
@@ -57,13 +59,12 @@ export const authOptions = {
     session: {
         strategy: 'jwt' as 'jwt',
         maxAge: 3600
-    },    
+    },
 
-    secret: process.env.JWT_SECRET, 
+    secret: process.env.JWT_SECRET,
 };
 
-const handler = NextAuth(authOptions); 
+const handler = NextAuth(authOptions);
 
 export const GET = handler;
 export const POST = handler;
-
