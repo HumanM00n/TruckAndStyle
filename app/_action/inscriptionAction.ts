@@ -61,7 +61,7 @@ export async function registerUser(formData: FormData) {
             `INSERT INTO tns_users (user_lastname, user_firstname, user_email, user_password, user_birthdate, user_phone_number, 
                 user_department, user_postcode, user_city, user_type) 
              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-            [user_lastname, user_firstname, user_email, hashedPassword, user_birthdate, user_phone_number, user_department, user_postcode, user_city, 2]
+            [user_lastname, user_firstname, user_email, hashedPassword, user_birthdate, user_phone_number, user_department, user_postcode, user_city, 3]
         );
         
 
