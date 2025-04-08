@@ -1,5 +1,5 @@
-import Accueil from "./ui/accueil";
 
-export default function page() {
-    <Accueil />
+export default function Page() {
+
+
 }
