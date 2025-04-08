@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { faCaretLeft, faPlay } from "@fortawesome/free-solid-svg-icons";
+import { faCaretLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Apropos() {
@@ -36,7 +36,7 @@ export default function Apropos() {
 
               <div className="text-center mt-3">
 
-                <h2 className="font-playfair text-xl font-[550] mb-2">Le hair'truck</h2>
+                <h2 className="font-playfair text-xl font-[550] mb-2">Le hair&apos;truck</h2>
                 <p className="capitalize text-left text-sm">Praesent ante libero, congue eu ante a, faucibus euismod lorem. In sit amet mauris non tellus laoreet porttitor. Aenean congue tincidunt rutrum. 
                   Etiam bibendum pharetra egestas. Sed sagittis rutrum tortor, sollicitudin vulputate ex finibus a. Aenean mauris magna, imperdiet quis ornare vel, finibus a erat. 
                   Vestibulum sem odio, placerat eu nunc ut, dictum malesuada nisl. Sed eget libero sed enim maximus porttitor.</p>
