@@ -1,5 +1,11 @@
-// import TestSession from "../_components/test";
+// app/page.tsx
 
-export default function Home() {
-    // return <TestSession />
+import Home from "../ui/accueil";
+
+export default function Page() {
+  return (
+    <div>
+        <Home />
+    </div>
+  );
 }
