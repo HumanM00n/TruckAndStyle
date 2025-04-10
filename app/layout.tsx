@@ -4,8 +4,6 @@ import { usePathname } from "next/navigation";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@/app/styles/globals.css";
-import 'mdb-react-ui-kit/dist/css/mdb.min.css';
-import 'bootstrap/dist/css/bootstrap.min.css'; 
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 
