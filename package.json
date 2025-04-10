@@ -24,6 +24,7 @@
     "dotenv": "^16.4.7",
     "install": "^0.13.0",
     "jsonwebtoken": "^9.0.2",
+    "mdb-react-ui-kit": "^9.0.0",
     "mysql2": "^3.12.0",
     "next": "15.1.4",
     "next-auth": "^4.24.7",
