@@ -4,9 +4,10 @@ import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function TsAvisPrix() {
+
     return (
         <section className="border-1 border-blue-500 min-h-auto bg--grisArdoiseMid ">
-            <div className="flex flex-col border-3 border-yellow-500">
+            <div className="flex flex-col">
                 <h2 className="text-3xl text-white pl-5">Vos <span className="color--form">Avis</span></h2>
 
                 <div id="carouselExampleDark" className="carousel carousel-light slide min-h-[400px] px-9" data-bs-ride="carousel">
@@ -39,7 +40,7 @@ export default function TsAvisPrix() {
 
                     {/* Slides */}
                     <div className="carousel-inner h-[340px] w-full mt-2 px-6 pt-2 pb-4">
-                            
+
                         <div className="carousel-item active h-[300px] bg--form rounded-lg" data-bs-interval="10000">
                             <FontAwesomeIcon icon={faCircleUser} className="text-5xl text-white pl-4 pt-3" />
                             <div className="carousel-caption rounded-lg h-1/2 d-md-block pb-0 position-absolute bottom-16 text-white text-left px-3  object-fill">
@@ -77,46 +78,83 @@ export default function TsAvisPrix() {
                 <div className="border-2 border-purple-500 w-full h-auto">
                     <h3 className="text-3xl text-white pl-5">Nos <span className="color--form">Prix</span></h3>
 
-                    <div className="border-1 border-green-500 flex justify-center ">
-                        <div className="accordion border w-[650px] mt-3" id="accordionPanelsStayOpenExample">
+                    <div className=" px-14">
+                        <div className="accordion accordion-flush" id="accordionFlushExample">
                             <div className="accordion-item">
                                 <h2 className="accordion-header">
-                                    <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                        Coupes de cheveux - courtes
+                                    <button
+                                        className="accordion-button collapsed"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseOne"
+                                        aria-expanded="false"
+                                        aria-controls="flush-collapseOne"
+                                    >
+                                        Accordion Item #1
                                     </button>
                                 </h2>
-                                <div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse show">
+                                <div
+                                    id="flush-collapseOne"
+                                    className="accordion-collapse collapse "
+                                    data-bs-parent="#accordionFlushExample"
+                                >
                                     <div className="accordion-body">
-                                        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                        Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.
                                     </div>
                                 </div>
                             </div>
+
                             <div className="accordion-item">
                                 <h2 className="accordion-header">
-                                    <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                                        Coupes de cheveux - Coupes mi-long
+                                    <button
+                                        className="accordion-button collapsed"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseTwo"
+                                        aria-expanded="false"
+                                        aria-controls="flush-collapseTwo"
+                                    >
+                                        Accordion Item #2
                                     </button>
                                 </h2>
-                                <div id="panelsStayOpen-collapseTwo" className="accordion-collapse collapse">
+                                <div
+                                    id="flush-collapseTwo"
+                                    className="accordion-collapse collapse"
+                                    data-bs-parent="#accordionFlushExample"
+                                >
                                     <div className="accordion-body">
-                                        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                        Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.
                                     </div>
                                 </div>
                             </div>
+
                             <div className="accordion-item">
                                 <h2 className="accordion-header">
-                                    <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                                    <button
+                                        className="accordion-button collapsed"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseThree"
+                                        aria-expanded="false"
+                                        aria-controls="flush-collapseThree"
+                                    >
                                         Accordion Item #3
                                     </button>
                                 </h2>
-                                <div id="panelsStayOpen-collapseThree" className="accordion-collapse collapse">
+                                <div
+                                    id="flush-collapseThree"
+                                    className="accordion-collapse collapse"
+                                    data-bs-parent="#accordionFlushExample"
+                                >
                                     <div className="accordion-body">
-                                        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                        Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
                 </div>
 
             </div>
