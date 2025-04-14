@@ -1,7 +1,14 @@
 "use client";
+import { Session } from "inspector/promises";
 import Image from "next/image";
+import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 export default function PsInformations() {
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { data: session, status } = useSession();
+
     return (
         <section className="h-auto w-auto">
 
@@ -31,15 +38,31 @@ export default function PsInformations() {
                     </p>
 
                     <div className="flex mt-3 gap-3">
-                        <button className="btn text-[15px] text-white rounded-xs bg--form
-              hover:bg-[#733e3471] hover:text-red-500">
-                            En savoir plus
-                        </button>
+                        <Link href={"/a-propos"}>
+                            <button className="btn text-[15px] text-white rounded-xs bg--form
+                            hover:bg-[#733e3471] hover:text-red-500">
+                                En savoir plus
+                            </button>
+                        </Link>
 
-                        <button className="btn btn-outline-light text-[15px] rounded-xs text-[#733E34] border-1 border-[#733E34]
-              hover:bg-white hover:text-[#733E34]">
-                            Réserver votre coupe
-                        </button>
+                        {session ? (
+                            <Link href={"/reservation"}>
+                                <button className="btn btn-outline-light text-[15px] rounded-xs text-[#733E34] border-1 border-[#733E34]
+                                                    hover:bg-white hover:text-[#733E34]">
+                                    Réserver votre coupe
+                                </button>
+                            </Link>
+
+                        ) : (
+                            <Link href={"/connexion"}>
+                                <button className="btn btn-outline-light text-[15px] rounded-xs text-[#733E34] border-1 border-[#733E34]
+                            hover:bg-white hover:text-[#733E34]">
+                                    Réserver votre coupe
+                                </button>
+                            </Link>
+
+                        )}
+
                     </div>
                 </div>
 
