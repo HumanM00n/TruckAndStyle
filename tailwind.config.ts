@@ -8,6 +8,9 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        'myBreakHome': '1608px'
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
