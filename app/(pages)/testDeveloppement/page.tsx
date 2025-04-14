@@ -8,9 +8,9 @@ export default function page() {
 
     return (
         <>
-            {/* <PsInformations /> */}
+            <PsInformations />
             {/* <DsInfosCoupes /> */}
-            <TsAvisPrix />
+            {/* <TsAvisPrix /> */}
         </>
     );
 }
