@@ -73,7 +73,7 @@ export default function LoginPage() {
                             />
                             <FontAwesomeIcon
                                 icon={showPassword ? faEye : faEyeSlash}
-                                className="absolute right-3 top-3 cursor-pointer"
+                                className="absolute right-2 top-3.5 cursor-pointer text-lg"
                                 onClick={() => setShowPassword(!showPassword)}
                             />
                         </div>
@@ -81,8 +81,8 @@ export default function LoginPage() {
 
                     {error && <p className="text-red-500 mt-2">{error}</p>}
 
-                    <div className="underline underline-offset-2 text-light font-montserrat mt-6">
-                        <p>J&apos;ai oublié mon mot de passe</p>
+                    <div className="text-light font-montserrat mt-6 ">
+                        <p className="hover:text-gray-300 underline underline-offset-2">J&apos;ai oublié mon mot de passe</p>
                     </div>
 
                     <div className="mt-4 flex justify-end">
