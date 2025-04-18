@@ -9,8 +9,8 @@ export default function page() {
     return (
         <>
             {/* <PsInformations /> */}
-            <DsInfosCoupes />
-            {/* <TsAvisPrix /> */}
+            {/* <DsInfosCoupes /> */}
+            <TsAvisPrix />
         </>
     );
 }
