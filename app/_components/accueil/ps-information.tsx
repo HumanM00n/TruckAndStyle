@@ -10,14 +10,15 @@ export default function PsInformations() {
     const { data: session, status } = useSession();
 
     return (
-        <section className="h-auto w-auto">
+        <section className="max-h-[700px] w-auto md:min-h-dvh">
 
             {/* PREMIRE SECTION */}
-            <div className="text-white flex flex-col mb-3 min-h-dvh
+            <div className="text-white flex flex-col mb-3
             md:flex
             md:w-full
             md:flex-row
-            md:justify-around">
+            md:justify-around
+            md:min-h-dvh">
                 <div className="w-full px-3
                 md:w-1/2">
                     <h1 className="text-3xl mb-3
