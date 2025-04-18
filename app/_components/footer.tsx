@@ -14,7 +14,7 @@ export default function Footer() {
 
     return (
         <footer className="w-full font-montserrat flex justify-center">
-            <div className="w-full flex justify-around">
+            <div className="w-full flex justify-around border">
 
                 {/* Logo */}
                 <div className="w-36">
@@ -27,19 +27,19 @@ export default function Footer() {
                     />
                 </div>
 
-                <div className="text-sm text-white flex items-center">
+                <div className="text-xs mx-3 md:text-sm md:m-0 text-white flex items-center">
                     Copyright©Trucknstyle
                 </div>
 
-                <div className="flex flex-row w-56 justify-between mt-3">
+                <div className="flex flex-row w-56 justify-between mt-3 md:w-72">
                     <div className="text-white flex flex-col gap-1 items-left">
                         <p className="text-lg font-semibold">Menu</p>
-                        <Link href={"/"} className="text-xs text-left">Réservation</Link>
-                        <Link href={"/a-propos"} className="text-xs text-left">À propos</Link>
-                        <Link href={"/contactez-nous"} className="text-xs text-left">Contactez-nous</Link>
+                        <Link href={"/"} className="text-xs md:text-sm text-left">Réservation</Link>
+                        <Link href={"/a-propos"} className="text-xs md:text-sm text-left">À propos</Link>
+                        <Link href={"/contactez-nous"} className="text-xs md:text-sm text-left">Contactez-nous</Link>
                     </div>
 
-                    <div className="flex w-28 items-center justify-center gap-3">
+                    <div className="flex w-28 items-center justify-center gap-3 ">
                        <Link href={profilInstagram} target="_blank" className="transition-transform duration-300 hover:scale-125 hover:shadow-xl">
                             <FontAwesomeIcon icon={faSquareInstagram} className="color--form text-3xl border-none"/>
                         </Link> 
