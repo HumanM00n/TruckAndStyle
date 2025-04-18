@@ -180,6 +180,17 @@
   input[type=number] {
     appearance: textfield;
   }
+
+  /* cache la scrollbar sur Chrome/Safari */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
 }
 
 
