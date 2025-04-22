@@ -14,7 +14,7 @@ export default function Footer() {
 
     return (
         <footer className="w-full font-montserrat flex justify-center">
-            <div className="w-full flex justify-around border">
+            <div className="w-full flex justify-around">
 
                 {/* Logo */}
                 <div className="w-36">
