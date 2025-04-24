@@ -10,7 +10,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import typesCoupes from '@/app/_lib/typeCoupes';
 
-
 export default function TsAvisPrix() {
 
     // Création d'un tableau d'avis 
@@ -32,11 +31,18 @@ export default function TsAvisPrix() {
     ]
 
     return (
-        <section className="w-full min-h-auto bg--grisArdoiseMid">
-            <div className="flex flex-col justify-center text-white">
+        <section className="w-full min-h-auto">
+            <div className="flex flex-col justify-center text-white mt-14
+            lg:flex-row-reverse
+            lg:justify-between
+            lg:mt-28">
 
                 {/* NOS PRIX */}
-                <div className="w-full relative mt-8 mb-4 px-4 h-auto">
+                <div className="w-full relative mt-8 mb-4 px-4 h-auto
+                lg:min-h-max
+                lg:m-0
+                lg:pt-5
+                ">
                     <h2 className="text-2xl">Nos <span className="color--form">Prix</span></h2>
                     <div className="mt-2 font-montserrat">
 
@@ -70,7 +76,7 @@ export default function TsAvisPrix() {
 
                 {/* COMMENTAIRES */}
                 <div className="w-full h-auto mt-3">
-                    <h2 className='text-2xl pl-5'>Nos <span className="color--form">Tarifs</span></h2>
+                    <h2 className='text-2xl pl-5 lg:pl-16'>Nos <span className="color--form">Tarifs</span></h2>
 
                     <div id="carouselExampleDark" className="carousel carousel-light slide min-h-[400px] px-9" data-bs-ride="carousel">
 
