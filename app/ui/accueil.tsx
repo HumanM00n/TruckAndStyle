@@ -1,16 +1,15 @@
 "use client";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
-import Image from "next/image";
+import PsInformations from "@/app/_components/accueil/ps-information";
+import DsInfosCoupes from "@/app/_components/accueil/ds-informationsCoupes";
+import TsAvisPrix from "@/app/_components/accueil/ts-AvisPrix";
 
 export default function Home() {
   return (
-    <section className="border-1 border-blue-600 h-auto w-auto">
-
-    </section>
-
-
+    <>
+      <PsInformations />
+      <DsInfosCoupes />
+      <TsAvisPrix />
+    </>
   );
 }
