@@ -76,7 +76,7 @@ export default function TsAvisPrix() {
 
                 {/* COMMENTAIRES */}
                 <div className="w-full h-auto mt-3">
-                    <h2 className='text-2xl pl-5 lg:pl-16'>Nos <span className="color--form">Tarifs</span></h2>
+                    <h2 className='text-2xl pl-5 lg:pl-16'>Vos <span className="color--form">Avis</span></h2>
 
                     <div id="carouselExampleDark" className="carousel carousel-light slide min-h-[400px] px-9" data-bs-ride="carousel">
 
