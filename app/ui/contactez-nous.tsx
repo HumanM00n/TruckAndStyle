@@ -65,11 +65,11 @@ export default function ContactezNous() {
 
     return (
 
-        <section className="h-auto text-white w-full flex-col md:flex-row">
+        <section className="h-auto text-white w-full flex-col md:flex-row border-1 border-blue-500">
             <h1 className="text-3xl text-center mb-2 md:mb-12">Contactez-Nous</h1>
             <form action={handleSubmit}>
-                <div className="flex flex-col items-center justify-center gap-3 mt-4 
-                            md:flex-row md:!gap-48 md:mt-0">
+                <div className="border flex flex-col items-center justify-center gap-3 mt-4 
+                            md:flex-row md:mt-0 lg:!gap-60 xl:gap-96 ">
 
                     {/* EMAIL */}
                     <input className="
@@ -106,7 +106,8 @@ export default function ContactezNous() {
                 </div>
 
                 {/* TEXTAREA */}
-                <div className="flex justify-center mt-3 md:mt-8">
+                <div className="border-1 border-red-500 flex justify-center mt-3 
+                md:mt-8">
                     <textarea className="
                     w-3/5 
                     h-72
@@ -119,7 +120,7 @@ export default function ContactezNous() {
                     placeholder-[#8C5744] 
                     focus:border-[#c07a61]
                     focus:ring-2 focus:ring-[#C29A7E]
-                    md:w-2/5"
+                    md:w-4/5"
                         name="contentTextarea"
                         maxLength={255}
                         placeholder="Votre message"></textarea>
