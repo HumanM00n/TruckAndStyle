@@ -25,10 +25,10 @@ export default function QsFaq() {
 
     return ( // border-1 border-blue-500 // border-1 border-red-500
         <section className='bg--grisArdoiseMid w-full h-auto md:min-h-[700px] px-3 pb-3 text-white'>
-            <h2 className='text-2xl pt-14 md:text-3xl'>Foire <span className='color--form'><br />aux questions</span></h2>
+            <h2 className='text-2xl pt-14 md:text-3xl lg:pl-11'>Foire <span className='color--form'><br />aux questions</span></h2>
             <div className="w-full flex flex-col items-center mt-2 font-montserrat mb-28">
                 {faqUtilisateur.map((block, text) => (
-                    <Accordion key={text} className='bg-transparent text-white !shadow-[0px_2px_1px_0px_rgba(115,62,52,0.44)]
+                    <Accordion defaultExpanded key={text} className='bg-transparent text-white !shadow-[0px_2px_1px_0px_rgba(115,62,52,0.44)] 
                     sm:min-w-[600px]
                     md:w-2/3
                     lg:min-w-[700px]
