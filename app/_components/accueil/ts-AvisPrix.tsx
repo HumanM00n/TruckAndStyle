@@ -39,7 +39,7 @@ export default function TsAvisPrix() {
                 lg:m-0
                 lg:pt-5
                 ">
-                    <h2 className="text-2xl">Nos <span className="color--form">Prix</span></h2>
+                    <h2 className="text-2xl lg:text-3xl">Nos <span className="color--form">Prix</span></h2>
                     <div className="mt-2 font-montserrat">
                         {typesCoupes.map((group, content) => (
                             <Accordion key={content} className='bg-transparent text-white !shadow-[0px_2px_1px_0px_rgba(115,62,52,0.44)]'>
@@ -68,7 +68,7 @@ export default function TsAvisPrix() {
 
                 {/* COMMENTAIRES */}
                 <div className="w-full h-auto mt-3">
-                    <h2 className='text-2xl pl-5 lg:pl-16'>Vos <span className="color--form">Avis</span></h2>
+                    <h2 className='text-2xl pl-5 lg:pl-16 lg:text-3xl'>Vos <span className="color--form">Avis</span></h2>
                     <div id="carouselExampleDark" className="carousel carousel-light slide min-h-[400px] px-9" data-bs-ride="carousel">
                         {/* Indicateurs */}
                         <div className="carousel-indicators mb-28">
