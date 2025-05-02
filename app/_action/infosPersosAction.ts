@@ -1,19 +1,13 @@
 'use server';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { NextApiRequest, NextApiResponse } from 'next';
 import pool from "../_lib/db";
-import verifyToken from '../_lib/auth';
-import { console } from "inspector";
+export const getPersonalInfo = async (userId: number) => { 
 
-// async (userId: string)  
-export const getPersonalInfo = async (req: NextApiRequest, res: NextApiResponse) => { 
-
-    
     try {
         // Le premier any[] contient les resultats de la requêtes 
         // Le deuxième any[] contient les métadonnées des colonnes 
-        const [pullPersonnalInfos]: [any[], any] = await pool.query(`SELECT user_lastname, user_firstname, user_email, user_phone_number, user_password FROM tns_users WHERE id_users = 1;`);
+        const [pullPersonnalInfos]: [any[], any] = await pool.query(`SELECT user_lastname, user_firstname, user_email, user_phone_number FROM tns_users WHERE id_users = ${userId};`);
 
         if (!pullPersonnalInfos || pullPersonnalInfos.length === 0) {
             throw new Error("Une erreur lors de la récupérations des informations:")
@@ -29,7 +23,7 @@ export const getPersonalInfo = async (req: NextApiRequest, res: NextApiResponse)
 };
 
 
-export const updatPersonalInfo = async (newInfo: Partial<{ lastname: string; firstname: string; phone: string; email: string; password: string }>) => {
+export const updatPersonalInfo = async (newInfo: Partial<{ lastname: string; firstname: string; phone: string; email: string }>) => {
     try {
         console.log("📥 Données reçues par updatPersonalInfo :", newInfo);
 
