@@ -1,8 +1,7 @@
 'use server';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import pool from "../_lib/db";
-export const getPersonalInfo = async (userId: number) => { 
+export const getPersonalInfo = async (userId: number) => {
 
     try {
         // Le premier any[] contient les resultats de la requêtes 
@@ -23,36 +22,39 @@ export const getPersonalInfo = async (userId: number) => {
 };
 
 
-export const updatPersonalInfo = async (newInfo: Partial<{ lastname: string; firstname: string; phone: string; email: string }>) => {
+export const updatPersonalInfo = async (newInfo: Partial<{ lastname: string; firstname: string; phone: string; email: string }>, userId: number) => {
+
     try {
         console.log("📥 Données reçues par updatPersonalInfo :", newInfo);
 
-        const queryParts: string[] = []; 
-        const values: any[] = []; 
+        // Créer deux tableaux vides
+        const partsRequest: string[] = [];
+        const newValues: any[] = [];
 
-        Object.entries(newInfo).forEach(([key, val]) => {
-            if (val !== undefined && val !== "") { // Évite d'inclure des valeurs vides
-                queryParts.push(`${key} = ?`);
-                values.push(val);
+        Object.entries(newInfo).forEach(([key, value]) => {
+            if (value !== undefined && value !== "") {
+                partsRequest.push(`${key} = ?`)
+                newValues.push(value)
             }
         });
+
+        console.error("Partie de la requête :", partsRequest);
+        console.log("Valeurs envoyées :", newValues);
+
+        if (partsRequest.length === 0) return null;
+
+        const updateUserQuery = `UPDATE tns_users SET ${partsRequest.join(",")} WHERE id_users = ${userId}`;
+        console.log("Requête final :", updateUserQuery);
+        console.log(userId);
         
-        console.error("Partie de la requête :", queryParts);
-        console.log("Valeurs envoyées :", values);
-        
 
-        if (queryParts.length === 0) return null; // Aucun changement
+        await pool.query(updateUserQuery, newValues);
 
-        const updateUserQuery = `UPDATE tns_users SET ${queryParts.join(", ")} WHERE id_users = ?`;
-        console.log("Requête Final :", updateUserQuery);
+        console.log("Mise à jour des données !");
 
-        await pool.query(updateUserQuery, values);
-
-        console.log("✅ Mise à jour des données réussie !");
-        
-        return { ...newInfo }; // Retourne les nouvelles données mises à jour
+        return { ...newInfo };
     } catch (error) {
         console.error("Erreur lors de la mise à jour des informations :", error);
         return null;
-    }
-};
+    };
+}
