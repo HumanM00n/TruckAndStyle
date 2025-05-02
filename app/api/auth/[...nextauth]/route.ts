@@ -17,20 +17,18 @@ export const authOptions = {
             async authorize(credentials) {
                 const { email, password } = credentials!;
 
-                // Requête vers la base de données
                 const [users] = await pool.query("SELECT * FROM tns_users WHERE user_email = ?", [email]);
 
                 if ((users as any[]).length === 0) {
-                    return null; // L'utilisateur n'existe pas
+                    return null; 
                 }
 
                 const user = (users as any[])[0];
 
-                // Vérifie le mot de passe hashé
                 const passwordMatch = await bcrypt.compare(password, user.user_password);
 
                 if (!passwordMatch) {
-                    return null; // Mot de passe incorrect
+                    return null; 
                 }
 
                 return { id: user.id_users, email: user.user_email };
@@ -42,7 +40,6 @@ export const authOptions = {
         async jwt({ token, user }: any) {
             if (user) {
                 // Si un utilisateur se connecte, on lui ajoute le token JWT
-
                 token.id = user.id;
                 token.email = user.email;
             }
