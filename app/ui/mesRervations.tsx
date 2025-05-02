@@ -1,6 +1,6 @@
 "use client";
 
-// Import des fonction 'Actions';
+import { signOut } from "next-auth/react";
 
 export default function MyBookings() {
 
