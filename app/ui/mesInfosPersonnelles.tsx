@@ -46,7 +46,7 @@ export default function PersonalInfoForm() {
         try {
             const userId = session.user?.id; 
             const updatedInfo = await updatPersonalInfo(formData, userId);
-    
+   
             if (updatedInfo) {
                 alert("Informations mises à jour avec succès !");
             } else {
