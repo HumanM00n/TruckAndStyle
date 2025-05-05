@@ -1,6 +1,8 @@
 'use server';
 
+import { NextResponse } from "next/server";
 import pool from "../_lib/db";
+import { console } from "inspector";
 export const getPersonalInfo = async (userId: number) => {
 
     try {
@@ -32,6 +34,29 @@ export const updatPersonalInfo = async (newInfo: Partial<{ lastname: string; fir
     }
 
     try {
+
+        console.log("📥 Données reçues par updatPersonalInfo :", newInfo);
+
+        // if (newInfo.phone) {
+        //     const [pullAllPhoneNumber]: [any[], any] = await pool.query(`SELECT * FROM tns_users WHERE user_phone_number = ? AND id_users != ?`,
+        //         [newInfo.phone, userId]
+                
+        //     );
+            
+        //     if (pullAllPhoneNumber.length > 0) {
+        //         return {
+        //             success: false,
+        //             message: "Le numéro saisi est déjà attribué, veuillez en saisir un autre",
+        //         };
+        //     }
+        // }
+
+
+
+        // if (newInfo.email) {
+        //     const [pullAllEmail]: [any[], any] = await pool.query(`SELECT * FROM tns_users WHERE user_email = ? AND id`)
+        // }
+
         const partsRequest: string[] = [];
         const newValues: any[] = [];
 
@@ -43,14 +68,20 @@ export const updatPersonalInfo = async (newInfo: Partial<{ lastname: string; fir
             }
         });
 
+
         if (partsRequest.length === 0) return null;
 
-        const updateUserQuery = `UPDATE tns_users SET ${partsRequest.join(",")} WHERE id_users = ${userId}`;      
+        const updateUserQuery = `UPDATE tns_users SET ${partsRequest.join(",")} WHERE id_users = ?`;
+        newValues.push(userId)
+
+        console.log("Requête final :", updateUserQuery);
+        console.log("Valeurs envoyées :", newValues);
 
         await pool.query(updateUserQuery, newValues);
 
         return { ...newInfo };
     } catch (error) {
-        return null;
+        console.error("Erreur serveur :", error);
+        return { success: false, message: "Une erreur est survenue." };
     };
 }
