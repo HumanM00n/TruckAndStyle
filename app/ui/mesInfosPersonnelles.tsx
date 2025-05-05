@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { getPersonalInfo, updatPersonalInfo } from "../_action/infosPersosAction";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
+import Toastify from "toastify-js";
 
 export default function PersonalInfoForm() {
 
@@ -106,11 +107,19 @@ export default function PersonalInfoForm() {
                         text-sm 
                         h-10
                         focus:ring-2 focus:ring-[#C29A7E]"
-                            type="tel"
+                            type="text"
                             name="phone"
-                            defaultValue={formData.phone}
-                            onChange={handleUpdateUser}
-                            placeholder="N° Tel" />
+                            pattern="^0[1-9][0-9]{8}$"
+                            inputMode="numeric"
+                            placeholder="N° Tel"
+                            minLength={10}
+                            maxLength={10}
+                            onInvalid={(e) => {
+                                e.preventDefault();
+                                // Toastify("Merci de rentrer un numéro de téléphone valide")
+                            }}
+                            value={formData.phone}
+                            onChange={handleUpdateUser}/>
                     </div>
 
 
@@ -185,14 +194,13 @@ export default function PersonalInfoForm() {
                     <button 
                     onClick={() => signOut()}
                     className="
-                    bg-transparent 
                     border 
                     rounded-sm  
                     px-5 
                     py-2
                     static
                     transition
-                    hover:bg-[#918cb8]">Se déconnecter</button>
+                    hover:bg-[#323041]">Se déconnecter</button>
                 </div>
             </>
         )
