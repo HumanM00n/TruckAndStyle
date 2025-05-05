@@ -24,37 +24,33 @@ export const getPersonalInfo = async (userId: number) => {
 
 export const updatPersonalInfo = async (newInfo: Partial<{ lastname: string; firstname: string; phone: string; email: string }>, userId: number) => {
 
-    try {
-        console.log("📥 Données reçues par updatPersonalInfo :", newInfo);
+    const fieldMapddb: Record<string, string> = {
+        lastname: "user_lastname",
+        firstname: "user_firstname",
+        phone: "user_phone_number",
+        email: "user_email",
+    }
 
-        // Créer deux tableaux vides
+    try {
         const partsRequest: string[] = [];
         const newValues: any[] = [];
 
         Object.entries(newInfo).forEach(([key, value]) => {
             if (value !== undefined && value !== "") {
-                partsRequest.push(`${key} = ?`)
+                const dbField = fieldMapddb[key];
+                partsRequest.push(`${dbField} = ?`)
                 newValues.push(value)
             }
         });
 
-        console.error("Partie de la requête :", partsRequest);
-        console.log("Valeurs envoyées :", newValues);
-
         if (partsRequest.length === 0) return null;
 
-        const updateUserQuery = `UPDATE tns_users SET ${partsRequest.join(",")} WHERE id_users = ${userId}`;
-        console.log("Requête final :", updateUserQuery);
-        console.log(userId);
-        
+        const updateUserQuery = `UPDATE tns_users SET ${partsRequest.join(",")} WHERE id_users = ${userId}`;      
 
         await pool.query(updateUserQuery, newValues);
 
-        console.log("Mise à jour des données !");
-
         return { ...newInfo };
     } catch (error) {
-        console.error("Erreur lors de la mise à jour des informations :", error);
         return null;
     };
 }
