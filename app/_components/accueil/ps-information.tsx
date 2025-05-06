@@ -41,7 +41,7 @@ export default function PsInformations() {
                     <div className="flex mt-3 gap-3">
                         <Link href={"/a-propos"}>
                             <button className="btn text-[15px] text-white rounded-xs bg--form
-                            hover:bg-[#733e3471] hover:text-red-500">
+                            hover:bg-[#733e3471] hover:text-red-500 hover:font-bold">
                                 En savoir plus
                             </button>
                         </Link>
@@ -49,7 +49,7 @@ export default function PsInformations() {
                         {session ? (
                             <Link href={"/reservation"}>
                                 <button className="btn btn-outline-light text-[15px] rounded-xs text-[#733E34] border-1 border-[#733E34]
-                                                    hover:bg-white hover:text-[#733E34]">
+                                                    hover:bg-white hover:text-[#733E34] hover:font-bold">
                                     Réserver votre coupe
                                 </button>
                             </Link>
@@ -57,7 +57,7 @@ export default function PsInformations() {
                         ) : (
                             <Link href={"/connexion"}>
                                 <button className="btn btn-outline-light text-[15px] rounded-xs text-[#733E34] border-1 border-[#733E34]
-                            hover:bg-white hover:text-[#733E34]">
+                            hover:bg-white hover:text-[#733E34] hover:font-bold">
                                     Réserver votre coupe
                                 </button>
                             </Link>

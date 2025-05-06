@@ -16,8 +16,11 @@ export default function DsInfosCoupes() {
     };
 
     return (
-        <section className="bg--grisArdoiseMid w-full min-h-auto py-3 md:min-h-[750px]">
-            <div className="flex flex-col justify-center text-white mt-28 md:flex-row md:justify-between">
+        <section className="bg--grisArdoiseMid w-full min-h-auto py-3 md:min-h-[700px]">
+            <div className="flex flex-col justify-center text-white mt-14 
+            md:flex-row 
+            md:justify-between
+            md:mt-28">
 
                 {/* BLOC 1 => TITRE & TEXT */}
                 <div className="px-4 md:w-1/2">

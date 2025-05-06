@@ -3,32 +3,36 @@
 import { useState, useEffect } from "react";
 import { getPersonalInfo, updatPersonalInfo } from "../_action/infosPersosAction";
 import { useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
+import Toastify from "toastify-js";
 
 export default function PersonalInfoForm() {
 
-    const { data: session, status } = useSession(); 
-
-    const userId = 1;
+    const { data: session, status } = useSession();
     const [formData, setFormData] = useState({ lastname: "", firstname: "", phone: "", email: "", password: "" });
 
+
+    if (!session || !session.user?.id) return null;
+
     useEffect(() => {
-        const fetchData = async () => {
-            const resultData = await getPersonalInfo(userId);
-            if (resultData) {
-                setFormData({
-                    lastname: resultData.user_lastname || "",
-                    firstname: resultData.user_firstname || "",
-                    phone: resultData.user_phone_number || "",
-                    email: resultData.user_email || "",
-                    password: resultData.user_password || "",
-                });
 
-                console.log(setFormData);
-            }
-        };
+        if (session?.user?.id) {
+            const fetchData = async () => {
+                const resultData = await getPersonalInfo(session.user.id);
+                if (resultData) {
+                    setFormData({
+                        lastname: resultData.user_lastname || "",
+                        firstname: resultData.user_firstname || "",
+                        phone: resultData.user_phone_number || "",
+                        email: resultData.user_email || "",
+                        password: "",
+                    });
+                }
+            };
 
-        fetchData();
-    }, []);
+            fetchData();
+        }
+    }, [session]);
 
     const handleUpdateUser = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({
@@ -39,29 +43,25 @@ export default function PersonalInfoForm() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
-        console.log("✅ handleSubmit appelé !");
-        console.log("Données envoyées :", formData);
-
+    
         try {
-            console.log("Envoi des données à updatPersonalInfo...");
-            const updatedInfo = await updatPersonalInfo(formData);
-            console.log("✅ Réponse de updatPersonalInfo :", updatedInfo);
-
+            const userId = session.user?.id; 
+            const updatedInfo = await updatPersonalInfo(formData, userId);
+   
             if (updatedInfo) {
                 alert("Informations mises à jour avec succès !");
             } else {
-                console.log("❌ Erreur lors de la requête");
                 alert("Erreur lors de la mise à jour des informations.");
             }
         } catch (error) {
             console.error("⚠️ Erreur dans handleSubmit :", error);
         }
     };
+    
 
 
-
-    return (
+    if (status === "authenticated") {
+        return (
             <>
                 <form onSubmit={handleSubmit} className="rounded-md bg--form grid grid-cols-2 gap-4 py-9 px-7 mb-16
                 md:mb-[305px] 
@@ -77,9 +77,9 @@ export default function PersonalInfoForm() {
                             focus:ring-2 focus:ring-[#C29A7E]
                             md:text-sm md:h-10"
                             name="lastname"
-                            defaultValue={formData.lastname} 
+                            defaultValue={formData.lastname}
                             onChange={handleUpdateUser}
-                            placeholder="nom"
+                            placeholder="Nom"
                         />
                     </div>
 
@@ -92,10 +92,10 @@ export default function PersonalInfoForm() {
                         md:h-10
                         md:text-sm"
                             type="text"
-                            name="firstname" 
-                            defaultValue={formData.firstname} 
+                            name="firstname"
+                            defaultValue={formData.firstname}
                             onChange={handleUpdateUser}
-                            placeholder="prenom" />
+                            placeholder="Prénom" />
                     </div>
 
 
@@ -107,11 +107,19 @@ export default function PersonalInfoForm() {
                         text-sm 
                         h-10
                         focus:ring-2 focus:ring-[#C29A7E]"
-                            type="tel"
-                            name="phone" 
-                            defaultValue={formData.phone}
-                            onChange={handleUpdateUser}
-                            placeholder="num tel" />
+                            type="text"
+                            name="phone"
+                            pattern="^0[1-9][0-9]{8}$"
+                            inputMode="numeric"
+                            placeholder="N° Tel"
+                            minLength={10}
+                            maxLength={10}
+                            onInvalid={(e) => {
+                                e.preventDefault();
+                                // Toastify("Merci de rentrer un numéro de téléphone valide")
+                            }}
+                            value={formData.phone}
+                            onChange={handleUpdateUser}/>
                     </div>
 
 
@@ -124,10 +132,10 @@ export default function PersonalInfoForm() {
                         text-sm 
                         h-10
                         focus:ring-2 focus:ring-[#C29A7E]"
-                            type="email" 
+                            type="email"
                             name="email"
                             defaultValue={formData.email}
-                            onChange={handleUpdateUser} 
+                            onChange={handleUpdateUser}
                             placeholder="email" />
                     </div>
 
@@ -141,11 +149,11 @@ export default function PersonalInfoForm() {
                         text-sm 
                         h-10
                         focus:ring-2 focus:ring-[#C29A7E]"
-                            type="password" 
-                            name="password" 
+                            type="password"
+                            name="password"
                             defaultValue={formData.password}
                             onChange={handleUpdateUser}
-                            placeholder="password" />
+                            placeholder="Mot de passe" />
                     </div>
 
 
@@ -177,22 +185,25 @@ export default function PersonalInfoForm() {
                 </form>
 
 
-<div
-    className="
+                <div
+                    className="
     absolute right-28 bottom-[160px] 
     md:absolute md:right-44 md:top-2/4 md:mt-5"
->
+                >
 
-                <button className="
-                    bg-[#333140] 
+                    <button 
+                    onClick={() => signOut()}
+                    className="
                     border 
                     rounded-sm  
                     px-5 
                     py-2
                     static
                     transition
-                    hover:bg-[#25232e]">Se déconnecter</button>
-            </div>
+                    hover:bg-[#323041]">Se déconnecter</button>
+                </div>
             </>
-    )
+        )
+    }
+
 }

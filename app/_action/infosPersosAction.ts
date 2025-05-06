@@ -1,19 +1,14 @@
 'use server';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextResponse } from "next/server";
 import pool from "../_lib/db";
-import verifyToken from '../_lib/auth';
 import { console } from "inspector";
+export const getPersonalInfo = async (userId: number) => {
 
-// async (userId: string)  
-export const getPersonalInfo = async (req: NextApiRequest, res: NextApiResponse) => { 
-
-    
     try {
         // Le premier any[] contient les resultats de la requêtes 
         // Le deuxième any[] contient les métadonnées des colonnes 
-        const [pullPersonnalInfos]: [any[], any] = await pool.query(`SELECT user_lastname, user_firstname, user_email, user_phone_number, user_password FROM tns_users WHERE id_users = 1;`);
+        const [pullPersonnalInfos]: [any[], any] = await pool.query(`SELECT user_lastname, user_firstname, user_email, user_phone_number FROM tns_users WHERE id_users = ${userId};`);
 
         if (!pullPersonnalInfos || pullPersonnalInfos.length === 0) {
             throw new Error("Une erreur lors de la récupérations des informations:")
@@ -29,36 +24,64 @@ export const getPersonalInfo = async (req: NextApiRequest, res: NextApiResponse)
 };
 
 
-export const updatPersonalInfo = async (newInfo: Partial<{ lastname: string; firstname: string; phone: string; email: string; password: string }>) => {
+export const updatPersonalInfo = async (newInfo: Partial<{ lastname: string; firstname: string; phone: string; email: string }>, userId: number) => {
+
+    const fieldMapddb: Record<string, string> = {
+        lastname: "user_lastname",
+        firstname: "user_firstname",
+        phone: "user_phone_number",
+        email: "user_email",
+    }
+
     try {
+
         console.log("📥 Données reçues par updatPersonalInfo :", newInfo);
 
-        const queryParts: string[] = []; 
-        const values: any[] = []; 
+        // if (newInfo.phone) {
+        //     const [pullAllPhoneNumber]: [any[], any] = await pool.query(`SELECT * FROM tns_users WHERE user_phone_number = ? AND id_users != ?`,
+        //         [newInfo.phone, userId]
+                
+        //     );
+            
+        //     if (pullAllPhoneNumber.length > 0) {
+        //         return {
+        //             success: false,
+        //             message: "Le numéro saisi est déjà attribué, veuillez en saisir un autre",
+        //         };
+        //     }
+        // }
 
-        Object.entries(newInfo).forEach(([key, val]) => {
-            if (val !== undefined && val !== "") { // Évite d'inclure des valeurs vides
-                queryParts.push(`${key} = ?`);
-                values.push(val);
+
+
+        // if (newInfo.email) {
+        //     const [pullAllEmail]: [any[], any] = await pool.query(`SELECT * FROM tns_users WHERE user_email = ? AND id`)
+        // }
+
+        const partsRequest: string[] = [];
+        const newValues: any[] = [];
+
+        Object.entries(newInfo).forEach(([key, value]) => {
+            if (value !== undefined && value !== "") {
+                const dbField = fieldMapddb[key];
+                partsRequest.push(`${dbField} = ?`)
+                newValues.push(value)
             }
         });
-        
-        console.error("Partie de la requête :", queryParts);
-        console.log("Valeurs envoyées :", values);
-        
 
-        if (queryParts.length === 0) return null; // Aucun changement
 
-        const updateUserQuery = `UPDATE tns_users SET ${queryParts.join(", ")} WHERE id_users = ?`;
-        console.log("Requête Final :", updateUserQuery);
+        if (partsRequest.length === 0) return null;
 
-        await pool.query(updateUserQuery, values);
+        const updateUserQuery = `UPDATE tns_users SET ${partsRequest.join(",")} WHERE id_users = ?`;
+        newValues.push(userId)
 
-        console.log("✅ Mise à jour des données réussie !");
-        
-        return { ...newInfo }; // Retourne les nouvelles données mises à jour
+        console.log("Requête final :", updateUserQuery);
+        console.log("Valeurs envoyées :", newValues);
+
+        await pool.query(updateUserQuery, newValues);
+
+        return { ...newInfo };
     } catch (error) {
-        console.error("Erreur lors de la mise à jour des informations :", error);
-        return null;
-    }
-};
+        console.error("Erreur serveur :", error);
+        return { success: false, message: "Une erreur est survenue." };
+    };
+}

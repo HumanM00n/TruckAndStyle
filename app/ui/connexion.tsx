@@ -20,13 +20,13 @@ export default function LoginPage() {
         e.preventDefault();
 
         const result = await signIn("credentials", {
-            redirect: false, // Empêche NextAuth de rediriger automatiquement
+            redirect: false,
             email,
             password,
         });
 
         if (result?.error) {
-            setError("Échec de la connexion, vérifiez vos informations.");
+            setError("Échec de la connexion, Veuillez réessayer.");
         } else {
             router.push("/"); 
         }
@@ -97,14 +97,12 @@ export default function LoginPage() {
                         <hr className="flex-grow border-white" />
                     </div>
 
-                    <div className="underline underline-offset-1 text-light font-montserrat mt-6 text-xs">
-                        <Link href={"/inscription"}>Vous n&apos;avez pas de compte ? Créez-en un !</Link>
+                    <div className="text-light font-montserrat mt-4 text-[13px]">
+                        <p className="w-ful">Vous n&apos;avez pas de compte ? Créez-en un !</p>
                     </div>
 
                     <div className="mt-3">
-                        <button type="button" className="btn btn-light w-full text-[#8C5744] hover:text-[#8C5744]">
-                            Créer un compte
-                        </button>
+                        <Link href={"/inscription"} className="btn btn-light w-full text-[#8C5744] hover:text-[#8C5744]">Créer un compte</Link>
                     </div>
                 </form>
             </div>
