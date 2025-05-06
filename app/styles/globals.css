@@ -176,6 +176,12 @@
   }
 
 
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    appearance: none;
+  }
+
+
   /* FIREFOX */
   input[type=number] {
     appearance: textfield;
