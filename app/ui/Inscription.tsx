@@ -192,7 +192,9 @@ export default function Inscription() {
                         <span className="absolute 
                         text-xs 
                         top-10
-                        right-[115px]
+                        right-[50px]
+                        md:right-[60px]
+                        lg:right-[110px]
                         italic
                         text-black
                         font-[530]
