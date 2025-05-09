@@ -1,6 +1,5 @@
 'use server';
 
-import { NextResponse } from "next/server";
 import pool from "../_lib/db";
 import { console } from "inspector";
 export const getPersonalInfo = async (userId: number) => {
@@ -16,13 +15,11 @@ export const getPersonalInfo = async (userId: number) => {
 
         return pullPersonnalInfos[0];
 
-
     } catch (error) {
         console.error(" Erreur lors de la récupération des informations :", error);
         return null;
     }
 };
-
 
 export const updatPersonalInfo = async (newInfo: Partial<{ lastname: string; firstname: string; phone: string; email: string }>, userId: number) => {
 
@@ -35,28 +32,6 @@ export const updatPersonalInfo = async (newInfo: Partial<{ lastname: string; fir
 
     try {
 
-        console.log("📥 Données reçues par updatPersonalInfo :", newInfo);
-
-        // if (newInfo.phone) {
-        //     const [pullAllPhoneNumber]: [any[], any] = await pool.query(`SELECT * FROM tns_users WHERE user_phone_number = ? AND id_users != ?`,
-        //         [newInfo.phone, userId]
-                
-        //     );
-            
-        //     if (pullAllPhoneNumber.length > 0) {
-        //         return {
-        //             success: false,
-        //             message: "Le numéro saisi est déjà attribué, veuillez en saisir un autre",
-        //         };
-        //     }
-        // }
-
-
-
-        // if (newInfo.email) {
-        //     const [pullAllEmail]: [any[], any] = await pool.query(`SELECT * FROM tns_users WHERE user_email = ? AND id`)
-        // }
-
         const partsRequest: string[] = [];
         const newValues: any[] = [];
 
@@ -68,6 +43,31 @@ export const updatPersonalInfo = async (newInfo: Partial<{ lastname: string; fir
             }
         });
 
+        if (newInfo.phone) {
+            const [pullAllPhoneNumber]: [any[], any] = await pool.query(`SELECT * FROM tns_users WHERE user_phone_number = ? AND id_users != ?`,
+                [newInfo.phone, userId]
+            );
+
+            if (pullAllPhoneNumber.length > 0) {
+                return {
+                    success: false,
+                    message: "Le numéro saisi est déjà attribué, veuillez en saisir un autre",
+                };
+            }
+        }
+
+        if (newInfo.email) {
+            const [pullAllEmail]: [any[], any] = await pool.query(`SELECT * FROM tns_users WHERE user_email = ? AND id_users != ?`,
+                [newInfo, userId]
+            );
+        
+            if (pullAllEmail.length > 0) {
+                return {
+                    success: false,
+                    message: "L'adresse email saisi est déjà attribué, veuillez en saisir une autre",
+                };
+            }
+        }
 
         if (partsRequest.length === 0) return null;
 
@@ -79,9 +79,12 @@ export const updatPersonalInfo = async (newInfo: Partial<{ lastname: string; fir
 
         await pool.query(updateUserQuery, newValues);
 
-        return { ...newInfo };
+        return { 
+            success: true,
+            message: "Les informations ont été mises à jour.",
+            ...newInfo };
     } catch (error) {
         console.error("Erreur serveur :", error);
         return { success: false, message: "Une erreur est survenue." };
-    };
+    };    
 }
