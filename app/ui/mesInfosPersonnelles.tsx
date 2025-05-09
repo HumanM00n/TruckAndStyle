@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { getPersonalInfo, updatPersonalInfo } from "../_action/infosPersosAction";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
@@ -9,13 +9,13 @@ import Toastify from "toastify-js";
 export default function PersonalInfoForm() {
 
     const { data: session, status } = useSession();
+    const [showPassword, setshowPassword] = useState(false);
+    const [success, setSuccess] = useState(false);
     const [formData, setFormData] = useState({ lastname: "", firstname: "", phone: "", email: "", password: "" });
-
 
     if (!session || !session.user?.id) return null;
 
     useEffect(() => {
-
         if (session?.user?.id) {
             const fetchData = async () => {
                 const resultData = await getPersonalInfo(session.user.id);
@@ -28,9 +28,7 @@ export default function PersonalInfoForm() {
                         password: "",
                     });
                 }
-            };
-
-            fetchData();
+            };fetchData();
         }
     }, [session]);
 
@@ -48,18 +46,50 @@ export default function PersonalInfoForm() {
             const userId = session.user?.id; 
             const updatedInfo = await updatPersonalInfo(formData, userId);
    
-            if (updatedInfo) {
-                alert("Informations mises à jour avec succès !");
+            if (updatedInfo?.success === true) {
+                Toastify({
+                    text: updatedInfo.message,
+                    duration: 5000, 
+                    style: {
+                        width: "275px",
+                        display: "flex",
+                        background: "#4F5372",
+                        color: "white",
+                        padding: "10px 10px 10px 20px",
+                        position: "absolute",
+                        right: "20px",
+                        top: "20px",
+                        borderRadius: "8px",
+                        zIndex: "9999",
+                        fontSize: "14px",
+                    }
+                }).showToast();
+
+                setSuccess(true);
             } else {
-                alert("Erreur lors de la mise à jour des informations.");
+                const toast = Toastify({
+                    text: updatedInfo?.message,
+                    duration: 5000,
+                    style: {
+                        width: "300px",
+                        display: "flex",
+                        background: "#810a0a",
+                        color: "white",
+                        padding: "10px 10px 10px 17px",
+                        position: "absolute",
+                        right: "20px",
+                        top: "20px",
+                        borderRadius: "8px",
+                        zIndex: "9999",
+                        fontSize: "14px",
+                    }
+                }).showToast();
             }
         } catch (error) {
             console.error("⚠️ Erreur dans handleSubmit :", error);
         }
     };
     
-
-
     if (status === "authenticated") {
         return (
             <>
