@@ -56,17 +56,13 @@ export default function Inscription() {
                 duration: 5000,
                 style: {
                     width: "275px",
-                    //
                     display: "flex",
-                    //
                     background: "#4F5372",
                     color: "white",
-                    //
                     padding: "10px 10px 10px 20px",
                     position: "absolute",
                     right: "20px",
                     top: "20px",
-                    //
                     borderRadius: "8px",
                     zIndex: "9999",
                     fontSize: "14px",
@@ -84,17 +80,13 @@ export default function Inscription() {
                 position: "right",
                 style: {
                     width: "300px",
-                    //
                     display: "flex",
-                    //
                     background: "#810a0a",
                     color: "white",
-                    //
                     padding: "10px 10px 10px 17px",
                     position: "absolute",
                     right: "20px",
                     top: "20px",
-                    //
                     borderRadius: "8px",
                     zIndex: "9999",
                     fontSize: "14px",
