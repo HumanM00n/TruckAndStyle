@@ -95,7 +95,7 @@ export default function PersonalInfoForm() {
     if (status === "authenticated") {
         return (
             <>
-                <form onSubmit={handleSubmit} className="rounded-md bg--form grid grid-cols-2 gap-4 py-9 px-7 mb-16
+                <form onSubmit={handleSubmit} className="border-1 border-purple-500 rounded-md bg--form grid grid-cols-2 gap-4 py-9 px-7 mb-16
                 md:mb-[305px] 
                 md:grid 
                 md:grid-cols-3">
