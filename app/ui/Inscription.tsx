@@ -12,6 +12,9 @@ import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { useRef } from "react";
 
+import flatpickr from "flatpickr";
+import { French } from "flatpickr/dist/l10n/fr.js"; // Importer la locale française
+import "flatpickr/dist/flatpickr.min.css";
 
 export default function Inscription() {
 
@@ -111,6 +114,17 @@ export default function Inscription() {
         }
     }, [success, router]);
 
+    useEffect(() => {
+        if (inputRef.current) {
+            flatpickr(inputRef.current, {
+                dateFormat: "d-m-Y", // Format de la date en jour-mois-an
+                locale: French,       
+                allowInput: true,     
+            });
+        }
+    }, []);
+        
+
 
     return (
         <>
@@ -171,33 +185,33 @@ export default function Inscription() {
                             onChange={handleChange}
                             placeholder="N° Tel" />
 
-                        <input className="
-                        form-control 
-                        text-[15px]
-                        placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition appearance-none cursor-pointer"
-                            type="date"
-                            data-placeholder="Date de naissance"
-                            id="dateNaissance"
-                            name="dateNaissance"
-                            value={formData.dateNaissance}
-                            onChange={handleChange}
-                            ref={inputRef} />
+                        <input
+                    className="form-control 
+                    text-[15px]
+                    placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition appearance-none cursor-pointer"
+                    type="text"
+                    placeholder="Date de naissance"
+                    name="dateNaissance"
+                    value={formData.dateNaissance}
+                    onChange={handleChange}
+                    ref={inputRef}
+                />
 
-                        <FontAwesomeIcon
-                            icon={faCalendarAlt}
-                            className="w-5 h-4 absolute right-3 top-1/2 transform -translate-y-1/2 color--marronNoisetteMid"
-                            onClick={() => inputRef.current?.showPicker()}
-                        />
+                <FontAwesomeIcon
+                    icon={faCalendarAlt}
+                    className="w-5 h-4 absolute right-3 top-1/2 transform -translate-y-1/2 text-[#8C5744] cursor-pointer"
+                    onClick={() => inputRef.current?.click()}
+                />
 
-                        <span className="absolute 
+                    <span className="absolute 
                         text-xs 
                         top-10
                         right-[115px]
                         italic
                         text-black
-                        font-[530]
-                        ">*Date de naissance*</span>
-
+                        font-[530]">
+                        *Date de naissance*
+                    </span>
                     </div>
 
                     {/* EMAIL */}
@@ -252,10 +266,12 @@ export default function Inscription() {
                         form-control 
                         text-[15px]
                         placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
+                        
                             type="text"
                             name="departement"
                             value={formData.departement}
                             onChange={handleChange}
+                            
                             placeholder="Département" />
 
                         <input className="
