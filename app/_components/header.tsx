@@ -40,7 +40,7 @@ export default function Header() {
 
                 {/* Barre de navigation */}
                 <nav className="hidden lg:flex h-20 border border-gray-300 rounded-md items-center py-6 px-6 gap-16">
-                    <Link className="hoverMarron" href="/">Réservations</Link>
+                    <Link className="hoverMarron" href="/reservation">Réservations</Link>
                     <Link className="hoverMarron" href="/a-propos">À propos</Link>
                     <Link className="hoverMarron" href="/contactez-nous">Contactez-nous</Link>
                 </nav>
