@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { getPersonalInfo, updatPersonalInfo } from "../_action/infosPersosAction";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
@@ -9,13 +9,13 @@ import Toastify from "toastify-js";
 export default function PersonalInfoForm() {
 
     const { data: session, status } = useSession();
+    const [showPassword, setshowPassword] = useState(false);
+    const [success, setSuccess] = useState(false);
     const [formData, setFormData] = useState({ lastname: "", firstname: "", phone: "", email: "", password: "" });
-
 
     if (!session || !session.user?.id) return null;
 
     useEffect(() => {
-
         if (session?.user?.id) {
             const fetchData = async () => {
                 const resultData = await getPersonalInfo(session.user.id);
@@ -28,9 +28,7 @@ export default function PersonalInfoForm() {
                         password: "",
                     });
                 }
-            };
-
-            fetchData();
+            };fetchData();
         }
     }, [session]);
 
@@ -48,22 +46,56 @@ export default function PersonalInfoForm() {
             const userId = session.user?.id; 
             const updatedInfo = await updatPersonalInfo(formData, userId);
    
-            if (updatedInfo) {
-                alert("Informations mises à jour avec succès !");
+            if (updatedInfo?.success === true) {
+                Toastify({
+                    text: updatedInfo?.message,
+                    duration: 5000, 
+                    style: {
+                        width: "275px",
+                        display: "flex",
+                        background: "#4F5372",
+                        color: "white",
+                        padding: "10px 10px 10px 20px",
+                        position: "absolute",
+                        right: "20px",
+                        top: "20px",
+                        borderRadius: "8px",
+                        zIndex: "9999",
+                        fontSize: "14px",
+                    }
+                }).showToast();
+
+                setSuccess(true);
             } else {
-                alert("Erreur lors de la mise à jour des informations.");
+                const toast = Toastify({
+                    text: updatedInfo?.message,
+                    duration: 5000,
+                    style: {
+                        width: "300px",
+                        display: "flex",
+                        background: "#810a0a",
+                        color: "white",
+                        padding: "10px 10px 10px 17px",
+                        position: "absolute",
+                        right: "20px",
+                        top: "20px",
+                        borderRadius: "8px",
+                        zIndex: "9999",
+                        fontSize: "14px",
+                    }
+                }).showToast();
+
+                setSuccess(false);
             }
         } catch (error) {
             console.error("⚠️ Erreur dans handleSubmit :", error);
         }
     };
     
-
-
     if (status === "authenticated") {
         return (
             <>
-                <form onSubmit={handleSubmit} className="rounded-md bg--form grid grid-cols-2 gap-4 py-9 px-7 mb-16
+                <form onSubmit={handleSubmit} className="border-1 border-purple-500 rounded-md bg--form grid grid-cols-2 gap-4 py-9 px-7 mb-16
                 md:mb-[305px] 
                 md:grid 
                 md:grid-cols-3">
@@ -72,7 +104,9 @@ export default function PersonalInfoForm() {
                     <div className="w-40 ml-7 md:w-48 md:ml-0">
                         <input type="text"
                             className="
-                            form-control 
+                            form-control
+                            h-full
+                            text-[13px]
                             border-none 
                             focus:ring-2 focus:ring-[#C29A7E]
                             md:text-sm md:h-10"
@@ -86,8 +120,10 @@ export default function PersonalInfoForm() {
                     {/* PRENOM */}
                     <div className="w-40 md:w-48">
                         <input className="
-                        form-control 
-                        border-none                        
+                        form-control
+                        border-none
+                        text-[13px]
+                        h-9                      
                         focus:ring-2 focus:ring-[#C29A7E]
                         md:h-10
                         md:text-sm"
@@ -98,14 +134,15 @@ export default function PersonalInfoForm() {
                             placeholder="Prénom" />
                     </div>
 
-
                     {/* N° Téléphone */}
                     <div className="w-40 ml-7 md:w-48 md:ml-0">
                         <input className="
                         form-control 
-                        border-none 
-                        text-sm 
-                        h-10
+                        border-none
+                        text-[13px]
+                        h-9 
+                        md:text-sm 
+                        md:h-10
                         focus:ring-2 focus:ring-[#C29A7E]"
                             type="text"
                             name="phone"
@@ -116,21 +153,21 @@ export default function PersonalInfoForm() {
                             maxLength={10}
                             onInvalid={(e) => {
                                 e.preventDefault();
-                                // Toastify("Merci de rentrer un numéro de téléphone valide")
                             }}
                             value={formData.phone}
                             onChange={handleUpdateUser}/>
                     </div>
 
-
                     {/* EMAIL */}
                     <div className="w-40 
                     md:ml-0 md:w-56">
                         <input className="
-                        form-control 
+                        form-control
                         border-none 
-                        text-sm 
-                        h-10
+                        text-[13px]
+                        h-9
+                        md:text-sm 
+                        md:h-10
                         focus:ring-2 focus:ring-[#C29A7E]"
                             type="email"
                             name="email"
@@ -139,15 +176,15 @@ export default function PersonalInfoForm() {
                             placeholder="email" />
                     </div>
 
-
                     {/* MOT DE PASSE */}
                     <div className="w-full col-span-full px-7
                     md:ml-0 md:w-1/2 md:px-0 md:col-span-2">
                         <input className="
                         form-control 
                         border-none 
-                        text-sm 
+                        text-[13px] 
                         h-10
+                        md:text-sm
                         focus:ring-2 focus:ring-[#C29A7E]"
                             type="password"
                             name="password"
@@ -155,7 +192,6 @@ export default function PersonalInfoForm() {
                             onChange={handleUpdateUser}
                             placeholder="Mot de passe" />
                     </div>
-
 
                     <div className="col-span-full px-7 flex justify-end gap-2">
                         <button type="reset" className="
@@ -184,11 +220,12 @@ export default function PersonalInfoForm() {
                     </div>
                 </form>
 
-
                 <div
                     className="
-    absolute right-28 bottom-[160px] 
-    md:absolute md:right-44 md:top-2/4 md:mt-5"
+                    static 
+                    right-28 
+                    bottom-[160px] 
+                    md:absolute md:right-44 md:top-2/4 md:mt-5"
                 >
 
                     <button 
@@ -198,7 +235,8 @@ export default function PersonalInfoForm() {
                     rounded-sm  
                     px-5 
                     py-2
-                    static
+                    absolute
+                    bottom-16
                     transition
                     hover:bg-[#323041]">Se déconnecter</button>
                 </div>
