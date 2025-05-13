@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import PersonalInfoForm from "@/app/ui/mesInfosPersonnelles";
-import MyBookings from "@/app/ui/mesRervations";
+import MyBookings from "@/app/ui/mesReservations";
 import { redirect } from "next/navigation";
 
 export default function MonCompte() {
