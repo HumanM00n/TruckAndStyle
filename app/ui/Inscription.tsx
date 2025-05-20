@@ -1,31 +1,26 @@
 'use client';
 
 import Link from "next/link";
-import { useState, useEffect, } from "react";
-import { registerUser } from "@/app/_action/inscriptionAction";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation"; 
-
+import { registerUser } from "@/app/_action/inscriptionAction";
 
 import Toastify from "toastify-js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
-import { useRef } from "react";
 
 import flatpickr from "flatpickr";
-import { French } from "flatpickr/dist/l10n/fr.js"; // Importer la locale française
+import { French } from "flatpickr/dist/l10n/fr.js";
 import "flatpickr/dist/flatpickr.min.css";
 
 export default function Inscription() {
-
     const [message, setMessage] = useState("");
     const [success, setSuccess] = useState(false);
     const router = useRouter();
-
     const inputRef = useRef<HTMLInputElement | null>(null);
-
-    // Affichage du mot de passe
-    const [showPassword, setshowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [villes, setVilles] = useState<string[]>([]);
 
     const [formData, setFormData] = useState({
         nom: "",
@@ -39,18 +34,30 @@ export default function Inscription() {
         ville: ""
     });
 
-    function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    function handleChange(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
         setFormData({ ...formData, [event.target.name]: event.target.value });
     }
-
 
     async function handleSubmit(event: React.FormEvent) {
         event.preventDefault();
 
+        // Validation de base
+        if (!formData.nom || !formData.prenom || !formData.email || !formData.motDePasse) {
+            Toastify({
+                text: "Merci de remplir tous les champs obligatoires.",
+                duration: 5000,
+                backgroundColor: "#810a0a",
+                gravity: "top",
+                position: "right",
+                style: { color: "white" }
+            }).showToast();
+            return;
+        }
+
         const formDataToSend = new FormData();
         Object.entries(formData).forEach(([key, value]) => formDataToSend.append(key, value));
 
-        const response = await registerUser(formDataToSend); // Appel de la function du fichier Server Action
+        const response = await registerUser(formDataToSend);
         console.log("Reponse du serveur :", response);
 
         if (response.success) {
@@ -59,45 +66,34 @@ export default function Inscription() {
                 duration: 5000,
                 style: {
                     width: "275px",
-                    //
                     display: "flex",
-                    //
                     background: "#4F5372",
                     color: "white",
-                    //
                     padding: "10px 10px 10px 20px",
                     position: "absolute",
                     right: "20px",
                     top: "20px",
-                    //
                     borderRadius: "8px",
                     zIndex: "9999",
                     fontSize: "14px",
                 }
             }).showToast();
-
-            setSuccess(true);            
-
+            setSuccess(true);
         } else {
-
-            const toast = Toastify({
+            Toastify({
                 text: response.message,
                 duration: 5000,
                 gravity: "top",
                 position: "right",
                 style: {
                     width: "300px",
-                    //
                     display: "flex",
-                    //
                     background: "#810a0a",
                     color: "white",
-                    //
                     padding: "10px 10px 10px 17px",
                     position: "absolute",
                     right: "20px",
                     top: "20px",
-                    //
                     borderRadius: "8px",
                     zIndex: "9999",
                     fontSize: "14px",
@@ -107,7 +103,7 @@ export default function Inscription() {
     }
 
     useEffect(() => {
-        if(success) {
+        if (success) {
             setTimeout(() => {
                 router.push('/connexion');
             }, 2500);
@@ -117,223 +113,132 @@ export default function Inscription() {
     useEffect(() => {
         if (inputRef.current) {
             flatpickr(inputRef.current, {
-                dateFormat: "d-m-Y", // Format de la date en jour-mois-an
-                locale: French,       
-                allowInput: true,     
+                dateFormat: "d-m-Y",
+                locale: French,
+                allowInput: true,
+                onChange: (_, dateStr) => {
+                    setFormData(prev => ({ ...prev, dateNaissance: dateStr }));
+                }
             });
         }
     }, []);
-        
 
+    useEffect(() => {
+        const fetchVilleEtDepartement = async () => {
+            if (formData.codePostal.length === 5) {
+                try {
+                    const res = await fetch(`https://geo.api.gouv.fr/communes?codePostal=${formData.codePostal}&fields=nom,codeDepartement&format=json`);
+                    const data = await res.json();
+
+                    if (data.length > 0) {
+                        const codeDepartement = data[0].codeDepartement;
+                        const depRes = await fetch(`https://geo.api.gouv.fr/departements/${codeDepartement}`);
+                        const depData = await depRes.json();
+
+                        setFormData(prev => ({
+                            ...prev,
+                            departement: depData.nom,
+                            ville: data.length === 1 ? data[0].nom : ""
+                        }));
+                        setVilles(data.map((ville: any) => ville.nom));
+                    } else {
+                        setVilles([]);
+                        setFormData(prev => ({
+                            ...prev,
+                            departement: "",
+                            ville: ""
+                        }));
+                    }
+                } catch (error) {
+                    console.error("Erreur récupération commune/département :", error);
+                }
+            } else {
+                setVilles([]);
+                setFormData(prev => ({
+                    ...prev,
+                    departement: "",
+                    ville: ""
+                }));
+            }
+        };
+
+        fetchVilleEtDepartement();
+    }, [formData.codePostal]);
 
     return (
-        <>
-            <div className="
-            w-full 
-            h-auto 
-            flex 
-            justify-center
-            pb-32
-            md:min-h-auto
-            md:pb-0
-            ">
-                <form className="
-                w-[600px]
-                grid-cols-1 
-                bg--form 
-                px-14
-                py-9
-                rounded-md 
-                lg:mt-10
-                md:translate-x-1/2
-                md:z-50
-                md:max-h-[650px]">
-                    <h1 className="text-white text-center mb-4 text-2xl">Inscription</h1>
+        <div className="w-full h-auto flex justify-center pb-32 md:min-h-auto md:pb-0">
+            <form
+                onSubmit={handleSubmit}
+                className="w-[600px] grid-cols-1 bg--form px-14 py-9 rounded-md lg:mt-10 md:translate-x-1/2 md:z-50 md:max-h-[650px]"
+            >
+                <h1 className="text-white text-center mb-4 text-2xl">Inscription</h1>
 
-                    {/* NOM & PRENOM */}
-                    <div className=" flex justify-center gap-4 mb-4">
-                        <input className="
-                        form-control 
-                        text-[15px]
-                        placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
-                            type="text"
-                            name="nom"
-                            value={formData.nom}
-                            onChange={handleChange}
-                            placeholder="Nom" />
-
-                        <input className="
-                        form-control 
-                        text-[15px]
-                        placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
-                            type="text"
-                            name="prenom"
-                            value={formData.prenom}
-                            onChange={handleChange}
-                            placeholder="Prénom" />
-                    </div>
-
-                    {/* N° TEL & DDN */}
-                    <div className=" flex justify-center relative gap-4 mb-4">
-                        <input className="
-                        form-control 
-                        text-[15px]
-                        placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
-                            type="tel"
-                            name="telephone"
-                            value={formData.telephone}
-                            onChange={handleChange}
-                            placeholder="N° Tel" />
-
-                        <input
-                    className="form-control 
-                    text-[15px]
-                    placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition appearance-none cursor-pointer"
-                    type="text"
-                    placeholder="Date de naissance"
-                    name="dateNaissance"
-                    value={formData.dateNaissance}
-                    onChange={handleChange}
-                    ref={inputRef}
-                />
-
-                <FontAwesomeIcon
-                    icon={faCalendarAlt}
-                    className="w-5 h-4 absolute right-3 top-1/2 transform -translate-y-1/2 text-[#8C5744] cursor-pointer"
-                    onClick={() => inputRef.current?.click()}
-                />
-
-                    <span className="absolute 
-                        text-xs 
-                        top-10
-                        right-[115px]
-                        italic
-                        text-black
-                        font-[530]">
-                        *Date de naissance*
-                    </span>
-                    </div>
-
-                    {/* EMAIL */}
-                    <div className=" flex justify-center gap-4 mb-4">
-                        <input className="
-                        form-control 
-                        text-[15px]
-                        placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            placeholder="Email" />
-                    </div>
-
-                    <div className="relative w-full mb-4">
-                        <input
-                            type={showPassword ? "text" : "password"}
-                            className="form-control 
-                            text-[15px] 
-                            w-full  
-                            rounded-md 
-                            border border-gray-300 
-                            placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
-                            name="motDePasse"
-                            value={formData.motDePasse}
-                            onChange={handleChange}
-                            placeholder="Mot de passe"
-
-                        />
-
-                        <FontAwesomeIcon
-                            icon={showPassword ? faEye : faEyeSlash}
-                            className="
-                            w-5 
-                            h-5 
-                            absolute 
-                            right-3 
-                            top-1/2 transform -translate-y-1/2 
-                            cursor-pointer
-                            transition
-                            color--marronNoisetteMid
-                            "
-                            onClick={() => setshowPassword(!showPassword)}
-                        />
-                    </div>
-
-
-                    {/* DEPARTEMENT & CP */}
-                    <div className=" flex justify-center gap-4 mb-4">
-                        <input className="
-                        form-control 
-                        text-[15px]
-                        placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
-                        
-                            type="text"
-                            name="departement"
-                            value={formData.departement}
-                            onChange={handleChange}
-                            
-                            placeholder="Département" />
-
-                        <input className="
-                        form-control 
-                        text-[15px]
-                        placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
-                            type="number"
-                            name="codePostal"
-                            value={formData.codePostal}
-                            onChange={handleChange}
-                            placeholder="Code Postal" />
-                    </div>
-
-                    {/* VILLE */}
-                    <div className="flex justify-center gap-4 mb-4">
-                        <input className="form-control 
-                        text-[15px]
-                        placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
-                            type="text"
-                            name="ville"
-                            value={formData.ville}
-                            onChange={handleChange}
-                            placeholder="Ville" />
-                    </div>
-
-                    {/* BTN */}
-                    <div className="flex justify-center gap-4 mb-4 text-white">
-                        <button className="btn btn-outline-light text-[15px] rounded-xs hover:bg-white hover:text-[#733E34]"
-                            type="submit"
-                            onClick={handleSubmit}>
-                            Créer mon compte
-                        </button>
-                    </div>
-
-                    <div className="flex items-center my-10">
-                        <hr className="flex-grow border-white" />
-                        <span className="mx-4 text-light">OU</span>
-                        <hr className="flex-grow border-white" />
-                    </div>
-
-                    <div className="underline underline-offset-1 text-light font-montserrat mt-6 text-xs text-center">
-                        <Link href={"connexion"}>Vous avez déjà un compte ? Connectez-vous !</Link>
-                    </div>
-                </form>
-
-
-
-                <div className="
-                hidden 
-                md:rounded-md
-                md:relative
-                md:left-40
-                md:w-2/5
-                md:block">
-                    <img
-                        src="/assets/photoTondeuse.jpg"
-                        className="w-full h-[718px] object-cover"
-                    />
-
+                {/* NOM & PRENOM */}
+                <div className="flex justify-center gap-4 mb-4">
+                    <input className="form-control text-[15px]" type="text" name="nom" value={formData.nom} onChange={handleChange} placeholder="Nom" />
+                    <input className="form-control text-[15px]" type="text" name="prenom" value={formData.prenom} onChange={handleChange} placeholder="Prénom" />
                 </div>
-            </div>
-        </>
 
-    )
+                {/* TEL & DATE NAISSANCE */}
+                <div className="flex justify-center relative gap-4 mb-4">
+                    <input className="form-control text-[15px]" type="tel" name="telephone" value={formData.telephone} onChange={handleChange} placeholder="N° Tel" />
+                    <input className="form-control text-[15px] appearance-none cursor-pointer" type="text" placeholder="Date de naissance" name="dateNaissance" value={formData.dateNaissance} ref={inputRef} readOnly />
+                    <FontAwesomeIcon icon={faCalendarAlt} className="w-5 h-4 absolute right-3 top-1/2 transform -translate-y-1/2 text-[#8C5744] cursor-pointer" onClick={() => inputRef.current?.click()} />
+                    <span className="absolute text-xs top-10 right-[115px] italic text-black font-[530]">*Date de naissance*</span>
+                </div>
+
+                {/* EMAIL */}
+                <div className="flex justify-center gap-4 mb-4">
+                    <input className="form-control text-[15px]" type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" />
+                </div>
+
+                {/* MOT DE PASSE */}
+                <div className="relative w-full mb-4">
+                    <input type={showPassword ? "text" : "password"} className="form-control text-[15px] w-full" name="motDePasse" value={formData.motDePasse} onChange={handleChange} placeholder="Mot de passe" />
+                    <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} className="w-5 h-5 absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer" onClick={() => setShowPassword(!showPassword)} />
+                </div>
+
+                {/* DEPARTEMENT & CODE POSTAL */}
+                <div className="flex justify-center gap-4 mb-4">
+                    <input className="form-control text-[15px]" type="text" name="departement" value={formData.departement} placeholder="Département" readOnly />
+                    <input className="form-control text-[15px]" type="number" name="codePostal" value={formData.codePostal} onChange={handleChange} placeholder="Code Postal" />
+                </div>
+
+                {/* VILLE */}
+                <div className="flex justify-center gap-4 mb-4">
+                    {villes.length > 1 ? (
+                        <select className="form-control text-[15px]" name="ville" value={formData.ville} onChange={handleChange}>
+                            <option value="">-- Choisissez votre ville --</option>
+                            {villes.map((ville) => (
+                                <option key={ville} value={ville}>{ville}</option>
+                            ))}
+                        </select>
+                    ) : (
+                        <input className="form-control text-[15px]" type="text" name="ville" value={formData.ville} onChange={handleChange} placeholder="Ville" />
+                    )}
+                </div>
+
+                {/* BOUTON */}
+                <div className="flex justify-center gap-4 mb-4 text-white">
+                    <button className="btn btn-outline-light text-[15px] rounded-xs hover:bg-white hover:text-[#733E34]" type="submit">
+                        Créer mon compte
+                    </button>
+                </div>
+
+                <div className="flex items-center my-10">
+                    <hr className="flex-grow border-white" />
+                    <span className="mx-4 text-light">OU</span>
+                    <hr className="flex-grow border-white" />
+                </div>
+
+                <div className="underline underline-offset-1 text-light font-montserrat mt-6 text-xs text-center">
+                    <Link href={"connexion"}>Vous avez déjà un compte ? Connectez-vous !</Link>
+                </div>
+            </form>
+
+            <div className="hidden md:rounded-md md:relative md:left-40 md:w-2/5 md:block">
+                <img src="/assets/photoTondeuse.jpg" className="w-full h-[718px] object-cover" />
+            </div>
+        </div>
+    );
 }
