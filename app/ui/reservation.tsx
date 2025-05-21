@@ -5,7 +5,7 @@ export default function Reservation() {
   return (
     <>
       <PsChoixCoupes />
-      <DsHoraireAndTruck />
+      {/* <DsHoraireAndTruck /> */}
     </>
   );
 }
