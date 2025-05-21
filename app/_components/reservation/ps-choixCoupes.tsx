@@ -8,9 +8,9 @@ export default function PsChoixCoupes() {
     const [selected, setSelected] = useState<View | null>('courtes');
 
     return (
-        <section className="border-1 border-blue-500 w-auto min-h-[700px] text-white
-        lg:min-h-[730px]">
-            <div className="flex flex-column">
+        <section className="border-1 border-green-500 w-auto min-h-[720px] text-white
+        md:min-h-auto">
+            <div className="border flex flex-column justify-center min-h-[720px]">
 
                 <div className="">
                     <h1 className="text-3xl text-center">Le choix <span className="color--form">de la coupes</span></h1>
@@ -46,7 +46,8 @@ export default function PsChoixCoupes() {
                 </div>
 
                 {selected && (
-                    <div className="w-full p-4
+                    // <div className=""></div>
+                    <div className="border-1 border-purple-500 w-full p-4
                     md:grid grid-cols-2 gap-12
                     md:relative
                     md:top-10
