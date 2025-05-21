@@ -8,7 +8,8 @@ export default function PsChoixCoupes() {
     const [selected, setSelected] = useState<View | null>('courtes');
 
     return (
-        <section className="border-1 border-blue-500 w-auto min-h-[700px] text-white">
+        <section className="border-1 border-blue-500 w-auto min-h-[700px] text-white
+        lg:min-h-[730px]">
             <div className="flex flex-column">
 
                 <div className="">
@@ -17,6 +18,7 @@ export default function PsChoixCoupes() {
 
                 <div className="w-full grid grid-cols-2 gap-4 px-4 
                 md:flex
+                md:justify-center
                 md:text-sm
                 lg:text-base
                 lg:px-0
@@ -29,7 +31,7 @@ export default function PsChoixCoupes() {
                         { key: 'tendances', label: 'Coupes tendances' },
                     ] as { key: View; label: string }[]).map(({ key, label }) => (
 
-                        <div key={key} onClick={() => setSelected(key)} className="border-1 border-[#733E34] w-52 px-2 py-3 mt-3 rounded-lg transition duration-300 hover:scale-105">
+                        <div key={key} onClick={() => setSelected(key)} className="border-1 border-[#733E34] w-52 items-center px-2 py-3 mt-3 rounded-lg transition duration-300 hover:scale-105">
                             <Image
                                 alt={`Image de ${label}`}
                                 src={"/assets/photoCadreResa.png"}
@@ -38,7 +40,7 @@ export default function PsChoixCoupes() {
                                 quality={70}
                                 className="w-full mb-3"
                             />
-                            <span className="relative left-7 md:left-4">Coupes courtes</span>
+                            <div className="text-center">{label}</div>
                         </div>
                     ))}
                 </div>
@@ -48,11 +50,10 @@ export default function PsChoixCoupes() {
                     md:grid grid-cols-2 gap-12
                     md:relative
                     md:top-10
-                    xl:gap-x-72
-                    2xl:border
-                    2xl:w-1/2
-                    2xl:relative
-                    2xl:left-1/4
+                    lg:w-[950px]
+                    lg:left-9
+                    xl:left-40
+                    2xl:left-72
                     ">
                         {dataMap[selected].map((item, index) => (
                             <div key={index} className="mb-4 border-none border-bottom">
