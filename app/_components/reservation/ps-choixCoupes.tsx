@@ -8,12 +8,12 @@ export default function PsChoixCoupes() {
     const [selected, setSelected] = useState<View | null>('courtes');
 
     return (
-        <section className="border-1 border-green-500 w-auto min-h-[720px] text-white
+        <section className="min-h-[80vh] text-white
         md:min-h-auto">
-            <div className="border flex flex-column justify-center min-h-[720px]">
+            <div className="flex flex-column justify-center min-h-[720px]">
 
                 <div className="">
-                    <h1 className="text-3xl text-center">Le choix <span className="color--form">de la coupes</span></h1>
+                    <h1 className="text-3xl text-center md:relative md:bottom-8">Le choix <span className="color--form">de la coupes</span></h1>
                 </div>
 
                 <div className="w-full grid grid-cols-2 gap-4 px-4 
@@ -46,15 +46,12 @@ export default function PsChoixCoupes() {
                 </div>
 
                 {selected && (
-                    // <div className=""></div>
-                    <div className="border-1 border-purple-500 w-full p-4
+                    <div className="w-full p-4
+                    relative
+                    top-10
                     md:grid grid-cols-2 gap-12
-                    md:relative
-                    md:top-10
                     lg:w-[950px]
-                    lg:left-9
-                    xl:left-40
-                    2xl:left-72
+                    lg:mx-auto
                     ">
                         {dataMap[selected].map((item, index) => (
                             <div key={index} className="mb-4 border-none border-bottom">
