@@ -1,5 +1,3 @@
-// app/data/dataCoupes.ts
-
 export type Coupe = {
   coupes: string;
   cout: string;
