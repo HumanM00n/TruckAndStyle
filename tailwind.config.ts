@@ -16,9 +16,10 @@ export default {
         foreground: "var(--foreground)",
       },
       fontFamily: {
-        montserrat: ["Montserrat", "sans-serif"],
-        playfair: ["Playfair Display", "serif"],
+        montserrat: ['var(--font-montserrat)', 'sans-serif'],
+        playfair: ['var(--font-playfair)', 'serif'],
       },
+
     },
   },
   plugins: [],
