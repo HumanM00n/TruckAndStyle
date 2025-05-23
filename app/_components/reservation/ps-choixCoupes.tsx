@@ -1,11 +1,17 @@
 'use client';
 
 import Image from "next/image";
-import { useState } from "react";
 import { dataMap, View } from "@/app/_lib/choixCoupes.ps-resa";
+import { useRouter } from 'next/navigation';
 
-export default function PsChoixCoupes() {
-    const [selected, setSelected] = useState<View | null>('courtes');
+
+type Props = {
+  selected: View | null;
+  onSelect: (value: View) => void;
+};
+
+export default function PsChoixCoupes({ selected, onSelect }: Props) {
+    const router = useRouter();
 
     return (
         <section className="min-h-[80vh] text-white
@@ -31,7 +37,8 @@ export default function PsChoixCoupes() {
                         { key: 'tendances', label: 'Coupes tendances' },
                     ] as { key: View; label: string }[]).map(({ key, label }) => (
 
-                        <div key={key} onClick={() => setSelected(key)} className="border-1 border-[#733E34] w-52 items-center px-2 py-3 mt-3 rounded-lg transition duration-300 hover:scale-105">
+                        <div key={key} onClick={() => onSelect(key)} className={`border-1 w-52 px-2 py-3 mt-3 rounded-lg transition duration-300 hover:scale-105 ${
+                            selected === key ? 'border-white bg-[#733E34]' : 'border-[#733E34]'}`}>
                             <Image
                                 alt={`Image de ${label}`}
                                 src={"/assets/photoCadreResa.png"}
@@ -45,10 +52,12 @@ export default function PsChoixCoupes() {
                     ))}
                 </div>
 
+                
                 {selected && (
                     <div className="w-full p-4
                     relative
                     top-10
+                    transition-opacity duration-500 ease-in-out opacity-100
                     md:grid grid-cols-2 gap-12
                     lg:w-[950px]
                     lg:mx-auto
@@ -61,7 +70,8 @@ export default function PsChoixCoupes() {
                                 </div>
                                 <div className="flex justify-between items-center pb-2">
                                     <span>{item.temps}</span>
-                                    <button className="btn text-sm text-white rounded bg-[#733E34] px-3 py-1 hover:bg-[#733e3471]">
+                                    <button className="btn text-sm text-white rounded bg-[#733E34] px-3 py-1 hover:bg-[#733e3471]"
+                                    onClick={() => router.push(`/reservation/heure?coupe=${item.coupes}`)}>
                                         Réserver cette coupe
                                     </button>
                                 </div>
