@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
 
   --noir: #1A1A1A;
@@ -136,17 +135,9 @@
   transition-duration: 150ms;
 }
 
-/* .btn-submit:hover {
-  background: #63362d;
-} */
-
-
-
 /*---------------------------------- 
               OTHER                 |
 -----------------------------------*/
-
-
 
 
 @layer components {
