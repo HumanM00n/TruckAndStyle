@@ -13,7 +13,7 @@ export default function Footer() {
     const profilFacebook = "https://www.facebook.com/profile.php?id=61573511614832";
 
     return (
-        <footer className="w-full font-montserrat flex justify-center">
+        <footer className="w-full font-montserrat flex justify-center bg-black">
             <div className="w-full flex justify-around">
 
                 {/* Logo */}
