@@ -4,12 +4,11 @@ import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-// ⬇️  On importe les images depuis le paquet Leaflet
 import iconRetina from 'leaflet/dist/images/marker-icon-2x.png';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import shadow from 'leaflet/dist/images/marker-shadow.png';
 
-// ⬇️  On dit à Leaflet d’utiliser ces fichiers
+// Précise à Leaflet d’utiliser ces fichiers
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: iconRetina,
   iconUrl: icon,
