@@ -1,38 +1,27 @@
 'use client'
 
 import { useState } from "react"
-import { format, getWeek, startOfWeek, endOfWeek } from "date-fns"
+import { format } from "date-fns"
 import { fr } from "date-fns/locale"
 import { Calendar } from "./componentsShadcn/calendar"
 import {  Popover, PopoverTrigger, PopoverContent } from '@/app/_components/componentsShadcn/popover'
 import { Button } from "./componentsShadcn/button"
 import { cn } from "../_lib/utils"
 
-const startWeekActive = new Date(2025, 5, 2);
-const endWeekActive = new Date(2025, 5, 7);
-
-const startSemaine = startOfWeek(startWeekActive, { weekStartsOn: 1, locale: fr });
-const endSemaine = endOfWeek(endWeekActive, { weekStartsOn: 1, locale: fr });
-
-console.log("Début de la semaine :", format(startSemaine, "eeee dd MMMM yyyy", { locale: fr }))
-console.log("Fin de la semaine :", format(endSemaine, "eeee dd MMMM yyyy", { locale: fr }))
-
-
-
 const horairesWeek = [
-  "10:00", "10:30", "11:00",
-  "11:30","12:00","12:00","12:30","13:30",
-  "14:30", "15:30", "14:00", "14:30", "15:00",
-  "15:30", "16:00", "16:30", "17:00", "17:30",
+  "10:00", "10:30", "11:00","11:30",
+  "12:00","12:30","13:00","13:30",
+  "14:00", "14:30", "15:00","15:30", 
+  "16:00", "16:30", "17:00", "17:30",
   "18:00",
 ]
 
 const horairesWeekEnd = [
-  "10:00", "10:30", "11:00",
-  "11:30","12:00","12:00","12:30","13:30",
-  "14:30", "15:30", "14:00", "14:30", "15:00",
-  "15:30", "16:00", "16:30", "17:00", "17:30",
-  "18:00", "19:00", "19:30", "20:00"
+  "10:00", "10:30","11:00","11:30",
+  "12:00","12:30","13:00","13:30",
+  "14:00","14:30","15:00","15:30", 
+  "16:00", "16:30", "17:00", "17:30",
+  "18:00","18:30", "19:00", "19:30", "20:00"
 ]
 
 export default function DateTimePicker({ onDateTimeChange,}: { onDateTimeChange: (datetime: string) => void}) {
@@ -47,19 +36,20 @@ const handleSelect = (d: Date | undefined, h: string | null) => {
   }
 
   if (d && h) {
-    const iso = `${format(d, "yyyy-MM-dd")}T${h}:00`
+    const iso = `${format(d, "yyyy-MM-dd")}${h}:00`
     onDateTimeChange(iso)
+    console.log(iso)
   }
 }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 text-black">
       {/* Sélecteur de date */}
       <Popover>
         <PopoverTrigger asChild>
           <Button
             variant="outline"
-            className={cn("w-full justify-start text-left", !date && "text-muted-foreground")}>
+            className={cn("w-full justify-start text-left bg--form border-1 border-none text-white hover:bg-[#733e3471]", !date && "text-gray-500 text-opacity-95")}>
             {affichage}
           </Button>
         </PopoverTrigger>
@@ -73,12 +63,13 @@ const handleSelect = (d: Date | undefined, h: string | null) => {
             }}
             initialFocus
             locale={fr}
+            disabled={{ before: new Date(2025, 5, 9), after: new Date(2025, 5, 22) }}
           />
         </PopoverContent>
       </Popover>
 
       {/* Choix de l'heure */}
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-3 gap-2 text-white">
         {horairesWeek.map((h) => (
           <Button
             key={h}
@@ -87,11 +78,15 @@ const handleSelect = (d: Date | undefined, h: string | null) => {
               setHeure(h)
               handleSelect(date, h)
             }}
+            className="bg--form border-1 border-none"
           >
             {h}
           </Button>
         ))}
       </div>
+
+      {/* <input type="text" value={currentDate}/> */}
     </div>
+    
   )
 }
