@@ -34,7 +34,7 @@ export default function PsChoixCoupes({ selected, onSelect, onChoixFinal  }: Pro
                         { key: 'tendances', label: 'Coupes tendances' },
                     ] as { key: View; label: string }[]).map(({ key, label }) => (
 
-                        <div key={key} onClick={() => onSelect(key)} className={`border-1 w-52 px-2 py-3 mt-3 rounded-lg transition duration-300 hover:scale-105 ${
+                        <div key={key} onClick={() => onSelect(key)} className={`border-1 w-52 px-2 py-3 mt-3 rounded-lg cursor-pointer transition duration-300 hover:scale-105 ${
                             selected === key ? 'border-white bg-[#733E34]' : 'border-[#733E34]'}`}>
                             <Image
                                 alt={`Image de ${label}`}
