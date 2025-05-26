@@ -2,17 +2,14 @@
 
 import Image from "next/image";
 import { dataMap, View } from "@/app/_lib/choixCoupes.ps-resa";
-import { useRouter } from 'next/navigation';
-
 
 type Props = {
   selected: View | null;
   onSelect: (value: View) => void;
+  onChoixFinal: (coupe: string) => void; 
 };
 
-export default function PsChoixCoupes({ selected, onSelect }: Props) {
-    const router = useRouter();
-
+export default function PsChoixCoupes({ selected, onSelect, onChoixFinal  }: Props) {
     return (
         <section className="min-h-[80vh] text-white
         md:min-h-auto">
@@ -70,8 +67,12 @@ export default function PsChoixCoupes({ selected, onSelect }: Props) {
                                 </div>
                                 <div className="flex justify-between items-center pb-2">
                                     <span>{item.temps}</span>
-                                    <button className="btn text-sm text-white rounded bg-[#733E34] px-3 py-1 hover:bg-[#733e3471]"
-                                    onClick={() => router.push(`/reservation/heure?coupe=${item.coupes}`)}>
+                                    <button type="button" className="btn text-sm text-white rounded bg-[#733E34] px-3 py-1 hover:bg-[#733e3471] 
+                                    focus:border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent focus:ring-[#ffffff]"
+                                     onClick={() => {
+                                        onChoixFinal(item.coupes)
+                                     }}
+                                    >
                                         Réserver cette coupe
                                     </button>
                                 </div>
