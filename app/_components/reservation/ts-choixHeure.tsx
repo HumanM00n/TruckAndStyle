@@ -1,9 +1,9 @@
 'use client';
 
 import Image from "next/image";
-import DateTimePicker from "@/app/_components/test"
+import DateTimePicker from "./objecResa/datepicker";
 
-type Props= {
+type Props = {
     date: Date | undefined;
     setDate: (value: Date | undefined) => void;
 
@@ -14,7 +14,7 @@ type Props= {
     setAffichage: (value: string) => void;
 }
 
-export default function TsChoixHeureResa({date, setDate, heure, setHeure, affichage, setAffichage}: Props) {
+export default function TsChoixHeureResa({ date, setDate, heure, setHeure, affichage, setAffichage }: Props) {
 
     const handleDateTime = (datetime: string) => {
         console.log("Créneau choisi :", datetime)
@@ -25,63 +25,68 @@ export default function TsChoixHeureResa({date, setDate, heure, setHeure, affich
         setHeure(null);
         setAffichage("Choisir une date")
     }
-    
+
 
     return (
-        <section className="border-1 border-blue-500 w-auto min-h-[80vh] text-white">
-            <div className="border flex flex-col">
-                <div className=" font-bold">
-                    <h2 className="!font-playfair text-2xl">Choix de votre <span className="color--form">Horaire</span></h2>
+        <section className="w-auto min-h-[80vh] text-white">
+            <div className="w-full flex flex-col md:flex-row ms:justify-between">
+                <div className="font-bold md:hidden">
+                    <h2 className="!font-playfair text-2xl pl-2">Choix de votre <span className="color--form">Horaire</span></h2>
                 </div>
 
-                <div className="border-1 border-[#733E34] w-52 px-2 py-3 mt-3 rounded-lg text-sm mx-auto">
-                    <Image
-                        alt="Photo de la coiffure selectionnée"
-                        src={"/assets/photoCadreResa.png"}
-                        width={150}
-                        height={150}
-                        quality={70}
-                        className="w-52"
-                    />
+                <div className="md:w-1/3">
 
-                    <div className="grid grid-cols-2 gap-1">
-                        <div className="">
-                            <span>Buzz cut</span>
+                    <div className="border-1 border-[#733E34] w-52 px-2 py-3 mt-3 rounded-lg text-sm mx-auto md:mx-0">
+                        <Image
+                            alt="Photo de la coiffure selectionnée"
+                            src={"/assets/photoCadreResa.png"}
+                            width={150}
+                            height={150}
+                            quality={70}
+                            className="w-52 md:max-w-40"
+                        />
+
+
+                        <div className="grid grid-cols-2 gap-1">
+                            <div className="">
+                                <span>Buzz cut</span>
+                            </div>
+
+                            <div className="relative">
+                                <span className="absolute right-0">10€</span>
+                            </div>
+
+                            <div className="">
+                                <span>30 min</span>
+                            </div>
+
                         </div>
 
-                        <div className="relative">
-                            <span className="absolute right-0">10€</span>
-                        </div>
-
-                        <div className="">
-                            <span>30 min</span>
+                        <div className="text-center">
+                            <button className="cursor-pointer underline" onClick={resetReservation}>Supprimer</button>
                         </div>
 
                     </div>
-
-                    <div className="text-center">
-                        <button className="cursor-pointer underline" onClick={resetReservation}>Supprimer</button>
-                    </div>
-
                 </div>
 
-                <div className="border-1 border-red-500">
+
+
+                <div className="mt-2 pl-2 md:w-2/3 md:h-[600px]">
                     <div className="">
-                        <p className="text-lg">Nom du Hair'Truck</p>
-                        <p className="italic text-sm">*HairOnWhells*</p>
+                        <p className="text-lg md:text-xl">Nom du Hair'Truck</p>
+                        <p className="italic text-sm md:text-lg">HairOnWhells</p>
                     </div>
 
-                    <div className="">
-                        <p>Adresse du Hair'Truck</p>
-                        <p className="italic text-sm">*adresse du hair'Truck*</p>
+                    <div className="mt-2">
+                        <p className="md:text-xl">Adresse du Hair'Truck</p>
+                        <p className="italic text-sm underline">*adresse du hair'Truck*</p>
                     </div>
 
                     <div className="p-6 max-w-xl mx-auto">
                         <DateTimePicker onDateTimeChange={handleDateTime} />
                     </div>
-
-
                 </div>
+
             </div>
         </section>
     )
