@@ -69,7 +69,7 @@ const handleSelect = (d: Date | undefined, h: string | null) => {
       </Popover>
 
       {/* Choix de l'heure */}
-      <div className="grid grid-cols-3 gap-2 text-white">
+      <div className="grid grid-cols-3 gap-2 text-white md:!gap-3">
         {horairesWeek.map((h) => (
           <Button
             key={h}
