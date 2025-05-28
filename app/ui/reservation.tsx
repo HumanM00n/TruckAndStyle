@@ -26,12 +26,12 @@ export default function Reservation() {
         affichage={affichage}
         setAffichage={setAffichage} />
 
-      <div className="border-1 border-blue-500 w-full flex justify-center static">
+      <div className="w-full flex justify-center relative md:bottom-24">
         <button className="
 		                w-64
-                    relative
                     py-2.5 
                     px-6
+                    relative
                     top-7
                     mb-16
                     rounded-md
@@ -39,7 +39,10 @@ export default function Reservation() {
                     bg--form
                     transition
                     hover:bg-[#63362d]
-                    md:mb-0"
+                    md:mb-0
+                    md:top-0
+                    md:left-6
+                    lg:left-9"
           type="submit" name="">Confirmer</button>
       </div>
     </form>
