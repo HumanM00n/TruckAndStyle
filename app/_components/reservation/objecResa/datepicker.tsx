@@ -72,6 +72,7 @@ const handleSelect = (d: Date | undefined, h: string | null) => {
       <div className="grid grid-cols-3 gap-2 text-white md:!gap-3">
         {horairesWeek.map((h) => (
           <Button
+          type="button"
             key={h}
             variant={heure === h ? "default" : "outline"}
             onClick={() => {
@@ -84,8 +85,6 @@ const handleSelect = (d: Date | undefined, h: string | null) => {
           </Button>
         ))}
       </div>
-
-      {/* <input type="text" value={currentDate}/> */}
     </div>
     
   )
