@@ -29,25 +29,28 @@ export default function TsChoixHeureResa({ date, setDate, heure, setHeure, affic
 
     return (
         <section className="w-auto min-h-[80vh] text-white">
-            <div className="w-full flex flex-col md:flex-row ms:justify-between">
+            <div className="w-full flex flex-col md:flex-row md:justify-between">
                 <div className="font-bold md:hidden">
                     <h2 className="!font-playfair text-2xl pl-2">Choix de votre <span className="color--form">Horaire</span></h2>
                 </div>
 
                 <div className="md:w-1/3">
-
-                    <div className="border-1 border-[#733E34] w-52 px-2 py-3 mt-3 rounded-lg text-sm mx-auto md:mx-0">
+                    <div className="border-1 border-[#733E34] w-52 px-2 py-3 mt-3 rounded-lg text-sm mx-auto 
+                    xl:w-60
+                    xl:text-[15px]
+                    2xl:h-96
+                    2xl:w-[300px]
+                    ">
                         <Image
                             alt="Photo de la coiffure selectionnée"
                             src={"/assets/photoCadreResa.png"}
                             width={150}
                             height={150}
                             quality={70}
-                            className="w-52 md:max-w-40"
+                            className="w-52 mx-auto md:w-40 2xl:w-[400px] 2xl:mb-3"
                         />
 
-
-                        <div className="grid grid-cols-2 gap-1">
+                        <div className="grid grid-cols-2 gap-2">
                             <div className="">
                                 <span>Buzz cut</span>
                             </div>
@@ -59,26 +62,23 @@ export default function TsChoixHeureResa({ date, setDate, heure, setHeure, affic
                             <div className="">
                                 <span>30 min</span>
                             </div>
-
                         </div>
 
-                        <div className="text-center">
+                        <div className="text-center pt-4">
                             <button className="cursor-pointer underline" onClick={resetReservation}>Supprimer</button>
                         </div>
 
                     </div>
                 </div>
 
-
-
-                <div className="mt-2 pl-2 md:w-2/3 md:h-[600px]">
-                    <div className="">
-                        <p className="text-lg md:text-xl">Nom du Hair'Truck</p>
+                <div className="mt-2 pl-2 md:w-2/3 md:h-[600px] xl:static">
+                    <div className="xl:static">
+                        <p className="text-lg md:text-xl 2xl:text-3xl">Nom du Hair'Truck</p>
                         <p className="italic text-sm md:text-lg">HairOnWhells</p>
                     </div>
 
-                    <div className="mt-2">
-                        <p className="md:text-xl">Adresse du Hair'Truck</p>
+                    <div className="mt-4 xl:static">
+                        <p className="text-lg md:text-xl 2xl:text-3xl">Adresse du Hair'Truck</p>
                         <p className="italic text-sm underline">*adresse du hair'Truck*</p>
                     </div>
 
@@ -86,7 +86,6 @@ export default function TsChoixHeureResa({ date, setDate, heure, setHeure, affic
                         <DateTimePicker onDateTimeChange={handleDateTime} />
                     </div>
                 </div>
-
             </div>
         </section>
     )
