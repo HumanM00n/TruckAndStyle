@@ -2,17 +2,16 @@
 
 import Image from "next/image";
 import { View } from "@/app/_lib/choixCoupes.ps-resa";
-import { faCaretLeft, faPlay } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { playfair } from "@/app/styles/fonts";
 
 export default function PsTruckAndPicture() {
     return (
 
         /* SECTION NOTRE TRUCK + COUPES PROPOSEES  */
-        <section className="min-h-[80vh] text-white">
+        <section className="min-h-[80vh]">
             <div className="w-full">
                 <div className="flex justify-center md:w-1/2 md:justify-start md:pl-9 lg:pl-10 xl:pl-11">
-                    <h1 className="text-2xl md:text-3xl font-semibold">Notre <span className="color--form">Truck</span></h1>
+                    <h1 className={`${playfair.className} text-2xl md:text-3xl font-semibold`}>Notre <span className="color--form">Truck</span></h1>
                 </div>
 
                 {/* IMAGE DU CAMION + LIBELLE */}
@@ -38,19 +37,14 @@ export default function PsTruckAndPicture() {
                                 className="w-full h-auto"
                             />
                         </div>
-
                         <div className="text-center mt-3">
 
-                            <h2 className="font-playfair text-xl font-[550] mb-2">Le hair&apos;truck</h2>
+                            <h2 className={`${playfair.className} text-xl font-[550] mb-2`}>Le hair&apos;truck</h2>
                             <p className="text-left text-sm"> Le hair’truck, c’est un salon de coiffure mobile pensé pour celles et ceux qui veulent un service professionnel sans avoir 
                                 à se déplacer. Que ce soit à domicile, sur le lieu de travail ou lors d’un événement, Truck’n Style propose des prestations rapides, soignées et adaptées à
                                 ton emploi du temps. Une solution pratique et flexible pour rester bien coiffé, même avec un planning chargé.</p>
                         </div>
                     </div>
-                </div>
-
-                <div className="flex justify-center mt-5 md:justify-start md:pl-9 lg:pl-10 xl:pl-11 2xl:justify-center">
-                    <h2 className="text-2xl md:text-3xl font-semibold">Les coupes <span className="color--form">proposées</span></h2>
                 </div>
 
                 {/* IMAGES DES COUPES */}
