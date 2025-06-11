@@ -17,26 +17,26 @@ export default function DsHoraireAndTruckResa() {
 
     return (
         <section className="bg--grisArdoiseMid min-h-[80vh] w-auto text-white">
-            <div className="relative ml-1 flex flex-col mb-3 md:flex-row">
-                <div className="bg--form w-[375px] h-[200px] flex flex-col items-center px-4 pt-2 mt-4 rounded-md">
+            <div className="relative ml-1 flex flex-col mb-3">
+                <div className="bg--form w-[375px] h-[200px] flex flex-col items-center px-4 pt-2 mt-4 rounded-md md:w-[450px] md:h-[300px]">
                     <div className="mb-4">
                         <h2 className={`${playfair.className} text-xl md:text-2xl`}>Nos horaires</h2>
                     </div>
 
                     <div className="mb-3">
-                        <p className="text-sm font-bold mb-2">Lundi - Mardi - Mercredi - Jeudi - Vendredi</p>
+                        <p className="text-sm font-bold mb-2 md:text-base">Lundi - Mardi - Mercredi - Jeudi - Vendredi</p>
                         <span className="flex justify-center">10h-18h</span>
                     </div>
 
                     <div>
-                        <p className="text-sm font-bold">Samedi</p>
+                        <p className="text-sm font-bold md:text-base">Samedi</p>
                         <span>10h-20h</span>
                     </div>
                 </div>
 
                 <div className="w-auto absolute top-60 right-4">
-                    <div className="w-full">
-                        <h2 className={`${playfair.className} text-xl md:text-2xl`}>Où se trouve le Hair'Truck ?</h2>
+                    <div className="w-full md:relative md:bottom-5">
+                        <h2 className={`${playfair.className} text-xl md:text-2xl md:text-end`}>Où se trouve le Hair'Truck ?</h2>
                     </div>
 
                     {/* MAPS */}
