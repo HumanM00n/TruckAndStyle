@@ -17,8 +17,15 @@ export default function DsHoraireAndTruckResa() {
 
     return (
         <section className="bg--grisArdoiseMid min-h-[80vh] w-auto text-white">
-            <div className="relative ml-1 flex flex-col mb-3">
-                <div className="bg--form w-[375px] h-[200px] flex flex-col items-center px-4 pt-2 mt-4 rounded-md md:w-[450px] md:h-[300px]">
+            <div className="relative flex flex-col mb-3 lg:relative">
+                <div className="bg--form w-[375px] h-[200px] flex flex-col items-center px-4 pt-2 mt-4 ml-1 rounded-md 
+                md:w-[450px] 
+                md:h-[300px] 
+                lg:relative
+                lg:left-12
+                lg:bottom-10
+                lg:!pt-7
+                ">
                     <div className="mb-4">
                         <h2 className={`${playfair.className} text-xl md:text-2xl`}>Nos horaires</h2>
                     </div>
@@ -34,7 +41,7 @@ export default function DsHoraireAndTruckResa() {
                     </div>
                 </div>
 
-                <div className="w-auto absolute top-60 right-4">
+                <div className="w-auto absolute top-60 right-4 lg:right-16 lg:top-48">
                     <div className="w-full md:relative md:bottom-5">
                         <h2 className={`${playfair.className} text-xl md:text-2xl md:text-end`}>Où se trouve le Hair'Truck ?</h2>
                     </div>

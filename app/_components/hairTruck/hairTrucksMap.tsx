@@ -34,7 +34,7 @@ const HairTruckMap = ({ latitude, longitude }: { latitude: number; longitude: nu
       .openPopup();
   }, [latitude, longitude]);
 
-  return <div id="map" className="h-[375px] w-[375px] rounded-xl shadow-lg "/>;
+  return <div id="map" className="h-[375px] w-[375px] rounded-xl shadow-lg lg:w-[500px] lg:h-[425px]"/>;
 };
 
 export default HairTruckMap;
