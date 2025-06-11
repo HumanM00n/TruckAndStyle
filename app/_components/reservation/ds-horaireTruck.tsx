@@ -25,6 +25,10 @@ export default function DsHoraireAndTruckResa() {
                 lg:left-12
                 lg:bottom-10
                 lg:!pt-7
+                xl:w-[525px]
+                xl:left-16
+                2xl:w-[650px]
+                2xl:left-52
                 ">
                     <div className="mb-4">
                         <h2 className={`${playfair.className} text-xl md:text-2xl`}>Nos horaires</h2>
@@ -41,7 +45,7 @@ export default function DsHoraireAndTruckResa() {
                     </div>
                 </div>
 
-                <div className="w-auto absolute top-60 right-4 lg:right-16 lg:top-48">
+                <div className="w-auto absolute top-60 right-4 lg:right-16 lg:top-48 xl:right-24 2xl:right-56 2xl:top-40">
                     <div className="w-full md:relative md:bottom-5">
                         <h2 className={`${playfair.className} text-xl md:text-2xl md:text-end`}>Où se trouve le Hair'Truck ?</h2>
                     </div>
