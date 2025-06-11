@@ -35,7 +35,7 @@ export default function PsChoixCoupes({ selected, onSelect, onChoixFinal  }: Pro
                         { key: 'tendances', label: 'Coupes tendances' },
                     ] as { key: View; label: string }[]).map(({ key, label }) => (
 
-                        <div key={key} onClick={() => onSelect(key)} className={`border-1 w-52 px-2 py-3 mt-3 text-sm rounded-lg cursor-pointer transition duration-300 hover:scale-105 md:text-md
+                        <div key={key} onClick={() => onSelect(key)} className={`border-1 w-52 px-2 py-3 mt-3 text-sm rounded-lg cursor-pointer transition duration-300 hover:scale-105 md:text-base
                             ${selected === key ? 'border-white bg-[#733E34]' : 'border-[#733E34]'}`}>
                             <Image
                                 alt={`Image de ${label}`}
@@ -61,7 +61,7 @@ export default function PsChoixCoupes({ selected, onSelect, onChoixFinal  }: Pro
                     lg:mx-auto
                     ">
                         {dataMap[selected].map((item, index) => (
-                            <div key={index} className="mb-4 border-none border-bottom text-sm md:text-md">
+                            <div key={index} className="mb-4 border-none border-bottom text-sm md:text-base">
                                 <div className="flex justify-between mb-4">
                                     <span className="font-bold">{item.coupes}</span>
                                     <span>{item.cout}</span>
