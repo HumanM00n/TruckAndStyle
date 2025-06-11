@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import DateTimePicker from "./objecResa/datepicker";
+import { playfair } from "@/app/styles/fonts";
 
 type Props = {
     date: Date | undefined;
@@ -30,8 +31,8 @@ export default function TsChoixHeureResa({ date, setDate, heure, setHeure, affic
     return (
         <section className="w-auto min-h-[80vh] text-white">
             <div className="w-full flex flex-col md:flex-row md:justify-between">
-                <div className="font-bold md:hidden">
-                    <h2 className="!font-playfair text-2xl pl-2">Choix de votre <span className="color--form">Horaire</span></h2>
+                <div className="mt-3 font-bold md:hidden">
+                    <h2 className={`${playfair.className} text-xl pl-2 md:text-2xl `}>Choix de votre <span className="color--form">Horaire</span></h2>
                 </div>
 
                 <div className="md:w-1/3">
@@ -73,12 +74,12 @@ export default function TsChoixHeureResa({ date, setDate, heure, setHeure, affic
 
                 <div className="mt-2 pl-2 md:w-2/3 md:h-[600px] xl:static">
                     <div className="xl:static">
-                        <p className="text-lg md:text-xl 2xl:text-3xl">Nom du Hair'Truck</p>
+                        <p className={`${playfair.className} text-xl md:text-xl 2xl:text-3xl`}>Nom du Hair'Truck</p>
                         <p className="italic text-sm md:text-lg">HairOnWhells</p>
                     </div>
 
                     <div className="mt-4 xl:static">
-                        <p className="text-lg md:text-xl 2xl:text-3xl">Adresse du Hair'Truck</p>
+                        <p className={`${playfair.className} text-xl md:text-xl 2xl:text-3xl`}>Adresse du Hair'Truck</p>
                         <p className="italic text-sm underline">*adresse du hair'Truck*</p>
                     </div>
 

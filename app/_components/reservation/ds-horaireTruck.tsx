@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import HairTruckMap from '../hairTruck/hairTrucksMap';
+import { playfair } from '@/app/styles/fonts';
 
 export default function DsHoraireAndTruckResa() {
 
@@ -15,37 +16,37 @@ export default function DsHoraireAndTruckResa() {
     }, []);
 
     return (
-        <section className="bg--grisArdoiseMid border-1 border-blue-500 min-h-[80vh] w-auto text-white ">
-            <div className="static ml-3">
-                <div className="bg--form w-[450px] h-[250px] flex flex-col items-center px-4 absolute pt-2 rounded-md">
+        <section className="bg--grisArdoiseMid min-h-[80vh] w-auto text-white">
+            <div className="relative ml-1 flex flex-col mb-3 md:flex-row">
+                <div className="bg--form w-[375px] h-[200px] flex flex-col items-center px-4 pt-2 mt-4 rounded-md">
                     <div className="mb-4">
-                        <h2 className="text-2xl">Nos horaires</h2>
+                        <h2 className={`${playfair.className} text-xl md:text-2xl`}>Nos horaires</h2>
                     </div>
 
                     <div className="mb-3">
-                        <p className="font-bold mb-2">Lundi - Mardi - Mercredi - Jeudi - Vendredi</p>
-                        <span className="pl-36">10h-18h</span>
+                        <p className="text-sm font-bold mb-2">Lundi - Mardi - Mercredi - Jeudi - Vendredi</p>
+                        <span className="flex justify-center">10h-18h</span>
                     </div>
 
-                    <div className="">
-                        <p className="font-bold">Samedi</p>
+                    <div>
+                        <p className="text-sm font-bold">Samedi</p>
                         <span>10h-20h</span>
                     </div>
                 </div>
 
-                <div className="border-1 border-red-500 w-auto absolute bottom-64 right-32">
+                <div className="w-auto absolute top-60 right-4">
                     <div className="w-full">
-                        <h2 className="text-2xl"> Où se trouve le Hair'Truck ?</h2>
+                        <h2 className={`${playfair.className} text-xl md:text-2xl`}>Où se trouve le Hair'Truck ?</h2>
                     </div>
 
                     {/* MAPS */}
-                    {/* <div className="">
+                    <div>
                         {coords ? (
-                            <HairTruckMap latitude={coords.latitude} longitude={coords.longitude} />
+                            <HairTruckMap latitude={coords.latitude} longitude={coords.longitude}/>
                         ) : (
                             <p className='text-center'>Chargement de la carte</p>
                         )}
-                    </div> */}
+                    </div>
                 </div>
             </div>
         </section>
