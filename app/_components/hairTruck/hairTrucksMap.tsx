@@ -26,16 +26,16 @@ const HairTruckMap = ({ latitude, longitude }: { latitude: number; longitude: nu
     mapRef.current = map;
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
 
     L.marker([latitude, longitude])
       .addTo(map)
-      .bindPopup(`Le 🚚 est ici `)
+      .bindPopup(`Le💈🚚 se situe ici !`)
       .openPopup();
   }, [latitude, longitude]);
 
-  return <div id="map" className="h-[500px] w-full rounded-xl shadow-lg" />;
+  return <div id="map" className="h-[375px] w-[375px] rounded-xl shadow-lg 
+  lg:w-[500px] lg:h-[425px] xl:w-[650px] 2xl:w-[875px] 2xl:h-[500px]"/>;
 };
 
 export default HairTruckMap;

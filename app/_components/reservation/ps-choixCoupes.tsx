@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { dataMap, View } from "@/app/_lib/choixCoupes.ps-resa";
+import { playfair } from "@/app/styles/fonts";
 
 type Props = {
   selected: View | null;
@@ -13,10 +14,10 @@ export default function PsChoixCoupes({ selected, onSelect, onChoixFinal  }: Pro
     return (
         <section className="min-h-[80vh] text-white
         md:min-h-auto">
-            <div className="flex flex-column justify-center min-h-[720px]">
+            <div className="flex flex-column justify-center min-h-[720px] mb-3">
 
                 <div className="">
-                    <h1 className="text-3xl text-center md:relative md:bottom-8">Le choix <span className="color--form">de la coupes</span></h1>
+                    <h1 className={`${playfair.className} text-2xl lg:text-3xl text-center md:relative md:bottom-8`}>Le choix <span className="color--form">de la coupes</span></h1>
                 </div>
 
                 <div className="w-full grid grid-cols-2 gap-4 px-4 
@@ -34,8 +35,8 @@ export default function PsChoixCoupes({ selected, onSelect, onChoixFinal  }: Pro
                         { key: 'tendances', label: 'Coupes tendances' },
                     ] as { key: View; label: string }[]).map(({ key, label }) => (
 
-                        <div key={key} onClick={() => onSelect(key)} className={`border-1 w-52 px-2 py-3 mt-3 rounded-lg cursor-pointer transition duration-300 hover:scale-105 ${
-                            selected === key ? 'border-white bg-[#733E34]' : 'border-[#733E34]'}`}>
+                        <div key={key} onClick={() => onSelect(key)} className={`border-1 w-52 px-2 py-3 mt-3 text-sm rounded-lg cursor-pointer transition duration-300 hover:scale-105 md:text-base
+                            ${selected === key ? 'border-white bg-[#733E34]' : 'border-[#733E34]'}`}>
                             <Image
                                 alt={`Image de ${label}`}
                                 src={"/assets/photoCadreResa.png"}
@@ -60,7 +61,7 @@ export default function PsChoixCoupes({ selected, onSelect, onChoixFinal  }: Pro
                     lg:mx-auto
                     ">
                         {dataMap[selected].map((item, index) => (
-                            <div key={index} className="mb-4 border-none border-bottom">
+                            <div key={index} className="mb-4 border-none border-bottom text-sm md:text-base">
                                 <div className="flex justify-between mb-4">
                                     <span className="font-bold">{item.coupes}</span>
                                     <span>{item.cout}</span>

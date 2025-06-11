@@ -16,8 +16,8 @@ export default function Reservation() {
 
   return (
     <form className="">
-      {/* <PsChoixCoupes selected={coupe} onSelect={setCoupe} onChoixFinal={setCoupeChoisie} /> */}
-      {/* <DsHoraireAndTruckResa /> */}
+      <PsChoixCoupes selected={coupe} onSelect={setCoupe} onChoixFinal={setCoupeChoisie} />
+      <DsHoraireAndTruckResa />
       <TsChoixHeureResa
         date={date}
         setDate={setDate}
