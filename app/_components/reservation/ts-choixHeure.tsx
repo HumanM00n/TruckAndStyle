@@ -61,7 +61,7 @@ export default function TsChoixHeureResa({ date, setDate, heure, setHeure, affic
                             </div>
 
                             <div className="">
-                                <span>30 min</span>
+                                <time>30 min</time>
                             </div>
                         </div>
 

@@ -32,32 +32,32 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
     try {
         const {
-            id_haircut,
+            id_customer,
+            reservation_haircut_name,
             reservation_datetime,
             reservation_duration_haircut,
             reservation_price_haircut,
-            id_hairdresser
+            
         } = await req.json();
 
         if (
-            !id_haircut || !reservation_datetime || !reservation_duration_haircut ||
-            !reservation_price_haircut || !id_hairdresser
+            !id_customer || !reservation_haircut_name || !reservation_datetime || !reservation_duration_haircut ||
+            !reservation_price_haircut 
         ) {
             return NextResponse.json({ message: "Données invalides ou incomplètes" }, { status: 400 });
         }
 
         const query = `
             INSERT INTO tns_reservation 
-            (id_haircut, reservation_datetime, reservation_duration_haircut, reservation_price_haircut, id_hairdresser) 
-            VALUES (?, ?, ?, ?, ?)
-        `;
+            (id_customer, reservation_haircut_name, reservation_datetime, reservation_duration_haircut, reservation_price_haircut, create_at) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
         const [result] = await pool.query(query, [
-            id_haircut,
+            id_customer,
+            reservation_haircut_name,
             reservation_datetime,
             reservation_duration_haircut,
             reservation_price_haircut,
-            id_hairdresser
         ]);
 
         const insertId = (result as { insertId: number }).insertId;

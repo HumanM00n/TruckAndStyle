@@ -67,7 +67,7 @@ export default function PsChoixCoupes({ selected, onSelect, onChoixFinal  }: Pro
                                     <span>{item.cout}</span>
                                 </div>
                                 <div className="flex justify-between items-center pb-2">
-                                    <span>{item.temps}</span>
+                                    <time>{item.temps}</time>
                                     <button type="button" className="btn text-sm text-white rounded bg-[#733E34] px-3 py-1 hover:bg-[#733e3471] 
                                     focus:border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent focus:ring-[#ffffff]"
                                      onClick={() => {
