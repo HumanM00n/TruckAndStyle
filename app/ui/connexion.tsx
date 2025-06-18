@@ -73,7 +73,7 @@ export default function LoginPage() {
                             />
                             <FontAwesomeIcon
                                 icon={showPassword ? faEye : faEyeSlash}
-                                className="absolute right-2 top-3.5 cursor-pointer text-lg"
+                                className="absolute right-2 top-3.5 cursor-pointer text-lg text-black" 
                                 onClick={() => setShowPassword(!showPassword)}
                             />
                         </div>
