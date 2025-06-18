@@ -140,6 +140,8 @@ export default function Inscription() {
                             departement: depData.nom,
                             ville: data.length === 1 ? data[0].nom : ""
                         }));
+                        
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         setVilles(data.map((ville: any) => ville.nom));
                     } else {
                         setVilles([]);
@@ -195,7 +197,7 @@ export default function Inscription() {
                         form-control 
                         text-[15px]
                         placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition appearance-none cursor-pointer"
-                            type="date"
+                            type="text"
                             data-placeholder="Date de naissance"
                             id="dateNaissance"
                             name="dateNaissance"
@@ -233,8 +235,8 @@ export default function Inscription() {
 
                 {/* DEPARTEMENT & CODE POSTAL */}
                 <div className="flex justify-center gap-4 mb-4">
-                    <input className="form-control text-[15px]" type="text" name="departement" value={formData.departement} placeholder="Département" readOnly />
                     <input className="form-control text-[15px]" type="number" name="codePostal" value={formData.codePostal} onChange={handleChange} placeholder="Code Postal" />
+                    <input className="form-control text-[15px]" type="text" name="departement" value={formData.departement} placeholder="Département" readOnly disabled/>
                 </div>
 
                 {/* VILLE */}

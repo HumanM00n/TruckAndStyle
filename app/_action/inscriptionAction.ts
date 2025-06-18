@@ -35,7 +35,7 @@ export async function registerUser(formData: FormData) {
     // Vérification si le numéro est déjà utilisé
     try {
         const [existingPhoneNumber] = await pool.query("SELECT * FROM tns_users WHERE user_phone_number = ?", [user_phone_number]);
-
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         if ((existingPhoneNumber as any[]).length > 0) {
             return { success: false, message: "Le numéro de téléphone est déjà associé à un utilisateur." };
         }
@@ -48,7 +48,7 @@ export async function registerUser(formData: FormData) {
     try {
         // Vérifier si l'utilisateur existe déjà
         const [existingUsers] = await pool.query("SELECT * FROM tns_users WHERE user_email = ?", [user_email]);
-
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         if ((existingUsers as any[]).length > 0) {
             return { success: false, message: "Cette adresse mail est déjà utilisée. Veuillez en choisir une autre." };
         }
@@ -64,7 +64,8 @@ export async function registerUser(formData: FormData) {
             [user_lastname, user_firstname, user_email, hashedPassword, user_birthdate, user_phone_number, user_department, user_postcode, user_city, 3]
         );
         
-
+      
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         if (!(result as any).insertId) {
             return { success: false, message: "Erreur lors de la création du compte." };
         }
