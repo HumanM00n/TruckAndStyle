@@ -1,5 +1,6 @@
 import pool from "@/app/_lib/db";
 import { NextResponse } from "next/server";
+import nodemailer from 'nodemailer';
 // import { cookies } from "next/headers";
 // import { createHash } from "crypto";
 
@@ -9,6 +10,16 @@ export async function POST(req: Response) {
     const numeroTel = dataForm.get("phoneNumber")?.toString().trim();
     const messageContent = dataForm.get("contentTextarea")?.toString().trim();
     // const csrfToken = dataForm.get("csrfToken")?.toString();
+
+    const mailSendForUser = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
+        auth: {
+            user: process.env.SMTP_USER,
+            pass: process.env.SMTP_PASS,
+        },
+    });
 
 
     if (!email || !numeroTel || !messageContent) {
@@ -37,22 +48,41 @@ export async function POST(req: Response) {
     //     return ({ success: false, message: "Non autorisé" });
     // }
 
+    const [rows] = await pool.execute(`SELECT id_contact FROM tns_contact WHERE phone_user = ? AND create_at > (NOW() - INTERVAL 1 HOUR)`,
+        [numeroTel]
+    );
+
+    if ((rows as never[]).length > 0) {
+        return NextResponse.json({ success: false, message: "Vous avez déjà envoyé un message récemment. Veuillez patienter." }, { status: 429 })
+    }
+
     try {
         const queryPostContact = `INSERT INTO tns_contact (email_user, phone_user, message_content) VALUES (?, ?, ?)`;
-        console.log(queryPostContact);
-
         const valuesPostContact = [email, numeroTel, messageContent];
-        console.log(valuesPostContact);
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const [resultQuery] = await pool.execute(queryPostContact, valuesPostContact);
-        console.log(resultQuery);
-        
 
-        console.log("Message envoyé", { email, numeroTel, messageContent });
+        await mailSendForUser.sendMail({
+            from: ' " Support TruckNStyle" <no-reply@truckandstyle.com>',
+            to: email,
+            subject: "Confirmation de Votre message",
+            text: `Bonjour,
+
+Nous avons bien reçu votre message,
+
+Nous vous répondrons dans les plus brefs délais.
+
+Merci de votre confiance !
+
+Cordialement,
+L'équipe TruckAndStyle`
+        })
 
         return NextResponse.json({ success: true, message: "Votre message a bien été envoyé !" }, { status: 200 });
+
     } catch (error) {
         console.error('Erreur MySQL :', error)
-        return NextResponse.json({ success: false, message:'Erreur serveur' }, { status: 500 })
+        return NextResponse.json({ success: false, message: 'Erreur serveur' }, { status: 500 })
     }
 }
