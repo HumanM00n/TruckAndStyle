@@ -16,7 +16,6 @@ import { French } from "flatpickr/dist/l10n/fr.js";
 import "flatpickr/dist/flatpickr.min.css";
 
 export default function Inscription() {
-    // const [message, setMessage] = useState("");
     const [success, setSuccess] = useState(false);
     const router = useRouter();
     const inputRef = useRef<HTMLInputElement | null>(null);
