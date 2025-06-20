@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
-import { useState, useEffect, useActionState } from "react";
+import { useState} from "react";
 import Toastify from "toastify-js";
 
-// { csrfToken }: { csrfToken: string }
-export default function ContactezNous() {
+export default function ContactezNous({ csrfToken }: { csrfToken: string }) {
     const [formData, setFormData] = useState({ inputEmail: '', phoneNumber: '', contentTextarea: '' });
     const [status, setStatus] = useState('')
 
@@ -18,14 +17,17 @@ export default function ContactezNous() {
         setStatus('Envoi en cours...');
 
         const form = new FormData();
-        form.append('inputEmail', formData.inputEmail)
-        form.append('phoneNumber', formData.phoneNumber)
-        form.append('contentTextarea', formData.contentTextarea)
+        form.append('inputEmail', formData.inputEmail);
+        form.append('phoneNumber', formData.phoneNumber);
+        form.append('contentTextarea', formData.contentTextarea);
+        form.append("csrfToken", csrfToken);
+
 
         try {
             const res = await fetch('/api/contact', {
                 method: 'POST',
                 body: form,
+                credentials: "include",
             });
 
             const dataResponse = await res.json();
@@ -91,7 +93,7 @@ export default function ContactezNous() {
         <section className="h-screen md:h-dvh lg:h-auto text-white w-full flex-col">
             <h1 className="text-3xl text-center mb-2 md:mb-12">Contactez-Nous</h1>
             <form onSubmit={handleSubmit} className="text-sm md:text-base">
-                {/* <input type="hidden" name="csrfToken" value={csrfToken ?? ""} /> */}
+                <input type="hidden" name="csrfToken" value={csrfToken} />
 
                 <div className="flex flex-col items-center justify-center gap-3 mt-4 md:flex-row lg:!gap-44">
                     {/* EMAIL */}
