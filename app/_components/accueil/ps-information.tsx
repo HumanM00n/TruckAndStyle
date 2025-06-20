@@ -1,5 +1,4 @@
 "use client";
-import { Session } from "inspector/promises";
 import Image from "next/image";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
