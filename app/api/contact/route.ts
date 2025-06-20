@@ -1,15 +1,23 @@
 import pool from "@/app/_lib/db";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import nodemailer from 'nodemailer';
-// import { cookies } from "next/headers";
-// import { createHash } from "crypto";
 
-export async function POST(req: Response) {
+export async function POST(req: Request) {
     const dataForm = await req.formData();
     const email = dataForm.get("inputEmail")?.toString().trim();
     const numeroTel = dataForm.get("phoneNumber")?.toString().trim();
     const messageContent = dataForm.get("contentTextarea")?.toString().trim();
-    // const csrfToken = dataForm.get("csrfToken")?.toString();
+    const csrfTokenFromBody = dataForm.get("csrfToken")
+    const cookieStore = await cookies();
+    const csrfTokenFromCookie = cookieStore.get("csrfToken")?.value;
+    
+    if (!csrfTokenFromBody || !csrfTokenFromCookie || csrfTokenFromBody !== csrfTokenFromCookie) {
+        return NextResponse.json(
+            { success: false, message: 'Échec de vérification CSRF' },
+            { status: 403 }
+        )
+    }
 
     const mailSendForUser = nodemailer.createTransport({
         host: "smtp.gmail.com",
@@ -33,20 +41,6 @@ export async function POST(req: Response) {
     if (messageContent.length < 20) {
         return NextResponse.json({ success: false, message: "Le texte doit contenir au moins 20 caractères" }, { status: 401 });
     }
-
-    // const csrfCookie = (await cookies()).get("next-auth.csrf-token")?.value;
-    // if (!csrfToken || !csrfCookie) {
-    //     return ({ success: false, message: "Informations incomplètes" });
-    // }
-
-    // const [tokenFromCookie, tokenHash] = csrfCookie.split("|");
-    // const validToken =
-    //     tokenFromCookie &&
-    //     createHash("sha256").update(csrfToken).digest("hex") === tokenHash;
-
-    // if (!validToken) {
-    //     return ({ success: false, message: "Non autorisé" });
-    // }
 
     const [rows] = await pool.execute(`SELECT id_contact FROM tns_contact WHERE phone_user = ? AND create_at > (NOW() - INTERVAL 1 HOUR)`,
         [numeroTel]
