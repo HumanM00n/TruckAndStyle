@@ -235,11 +235,10 @@ export default function Inscription() {
 
                 {/* DEPARTEMENT & CODE POSTAL */}
                 <div className="flex justify-center gap-4 mb-4">
-<<<<<<< HEAD
+
                     <input className="form-control text-[15px] focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4" type="number" name="codePostal" value={formData.codePostal} onChange={handleChange} placeholder="Code Postal" />    
 =======
                     <input className="form-control text-[15px]" type="number" name="codePostal" value={formData.codePostal} onChange={handleChange} placeholder="Code Postal" />
->>>>>>> 6d3edb310fe594563563382cf2293edbe24f069e
                     <input className="form-control text-[15px]" type="text" name="departement" value={formData.departement} placeholder="Département" readOnly disabled/>
                 </div>
 
