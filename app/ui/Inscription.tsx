@@ -175,8 +175,8 @@ export default function Inscription() {
 
                 {/* NOM & PRENOM */}
                 <div className="flex justify-center gap-4 mb-4">
-                    <input className="form-control text-[15px]" type="text" name="nom" value={formData.nom} onChange={handleChange} placeholder="Nom" />
-                    <input className="form-control text-[15px]" type="text" name="prenom" value={formData.prenom} onChange={handleChange} placeholder="Prénom" />
+                    <input className="form-control text-[15px] focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4" type="text" name="nom" value={formData.nom} onChange={handleChange} placeholder="Nom" />
+                    <input className="form-control text-[15px] focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4" type="text" name="prenom" value={formData.prenom} onChange={handleChange} placeholder="Prénom" />
                 </div>
 
                     {/* N° TEL & DDN */}
@@ -195,7 +195,7 @@ export default function Inscription() {
                         form-control 
                         text-[15px]
                         placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition appearance-none cursor-pointer"
-                            type="date"
+                            type="text"
                             data-placeholder="Date de naissance"
                             id="dateNaissance"
                             name="dateNaissance"
@@ -222,19 +222,19 @@ export default function Inscription() {
 
                 {/* EMAIL */}
                 <div className="flex justify-center gap-4 mb-4">
-                    <input className="form-control text-[15px]" type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" />
+                    <input className="form-control text-[15px] focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4" type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" />
                 </div>
 
                 {/* MOT DE PASSE */}
                 <div className="relative w-full mb-4">
-                    <input type={showPassword ? "text" : "password"} className="form-control text-[15px] w-full" name="motDePasse" value={formData.motDePasse} onChange={handleChange} placeholder="Mot de passe" />
+                    <input type={showPassword ? "text" : "password"} className="form-control text-[15px] w-full focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4" name="motDePasse" value={formData.motDePasse} onChange={handleChange} placeholder="Mot de passe" />
                     <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} className="w-5 h-5 absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer" onClick={() => setShowPassword(!showPassword)} />
                 </div>
 
                 {/* DEPARTEMENT & CODE POSTAL */}
                 <div className="flex justify-center gap-4 mb-4">
-                    <input className="form-control text-[15px]" type="text" name="departement" value={formData.departement} placeholder="Département" readOnly />
-                    <input className="form-control text-[15px]" type="number" name="codePostal" value={formData.codePostal} onChange={handleChange} placeholder="Code Postal" />
+                    <input className="form-control text-[15px] focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4" type="number" name="codePostal" value={formData.codePostal} onChange={handleChange} placeholder="Code Postal" />    
+                    <input className="form-control text-[15px]" type="text" name="departement" value={formData.departement} placeholder="Département" readOnly disabled/>
                 </div>
 
                 {/* VILLE */}
@@ -247,7 +247,7 @@ export default function Inscription() {
                             ))}
                         </select>
                     ) : (
-                        <input className="form-control text-[15px]" type="text" name="ville" value={formData.ville} onChange={handleChange} placeholder="Ville" />
+                        <input className="form-control text-[15px] focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4" type="text" name="ville" value={formData.ville} onChange={handleChange} placeholder="Ville" />
                     )}
                 </div>
 
