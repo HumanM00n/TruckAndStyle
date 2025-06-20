@@ -1,6 +1,7 @@
 'use client';
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation"; 
 import { registerUser } from "@/app/_action/inscriptionAction";
@@ -15,7 +16,7 @@ import { French } from "flatpickr/dist/l10n/fr.js";
 import "flatpickr/dist/flatpickr.min.css";
 
 export default function Inscription() {
-    const [message, setMessage] = useState("");
+    // const [message, setMessage] = useState("");
     const [success, setSuccess] = useState(false);
     const router = useRouter();
     const inputRef = useRef<HTMLInputElement | null>(null);
@@ -275,7 +276,7 @@ export default function Inscription() {
             </form>
 
             <div className="hidden md:rounded-md md:relative md:left-40 md:w-2/5 md:block">
-                <img src="/assets/photoTondeuse.jpg" className="w-full h-[718px] object-cover" />
+                <Image src="/assets/photoTondeuse.jpg" className="w-full h-[718px] object-cover" alt="Photo d'une personne qui se fait tondre la barbe"/>
             </div>
         </div>
     );
