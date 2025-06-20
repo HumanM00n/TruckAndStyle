@@ -1,56 +1,46 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
-import Toastify from 'toastify-js';
+import Image from "next/image";
+import { dataEquipe, View } from "@/app/_lib/equipeTns";
 
-export default function ContactezNous({ csrfToken }: { csrfToken: string }) {
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    const success = searchParams.get("success");
-    const error = searchParams.get("error");
-
-    if (success === "true") {
-      Toastify({ text: "Votre message a bien été envoyé !", duration: 5000 }).showToast();
-    } else if (success === "false") {
-      let errorMessage = "Une erreur est survenue";
-      switch (error) {
-        case "incomplete": errorMessage = "Veuillez remplir tous les champs !"; break;
-        case "incorrectPhoneNumber": errorMessage = "Le numéro de téléphone est incorrect."; break;
-        case "incorrectMessageContent": errorMessage = "Le message doit contenir au moins 20 caractères."; break;
-        case "requireMoreInformations": errorMessage = "Erreur CSRF."; break;
-        case "notAuthorize": errorMessage = "Non autorisé."; break;
-      }
-
-      Toastify({ text: errorMessage, duration: 5000 }).showToast();
-    }
-  }, [searchParams]);
-
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      body: formData,
-    });
-
-    // Redirection manuelle
-    if (res.redirected) {
-      window.location.href = res.url;
-    }
-  }
-
+export default function ContactezNous() {
+  const views: View[] = ['CEO', "Conducteur", "Coiffeur"];
   return (
-    <form onSubmit={handleSubmit} className='text-black'>
-      <input type="hidden" name="csrfToken" value={csrfToken} />
-      <input name="inputEmail" type="email" placeholder="Email" />
-      <input name="phoneNumber" type="text" placeholder="Téléphone" />
-      <textarea name="contentTextarea" placeholder="Message"></textarea>
-      <button type="submit" className='text-white bg-blue-400'>Envoyer</button>
-    </form>
+    <section className="min-h-[80vh]">
+
+      <div className="w-full grid grid-cols-3 border-1 border-red-500">
+        {views.map(view => (
+          dataEquipe[view].flatMap(person => (
+            <div
+  key={person.nom + person.prenom + person.photo}
+  className="group relative border border-[#733E34] w-auto px-2 py-3 mt-3 rounded-lg mx-auto cursor-pointer text-sm transition duration-300 hover:scale-105"
+>
+  <Image
+    alt=""
+    src={`/assets/Personnel/${person.photo}`}
+    width={150}
+    height={150}
+    quality={70}
+    className="w-36 h-36 mb-3 object-cover rounded-lg lg:w-40 lg:h-40"
+  />
+
+  {/* Overlay visible au hover */}
+  <div className="absolute inset-0 bg-black/60 text-white opacity-0 group-hover:opacity-100 flex items-center justify-center text-center transition duration-300 rounded-lg px-2">
+    {person.informations && (
+      <p className="text-sm">{person.informations}</p>
+    )}
+  </div>
+
+  <div className="text-center">{person.prenom} {person.nom}</div>
+  <div className="text-center">{person.poste}</div>
+</div>
+
+
+
+          ))))}
+      </div>
+
+    </section>
+
   );
 }
