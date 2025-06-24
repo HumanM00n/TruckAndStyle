@@ -76,7 +76,6 @@ export default function ContactezNous({ csrfToken }: { csrfToken: string }) {
                 }).showToast();
             }
 
-            // setStatus('');
         } catch (error) {
             console.error('Erreur de requête', error);
             Toastify({
@@ -133,15 +132,11 @@ export default function ContactezNous({ csrfToken }: { csrfToken: string }) {
                 </div>
 
                 <div className="w-full flex justify-center mt-6 md:mt-12">
-                    <button
-                        className="rounded-md font-base py-2.5 px-4 mb-16 bg--form hover:bg-[#63362d] transition"
-                        type="submit"
-                    >
+                    <button className="rounded-md font-base py-2.5 px-4 mb-16 bg--form hover:bg-[#63362d] transition" type="submit">
                         Contactez-nous
                     </button>
                 </div>
             </form>
-            {/* {message && <p className="mt-4">{message}</p>} */}
         </section>
     );
 }
