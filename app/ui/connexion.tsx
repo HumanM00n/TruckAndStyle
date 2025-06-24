@@ -86,8 +86,34 @@ export default function LoginPage() {
                         <button type="button" onClick={() => setShowContainerLink(true)} className="hover:text-gray-300 underline underline-offset-2">J&apos;ai oublié mon mot de passe</button>
                     </div>
 
-                        {showContainerLink && ( 
-                        <AccountRecoveryLink onClose={() => setShowContainerLink(false)} />
+                    {showContainerLink && (
+                        <AccountRecoveryLink
+                            onClose={() => setShowContainerLink(false)}
+                            onSubmit={async (email) => {
+                                try {
+                                    const res = await fetch("/api/auth/forgot-password", {
+                                        method: "POST",
+                                        headers: {
+                                            "Content-Type": "application/json",
+                                        },
+                                        body: JSON.stringify({ emailVerify: email }),
+                                    });
+
+                                    const data = await res.json();
+
+                                    if (!res.ok) {
+                                        alert(data.message || "Erreur lors de l'envoi.");
+                                    } else {
+                                        alert("Un lien de réinitialisation a été envoyé à votre adresse.");
+                                    }
+                                } catch (err) {
+                                    console.error(err);
+                                    alert("Erreur serveur.");
+                                }
+
+                                setShowContainerLink(false);
+                            }}
+                        />
                     )}
 
                     <div className="mt-4 flex justify-end">
