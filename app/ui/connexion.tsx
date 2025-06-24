@@ -4,21 +4,22 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react"; 
+import { signIn } from "next-auth/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
+import AccountRecoveryLink from "@/app/_components/showForgotPasswordForm/AccountRecoveryLink";
+
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const router = useRouter(); 
-    
-    const handleLogin = async (e: React.FormEvent) => {
-        
-        e.preventDefault();
+    const router = useRouter();
+    const [showContainerLink, setShowContainerLink] = useState(false);
 
+    const handleLogin = async (e: React.FormEvent) => {
+        e.preventDefault();
         const result = await signIn("credentials", {
             redirect: false,
             email,
@@ -28,7 +29,7 @@ export default function LoginPage() {
         if (result?.error) {
             setError("Échec de la connexion, Veuillez réessayer.");
         } else {
-            router.push("/"); 
+            router.push("/");
         }
     };
 
@@ -46,7 +47,7 @@ export default function LoginPage() {
             {/* FORMULAIRE DE CONNEXION */}
             <div className="shrink-0 md:absolute md:left-2/4 md:transform md:-translate-x-3/4 bg--form p-12 px-40 rounded-md text-sm shadow-lg w-[600px]">
                 <form onSubmit={handleLogin} className="font-montserrat z-10">
-                    <h1 className="text-light text-3xl font-[500] font-playfair text-center">Connexion</h1>
+                    <h1 className="text-3xl font-[500] font-playfair text-center">Connexion</h1>
 
                     <div className="grid grid-cols-1 gap-y-6 mt-10">
                         {/* ADRESSE EMAIL */}
@@ -73,7 +74,7 @@ export default function LoginPage() {
                             />
                             <FontAwesomeIcon
                                 icon={showPassword ? faEye : faEyeSlash}
-                                className="absolute right-2 top-3.5 cursor-pointer text-lg text-black" 
+                                className="absolute right-2 top-3.5 cursor-pointer text-lg text-black"
                                 onClick={() => setShowPassword(!showPassword)}
                             />
                         </div>
@@ -82,8 +83,12 @@ export default function LoginPage() {
                     {error && <p className="text-red-500 mt-2">{error}</p>}
 
                     <div className="text-light font-montserrat mt-6 ">
-                        <p className="hover:text-gray-300 underline underline-offset-2">J&apos;ai oublié mon mot de passe</p>
+                        <button type="button" onClick={() => setShowContainerLink(true)} className="hover:text-gray-300 underline underline-offset-2">J&apos;ai oublié mon mot de passe</button>
                     </div>
+
+                        {showContainerLink && ( 
+                        <AccountRecoveryLink onClose={() => setShowContainerLink(false)} />
+                    )}
 
                     <div className="mt-4 flex justify-end">
                         <button type="submit" className="btn btn-outline-light rounded-xs hover:bg-white hover:text-[#733E34]">
@@ -98,7 +103,7 @@ export default function LoginPage() {
                     </div>
 
                     <div className="text-light font-montserrat mt-4 text-[13px]">
-                        <p className="w-ful">Vous n&apos;avez pas de compte ? Créez-en un !</p>
+                        <p className="w-full">Vous n&apos;avez pas de compte ? Créez-en un !</p>
                     </div>
 
                     <div className="mt-3">
