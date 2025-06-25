@@ -31,43 +31,33 @@ export async function GET(req: Request) {
 // Création d'une réservation
 export async function POST(req: Request) {
     try {
-        const {
-            id_customer,
-            reservation_haircut_name,
-            reservation_datetime,
-            reservation_duration_haircut,
-            reservation_price_haircut,
-            
-        } = await req.json();
+        const body = await req.json();
+        const { email, coupeChoisi, date, temps, cout } = body;
 
-        if (
-            !id_customer || !reservation_haircut_name || !reservation_datetime || !reservation_duration_haircut ||
-            !reservation_price_haircut 
-        ) {
-            return NextResponse.json({ message: "Données invalides ou incomplètes" }, { status: 400 });
+        if (!email || !coupeChoisi || !date || !temps || !cout) {
+            return NextResponse.json({ error: "Champs manquants" }, { status: 400 });
         }
 
-        const query = `
-            INSERT INTO tns_reservation 
-            (id_customer, reservation_haircut_name, reservation_datetime, reservation_duration_haircut, reservation_price_haircut, create_at) 
-            VALUES (?, ?, ?, ?, ?, ?, ?)`;
+        const sql = `
+      INSERT INTO reservations (
+        id_customer,
+        reservation_haircut_name,
+        reservation_datetime,
+        reservation_duration_haircut,
+        reservation_price_haircut,
+        created_at
+      ) VALUES (?, ?, ?, ?, ?, NOW())`;
 
-        const [result] = await pool.query(query, [
-            id_customer,
-            reservation_haircut_name,
-            reservation_datetime,
-            reservation_duration_haircut,
-            reservation_price_haircut,
-        ]);
+        const values = [email, coupeChoisi, date, temps, cout];
 
-        const insertId = (result as { insertId: number }).insertId;
-        return NextResponse.json({ message: "Réservation créée", id: insertId });
+        const [result] = await pool.execute(sql, values);
+
+        return NextResponse.json({ success: true, id: (result as any).insertId }, { status: 201 });
     } catch (error) {
-        console.error("Erreur lors de la création de la réservation :", error);
-        return NextResponse.json({ message: "Erreur serveur" }, { status: 500 });
+        console.error("Erreur lors de la réservation :", error);
+        return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
     }
 }
-
 // Mise à jour d'une réservation
 export async function PUT(req: Request) {
     try {
