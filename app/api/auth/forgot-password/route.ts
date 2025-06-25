@@ -2,9 +2,8 @@ import pool from "@/app/_lib/db";
 import { NextResponse } from "next/server";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
-// import { sendResetEmail } from "@/lib/mailer";
 
-export async function verifyEmailAndSendLink(req: Request) {
+export async function POST(req: Request) {
     try {
     const body = await req.json();
     const email = body.emailVerify?.trim();
@@ -22,14 +21,14 @@ export async function verifyEmailAndSendLink(req: Request) {
         return NextResponse.json({ message: "Adresse email manquante." }, { status: 400 });
     }
 
-    const [queryEmailVerify] = await pool.execute(`SELECT * FROM tns_users WHERE email_user = ?`, [email]);
+    const [queryEmailVerify] = await pool.execute(`SELECT id_users, user_email FROM tns_users WHERE user_email = ?`, [email]);
     if ((queryEmailVerify as never[]).length === 0) {
         return NextResponse.json({ message: "Adresse mail introuvable." }, { status: 401 });
     }
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const user = (queryEmailVerify as any)[0];
-        const userId = user.id_user;
+        const userId = user.id_users;
     
         const token = crypto.randomBytes(32).toString("hex");
 
@@ -39,7 +38,7 @@ export async function verifyEmailAndSendLink(req: Request) {
 
         await pool.execute(queryPostToken, valuesPostToken);
 
-        const resetPasswordLink = `${process.env.NEXT_PUBLIC_BASE_URL}/reset-password?token=${token}`;
+        const resetPasswordLink = `${process.env.TNS_PUBLIC_BASE_URL}/reset-password?token=${token}`;
         await sendEmailForResetPassword.sendMail({
             from: ' " Support TruckNStyle" <no-reply@truckandstyle.com>',
             to: email,
