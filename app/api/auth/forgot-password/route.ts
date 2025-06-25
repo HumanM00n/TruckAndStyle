@@ -23,7 +23,7 @@ export async function POST(req: Request) {
 
     const [queryEmailVerify] = await pool.execute(`SELECT id_users, user_email FROM tns_users WHERE user_email = ?`, [email]);
     if ((queryEmailVerify as never[]).length === 0) {
-        return NextResponse.json({ message: "Adresse mail introuvable." }, { status: 401 });
+        return NextResponse.json({ message: "Indentifiant incorrect." }, { status: 401 });
     }
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
