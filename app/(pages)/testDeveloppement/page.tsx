@@ -1,46 +1,58 @@
 'use client';
 
-import Image from "next/image";
-import { dataEquipe, View } from "@/app/_lib/equipeTns";
+import { useState } from "react";
+export default function SendLinkAtEmail() {
 
-export default function ContactezNous() {
-  const views: View[] = ['CEO', "Conducteur", "Coiffeur"];
+  const [showContainerLink, setShowContainerLink] = useState(false);
+  const openContainer = () => {
+    setShowContainerLink(true);
+  }
+
   return (
     <section className="min-h-[80vh]">
+      <button type="button" className="btn w-48 border rounded-xs text-white bg--form hover:text-[#733E34] transition"
+        onClick={openContainer}>
+        Afficher le conteneur
+      </button>
 
-      <div className="w-full grid grid-cols-3 border-1 border-red-500">
-        {views.map(view => (
-          dataEquipe[view].flatMap(person => (
-            <div
-  key={person.nom + person.prenom + person.photo}
-  className="group relative border border-[#733E34] w-auto px-2 py-3 mt-3 rounded-lg mx-auto cursor-pointer text-sm transition duration-300 hover:scale-105"
->
-  <Image
-    alt=""
-    src={`/assets/Personnel/${person.photo}`}
-    width={150}
-    height={150}
-    quality={70}
-    className="w-36 h-36 mb-3 object-cover rounded-lg lg:w-40 lg:h-40"
-  />
+      {showContainerLink && (
+        <>
+          <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-10" ></div>
+          <div className="border fixed inset-0 flex items-center z-20 transition-opacity duration-300 opacity-100" onClick={() => setShowContainerLink(false)} >
+            <div className={`border-1 border-purple-500  h-[375px] w-96 bg--form rounded-md text-sm shadow-lg relative left-12`} role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
+              <form className="flex flex-column gap-10 items-center">
 
-  {/* Overlay visible au hover */}
-  <div className="absolute inset-0 bg-black/60 text-white opacity-0 group-hover:opacity-100 flex items-center justify-center text-center transition duration-300 rounded-lg px-2">
-    {person.informations && (
-      <p className="text-sm">{person.informations}</p>
-    )}
-  </div>
+                <div className="relative" data-bs-theme="light">
+                  <button type="button" className="btn-close btn-close-white absolute top-3  left-40 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-2"
+                    aria-label="Close" onClick={() => setShowContainerLink(false)}></button>
+                </div>
 
-  <div className="text-center">{person.prenom} {person.nom}</div>
-  <div className="text-center">{person.poste}</div>
-</div>
+                <div className="text-xl">
+                  <h1 className="">Retrouver votre compte Hair&apos;Truck</h1>
+                </div>
 
+                <div className="text-base">
+                  <h2 className="">Dites-nous en plus sur votre compte.</h2>
+                </div>
 
+                <div className="flex flex-column">
+                  <label htmlFor="inputForEmail">Saisissez votre adresse e-mail</label>
+                  <input type="email" id="inputForEmail" placeholder="ex : example@gmail.com" required
+                    className="form-control md:py-2.5 px-4 placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition" />
+                </div>
 
-          ))))}
-      </div>
+                <div className="">
+                  <button className="btn btn-outline-light w-[275px] rounded-xs hover:bg-white hover:text-[#733E34] transition" type="submit">
+                    Continuer
+                  </button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </>
+      )}
 
     </section>
-
-  );
+  )
 }
