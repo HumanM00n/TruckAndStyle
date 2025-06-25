@@ -8,6 +8,7 @@ import { signIn } from "next-auth/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import AccountRecoveryLink from "@/app/_components/showForgotPasswordForm/AccountRecoveryLink";
+import { log } from "console";
 
 
 export default function LoginPage() {
@@ -100,12 +101,14 @@ export default function LoginPage() {
                                     });
 
                                     const data = await res.json();
+                                    console.log(email);
 
                                     if (!res.ok) {
                                         alert(data.message || "Erreur lors de l'envoi.");
                                     } else {
-                                        alert("Un lien de réinitialisation a été envoyé à votre adresse.");
+                                        alert("Un lien de réinitialisation a été envoyé à votre boîte mail.");
                                     }
+
                                 } catch (err) {
                                     console.error(err);
                                     alert("Erreur serveur.");
