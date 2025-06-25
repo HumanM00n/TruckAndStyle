@@ -8,8 +8,6 @@ import { signIn } from "next-auth/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import AccountRecoveryLink from "@/app/_components/showForgotPasswordForm/AccountRecoveryLink";
-import { log } from "console";
-
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
