@@ -4,7 +4,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "types": ["next-auth"],
     "allowJs": true,
-    "noUnusedLocals": false, // Retire la remontée des erreurs lorsqu'un variable n'est pas utilisée.
+    "noUnusedLocals": false,
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
@@ -24,6 +24,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/_lib/db.ts", "app/_hooks/useBooking.js", "app/api/users/route.ts", "app/api/auth/[...nextauth].ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/_lib/db.ts", "app/_hooks/useBooking.js", "app/api/users/route.ts", "app/api/auth/[...nextauth].ts", "app/_components/showForgotPasswordForm/AccountRecoveryLink.tsx"],
   "exclude": ["node_modules"]
 }
