@@ -16,7 +16,7 @@ export default function LoginPage() {
     const [error, setError] = useState<string | null>(null);
     const router = useRouter();
     const [showContainerLink, setShowContainerLink] = useState(false);
-    const [ invalidEmail, setInvalidEmail ] = useState("");
+    const [ apiError, setApiError ] = useState<string | null>(null);
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -88,8 +88,13 @@ export default function LoginPage() {
 
                     {showContainerLink && (
                         <AccountRecoveryLink
-                            onClose={() => setShowContainerLink(false)}
+                            onClose={() => {
+                                setShowContainerLink(false)
+                                setApiError(null);
+                            }}
                             onSubmit={async (email) => {
+                                setApiError(null);
+
                                 try {
                                     const res = await fetch("/api/auth/forgot-password", {
                                         method: "POST",
@@ -100,22 +105,25 @@ export default function LoginPage() {
                                     });
 
                                     const data = await res.json();
-                                    console.log(email);
+
+                                    if(res.status >= 401) {
+                                        setApiError(data.message)
+                                        return;
+                                    }
 
                                     if (!res.ok) {
                                         alert(data.message || "Erreur lors de l'envoi.");
-                                    } else {
-                                        alert("Un lien de réinitialisation a été envoyé à votre boîte mail.");
-                                    }
+                                    } 
+                                    
+                                    alert("Un lien de réinitialisation a été envoyé à votre boîte mail.");
+                                    setShowContainerLink(false);
 
                                 } catch (err) {
                                     console.error(err);
                                     alert("Erreur serveur.");
                                 }
-
-                                setShowContainerLink(false);
                             }}
-                        />
+                            apiError={apiError}/>
                     )}
 
                     <div className="mt-4 flex justify-end">
