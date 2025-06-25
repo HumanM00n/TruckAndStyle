@@ -16,6 +16,7 @@ export default function LoginPage() {
     const [error, setError] = useState<string | null>(null);
     const router = useRouter();
     const [showContainerLink, setShowContainerLink] = useState(false);
+    const [ invalidEmail, setInvalidEmail ] = useState("");
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
