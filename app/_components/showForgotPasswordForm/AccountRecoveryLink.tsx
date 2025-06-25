@@ -4,6 +4,7 @@ import { useState } from "react";
 
 export default function AccountRecoveryLink({ onClose, onSubmit, }: { onClose: () => void; onSubmit: (email: string) => void; }) {
   const [ email, setEmail ] = useState("");
+  const [ invalidEmail, setInvalidEmail ] = useState("");
 
   const handleSubmit = () => {
     if (!email.trim()) return;
