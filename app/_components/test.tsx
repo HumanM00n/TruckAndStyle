@@ -1,92 +1,61 @@
 'use client'
 
-import { useState } from "react"
-import { format } from "date-fns"
-import { fr } from "date-fns/locale"
-import { Calendar } from "./componentsShadcn/calendar"
-import {  Popover, PopoverTrigger, PopoverContent } from '@/app/_components/componentsShadcn/popover'
-import { Button } from "./componentsShadcn/button"
-import { cn } from "../_lib/utils"
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 
-const horairesWeek = [
-  "10:00", "10:30", "11:00","11:30",
-  "12:00","12:30","13:00","13:30",
-  "14:00", "14:30", "15:00","15:30", 
-  "16:00", "16:30", "17:00", "17:30",
-  "18:00",
-]
-
-const horairesWeekEnd = [
-  "10:00", "10:30","11:00","11:30",
-  "12:00","12:30","13:00","13:30",
-  "14:00","14:30","15:00","15:30", 
-  "16:00", "16:30", "17:00", "17:30",
-  "18:00","18:30", "19:00", "19:30", "20:00"
-]
-
-export default function DateTimePicker({ onDateTimeChange,}: { onDateTimeChange: (datetime: string) => void}) {
-  const [date, setDate] = useState<Date | undefined>()
-  const [heure, setHeure] = useState<string | null>(null)
-  const [affichage, setAffichage] = useState<string>("Choisir une date")
-
-const handleSelect = (d: Date | undefined, h: string | null) => {
-  if (d) {
-    const label = format(d, "EEEE d MMMM, yyyy", { locale: fr })
-    setAffichage(label)  // ✅ Affiche la date dès qu'elle est sélectionnée
-  }
-
-  if (d && h) {
-    const iso = `${format(d, "yyyy-MM-dd")}${h}:00`
-    onDateTimeChange(iso)
-    console.log(iso)
-  }
-}
+export default function MdpOublie() {
+  const [ showPassword, setShowPassword ] = useState(false);
+  const [ newPassword, setNewPassword ] = useState("");
+  const [ confirmNewPassword, setConfirmNewPassword ] = useState("");
 
   return (
-    <div className="space-y-4 text-black">
-      {/* Sélecteur de date */}
-      <Popover>
-        <PopoverTrigger asChild>
-          <Button
-            variant="outline"
-            className={cn("w-full justify-start text-left bg--form border-1 border-none text-white hover:bg-[#733e3471]", !date && "text-gray-500 text-opacity-95")}>
-            {affichage}
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-auto p-0">
-          <Calendar
-            mode="single"
-            selected={date}
-            onSelect={(d) => {
-              setDate(d)
-              handleSelect(d, heure)
-            }}
-            initialFocus
-            locale={fr}
-            disabled={{ before: new Date(2025, 5, 9), after: new Date(2025, 5, 22) }}
+    <section className="border-1 border-blue-500 h-full w-auto">
+      <form className="border flex flex-column items-center gap-5">
+        <div className="w-full border">
+          <h1>Réinitialisation de votre de mot de passe</h1>
+          <hr className="text-purple-500 opacity-80" />
+        </div>
+
+        <div className="">
+          <h2>Définir un nouveau mot de passse</h2>
+          <p>Choisissez un mot de passe fort que vous n'avez pas utiliser auparavant</p>
+        </div>
+
+
+        <div className="flex flex-column gap-2 relative">
+          <label htmlFor="inputNewPassword">Mot de passe</label>
+          <input 
+            type={showPassword ? "text" : "password"} 
+            className="w-72 py-2.5 pl-4 bg--form rounded-md placeholder-[#8C5744] focus:border-[#c07a61] focus:ring-2 focus:ring-[#C29A7E] outline-none transition" 
+            id="inputNewPassword" 
+            // onChange={}
+            // value={newPassword} 
+            placeholder="Mot de passe"
+            required/>
+          
+          <FontAwesomeIcon
+            icon={showPassword ? faEye : faEyeSlash}
+            className="absolute right-2 bottom-6 cursor-pointer text-lg text-black" 
+            // onClick={}
+            />
+
+          <label htmlFor="inputConfirmNewPassword">Confirmation de mot passe</label>
+          <input 
+            type={showPassword ? "text" : "password"} 
+            className="w-72 py-2.5 pl-4 bg--form rounded-md placeholder-[#8C5744] md:w-72 focus:border-[#c07a61] focus:ring-2 focus:ring-[#C29A7E] outline-none transition" 
+            id="inputConfirmNewPassword" 
+            // onChange={}
+            // value={confirmNewPassword}
+            placeholder="Confirmer votre mot de passe"
           />
-        </PopoverContent>
-      </Popover>
+        </div>
 
-      {/* Choix de l'heure */}
-      <div className="grid grid-cols-3 gap-2 text-white">
-        {horairesWeek.map((h) => (
-          <Button
-            key={h}
-            variant={heure === h ? "default" : "outline"}
-            onClick={() => {
-              setHeure(h)
-              handleSelect(date, h)
-            }}
-            className="bg--form border-1 border-none"
-          >
-            {h}
-          </Button>
-        ))}
-      </div>
+        <div className="">
+          <button className="rounded-md font-base py-2.5 px-4 mb-16 bg--form hover:bg-[#63362d] transition">Enregistrer les modifications</button>
+        </div>
 
-      {/* <input type="text" value={currentDate}/> */}
-    </div>
-    
-  )
+      </form>
+    </section>
+  );
 }
