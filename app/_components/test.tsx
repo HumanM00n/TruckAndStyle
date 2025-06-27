@@ -4,23 +4,71 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
+import { SpinnerTns } from "./defaultComponents/spinner";
 
 export default function MdpOublie() {
   const getTokenByUrl = useSearchParams();
-  const token = getTokenByUrl.get("token");
-
   const [showPassword, setShowPassword] = useState(false);
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
-  const [status, setStatus] = useState();  // if ( status === "tokenValid" ) // if ( status === "tokenInvalid" // if ( status === "loading" 
+  const [isTokenValid, setIsTokenValid] = useState<boolean | null>(null);
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    fetch("api/auth/reset-password", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token, newPassword })
-    })
-  })
+  const token = getTokenByUrl.get('token');
+
+  if (!token) {
+    console.log("Aucun token trouvé dans l'url");
+    setIsTokenValid(false);
+    setIsLoading(false);
+    return;
+  }
+
+  const checkToken = async () => {
+    try {
+      const res = await fetch(`/api/auth/reset-password?token=${token}`);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const data = await res.json();
+
+      if (res.ok) {
+        setIsTokenValid(true);
+      } else {
+        setIsTokenValid(false);
+      }
+    } catch (error) {
+      console.error("Erreur serveur :", error);
+      setIsTokenValid(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  checkToken();
+}, [getTokenByUrl]);
+
+
+
+  if (isLoading) {
+    return (
+      <SpinnerTns />
+    )
+  }
+
+  if (isTokenValid === false) {
+    return (
+      <>
+        <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-10"></div>
+        <hr className="text-white border" />
+        <div className="border-1 border-blue-500 w-full h-full flex justify-center items-center fixed inset-0 z-20" role="dialog"
+          aria-modal="true">
+
+          <div className="h-[110px] rounded-md bg--grisArdoise text-sm shadow-lg top-0 px-4 py-3">
+            <p className="text-xl">Ce lien a expiré ou est invalide.</p>
+            <a href="/connexion" className="underline underline-offset-1 relative top-2">Retour à la connexion</a>
+          </div>
+        </div></>
+    );
+  }
 
   return (
     <section className="h-full w-auto">
@@ -32,7 +80,7 @@ export default function MdpOublie() {
 
         <div className="">
           <h2 className="text-lg">Définir un nouveau mot de passe</h2>
-          <p className="italic text-xs opacity-45">Choisissez un mot de passe fort que vous n'avez pas utiliser auparavant</p>
+          <p className="italic text-xs opacity-45">Choisissez un mot de passe fort que vous n&apos;avez pas utiliser auparavant</p>
         </div>
 
 
@@ -50,7 +98,7 @@ export default function MdpOublie() {
           <FontAwesomeIcon
             icon={showPassword ? faEye : faEyeSlash}
             className="absolute right-10 top-[44px] cursor-pointer text-lg text-black"
-          // onClick={}
+            onClick={() => setShowPassword(!showPassword)}
           />
 
 
@@ -60,15 +108,16 @@ export default function MdpOublie() {
             type={showPassword ? "text" : "password"}
             className="w-[425px] py-2.5 pl-4 bg--form rounded-md placeholder-[#8C5744] focus:border-[#c07a61] focus:ring-2 focus:ring-[#C29A7E] outline-none transition"
             id="inputConfirmNewPassword"
-            // onChange={}
-            // value={confirmNewPassword}
+            onChange={(e) => setConfirmNewPassword(e.target.value)}
+            value={confirmNewPassword}
             placeholder="Confirmer votre mot de passe"
+            required
           />
 
           <FontAwesomeIcon
             icon={newPassword ? faEye : faEyeSlash}
             className="absolute right-10 top-36 cursor-pointer text-lg text-black"
-          // onClick={}
+            onClick={() => setShowPassword(!showPassword)}
           />
         </div>
 
@@ -79,4 +128,5 @@ export default function MdpOublie() {
       </form>
     </section>
   );
+
 }
