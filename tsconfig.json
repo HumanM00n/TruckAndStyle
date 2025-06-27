@@ -24,6 +24,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/_lib/db.ts", "app/api/users/route.ts", "app/api/auth/[...nextauth].ts", "app/_components/showForgotPasswordForm/AccountRecoveryLink.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/_lib/db.ts", "app/api/users/route.ts", "app/api/auth/[...nextauth].ts", "app/_components/showForgotPasswordForm/AccountRecoveryLink.tsx", "app/_components/defaultComponents/spinner.tsx"],
   "exclude": ["node_modules"]
 }
