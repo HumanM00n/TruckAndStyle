@@ -38,7 +38,7 @@ export async function POST(req: Request) {
 
         await pool.execute(queryPostToken, valuesPostToken);
 
-        const resetPasswordLink = `${process.env.TNS_PUBLIC_BASE_URL}/reset-password?token=${token}`;
+        const resetPasswordLink = `${process.env.TNS_PUBLIC_BASE_URL}/mot-de-passe-oublie?token=${token}`;
         await sendEmailForResetPassword.sendMail({
             from: ' " Support TruckNStyle" <no-reply@truckandstyle.com>',
             to: email,
