@@ -14,16 +14,18 @@ export default function TsAvisPrix() {
     // Création d'un tableau d'avis 
     const avisUtilisateurs = [
         {
+            nom: 'Come.T',
+            texte: `Super pratique ! J’ai réservé en 2 minutes pendant ma pause dej, et le truck était à deux pas de mon bureau. 
+            L’équipe est pro, rapide et le résultat est top. Je recommande à 100 %.`
+        },
+        {
+            nom: 'Rayane.L',
+            texte: `J’ai testé le truck pendant sa tournée en ville et j’ai adoré l’expérience. Aucun stress, 
+            une coupe nickel, et le tout en moins de 30 minutes. Idéal pour les gens pressés comme moi !`
+        },
+        {
             nom: 'Alex.D',
-            texte: '“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et nisl ex...”'
-        },
-        {
-            nom: 'Mathis.R',
-            texte: '“Suspendisse erat augue, maximus at dui at, pulvinar ullamcorper ante.”'
-        },
-        {
-            nom: 'Myriam.JD',
-            texte: '“Duis et nisl ex. Suspendisse erat augue, maximus at dui at...”'
+            texte: `Simple et efficace ! L'équipe de coiffeur est cool.`
         },
     ]
     return (
