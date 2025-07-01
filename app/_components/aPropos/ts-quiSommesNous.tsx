@@ -7,11 +7,11 @@ import { dataEquipe, View } from "@/app/_lib/equipeTns";
 export default function TsQuiSommeNous() {
     const views: View[] = ['CEO', "Conducteur", "Coiffeur"];
     return (
-        <section className="border-1 border-blue-500 w-auto min-h-[80vh] px-4 py-2">
+        <section className="w-auto min-h-[80vh] px-4 py-2">
             <div className="flex justify-center">
                 <h2 className={`${playfair.className} text-3xl`}>Qui sommes nous ?</h2>
             </div>
-            <div className="w-full grid grid-cols-3 border-1 border-red-500">
+            <div className="w-full grid grid-cols-3">
                 {views.map(view => (
                     dataEquipe[view].flatMap(person => (
                         <div key={person.nom + person.prenom + person.photo}
