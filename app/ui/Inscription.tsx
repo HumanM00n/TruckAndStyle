@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation"; 
-import Image from "next/image";
 import { registerUser } from "@/app/_action/inscriptionAction";
 
 import Toastify from "toastify-js";
@@ -274,11 +273,6 @@ export default function Inscription() {
             </form>
 
             <div className="hidden md:rounded-md md:relative md:left-40 md:w-2/5 md:block">
-<<<<<<< HEAD
-                <Image src="/assets/photoTondeuse.jpg" className="w-full h-[718px] object-cover" alt="Photo d'une personne qui se fait tondre la barbe"/>
-=======
-                {/* <img src="" className="" alt=""/> */}
-
                 <Image
                 src={"/assets/photoTondeuse.jpg"}
                 width={150}
@@ -287,7 +281,6 @@ export default function Inscription() {
                 alt="Photo d'une tondeuse"
                 className="w-full h-[718px] object-cover"
                 />
->>>>>>> newFeature/motDePasseOublie
             </div>
         </div>
     );
