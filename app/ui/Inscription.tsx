@@ -1,6 +1,7 @@
 'use client';
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation"; 
 import { registerUser } from "@/app/_action/inscriptionAction";
@@ -15,7 +16,6 @@ import { French } from "flatpickr/dist/l10n/fr.js";
 import "flatpickr/dist/flatpickr.min.css";
 
 export default function Inscription() {
-    const [message, setMessage] = useState("");
     const [success, setSuccess] = useState(false);
     const router = useRouter();
     const inputRef = useRef<HTMLInputElement | null>(null);
@@ -189,8 +189,8 @@ export default function Inscription() {
 
                 {/* NOM & PRENOM */}
                 <div className="flex justify-center gap-4 mb-4">
-                    <input className="form-control text-[15px]" type="text" name="nom" value={formData.nom} onChange={handleChange} placeholder="Nom" />
-                    <input className="form-control text-[15px]" type="text" name="prenom" value={formData.prenom} onChange={handleChange} placeholder="Prénom" />
+                    <input className="form-control text-[15px] focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4" type="text" name="nom" value={formData.nom} onChange={handleChange} placeholder="Nom" />
+                    <input className="form-control text-[15px] focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4" type="text" name="prenom" value={formData.prenom} onChange={handleChange} placeholder="Prénom" />
                 </div>
 
                     {/* N° TEL & DDN */}
@@ -236,17 +236,20 @@ export default function Inscription() {
 
                 {/* EMAIL */}
                 <div className="flex justify-center gap-4 mb-4">
-                    <input className="form-control text-[15px]" type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" />
+                    <input className="form-control text-[15px] focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4" type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" />
                 </div>
 
                 {/* MOT DE PASSE */}
                 <div className="relative w-full mb-4">
-                    <input type={showPassword ? "text" : "password"} className="form-control text-[15px] w-full" name="motDePasse" value={formData.motDePasse} onChange={handleChange} placeholder="Mot de passe" />
+                    <input type={showPassword ? "text" : "password"} className="form-control text-[15px] w-full focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4" name="motDePasse" value={formData.motDePasse} onChange={handleChange} placeholder="Mot de passe" />
                     <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} className="w-5 h-5 absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer" onClick={() => setShowPassword(!showPassword)} />
                 </div>
 
                 {/* DEPARTEMENT & CODE POSTAL */}
                 <div className="flex justify-center gap-4 mb-4">
+
+                    <input className="form-control text-[15px] focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4" type="number" name="codePostal" value={formData.codePostal} onChange={handleChange} placeholder="Code Postal" />    
+=======
                     <input className="form-control text-[15px]" type="number" name="codePostal" value={formData.codePostal} onChange={handleChange} placeholder="Code Postal" />
                     <input className="form-control text-[15px]" type="text" name="departement" value={formData.departement} placeholder="Département" readOnly disabled/>
                 </div>
@@ -261,7 +264,7 @@ export default function Inscription() {
                             ))}
                         </select>
                     ) : (
-                        <input className="form-control text-[15px]" type="text" name="ville" value={formData.ville} onChange={handleChange} placeholder="Ville" />
+                        <input className="form-control text-[15px] focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4" type="text" name="ville" value={formData.ville} onChange={handleChange} placeholder="Ville" />
                     )}
                 </div>
 
@@ -284,7 +287,7 @@ export default function Inscription() {
             </form>
 
             <div className="hidden md:rounded-md md:relative md:left-40 md:w-2/5 md:block">
-                <img src="/assets/photoTondeuse.jpg" className="w-full h-[718px] object-cover" />
+                <Image src="/assets/photoTondeuse.jpg" className="w-full h-[718px] object-cover" alt="Photo d'une personne qui se fait tondre la barbe"/>
             </div>
         </div>
     );
