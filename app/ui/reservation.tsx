@@ -1,7 +1,5 @@
 'use client';
 import { useState } from "react";
-import { useSession } from "next-auth/react";
-import Link from "next/link";
 import PsChoixCoupes from "../_components/reservation/ps-choixCoupes";
 import DsHoraireAndTruckResa from "../_components/reservation/ds-horaireTruck";
 import TsChoixHeureResa from "../_components/reservation/ts-choixHeure";
@@ -70,7 +68,7 @@ export default function Reservation() {
           setAffichage={setAffichage} />
 
         <div className="w-full flex justify-center relative md:bottom-24">
->>>>>>> origin/develop
+
           <button className="
 		                w-64
                     py-2.5 
@@ -158,4 +156,4 @@ export default function Reservation() {
       </form>
     )
   }
-}
+
