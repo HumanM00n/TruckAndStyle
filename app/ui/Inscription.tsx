@@ -249,8 +249,6 @@ export default function Inscription() {
                 <div className="flex justify-center gap-4 mb-4">
 
                     <input className="form-control text-[15px] focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4" type="number" name="codePostal" value={formData.codePostal} onChange={handleChange} placeholder="Code Postal" />    
-=======
-                    <input className="form-control text-[15px]" type="number" name="codePostal" value={formData.codePostal} onChange={handleChange} placeholder="Code Postal" />
                     <input className="form-control text-[15px]" type="text" name="departement" value={formData.departement} placeholder="Département" readOnly disabled/>
                 </div>
 
@@ -287,7 +285,14 @@ export default function Inscription() {
             </form>
 
             <div className="hidden md:rounded-md md:relative md:left-40 md:w-2/5 md:block">
-                <Image src="/assets/photoTondeuse.jpg" className="w-full h-[718px] object-cover" alt="Photo d'une personne qui se fait tondre la barbe"/>
+                <Image
+                src={"/assets/photoTondeuse.jpg"}
+                width={150}
+                height={150}
+                quality={80}
+                alt="Photo d'une tondeuse"
+                className="w-full h-[718px] object-cover"
+                />
             </div>
         </div>
     );

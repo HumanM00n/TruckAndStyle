@@ -59,7 +59,7 @@ export default function DateTimePicker({ onDateTimeChange, }: { onDateTimeChange
           <Calendar
             mode="single"
             selected={date}
-            onSelect={(d) => {
+            onSelect={(d: any) => {
               setDate(d)
               handleSelect(d, heure)
             }}
