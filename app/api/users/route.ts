@@ -47,10 +47,6 @@ export async function GET(req: Request) {
             query = 'SELECT * from tns_users';
             values = [];
         }
-        if (!userId) {
-            return NextResponse.json({ message: "Filtrage par ID obligatoire" }, { status: 400 });
-          }
-          
         const [rows] = await pool.query(query, values);
         return NextResponse.json(rows);
     } catch (error) {
