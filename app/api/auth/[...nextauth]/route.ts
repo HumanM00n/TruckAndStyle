@@ -19,10 +19,12 @@ export const authOptions = {
 
                 const [users] = await pool.query("SELECT * FROM tns_users WHERE user_email = ?", [email]);
 
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 if ((users as any[]).length === 0) {
                     return null; 
                 }
 
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 const user = (users as any[])[0];
 
                 const passwordMatch = await bcrypt.compare(password, user.user_password);
@@ -37,6 +39,7 @@ export const authOptions = {
     ],
 
     callbacks: {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         async jwt({ token, user }: any) {
             if (user) {
                 // Si un utilisateur se connecte, on lui ajoute le token JWT
@@ -46,6 +49,7 @@ export const authOptions = {
             return token;
         },
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         async session({ session, token }: any) {
             session.user.id = token.id;
             session.user.email = token.email;

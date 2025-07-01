@@ -58,8 +58,7 @@ export default function PsChoixCoupes({ selected, onSelect, onChoixFinal  }: Pro
                     transition-opacity duration-500 ease-in-out opacity-100
                     md:grid grid-cols-2 gap-12
                     lg:w-[950px]
-                    lg:mx-auto
-                    ">
+                    lg:mx-auto">
                         {dataMap[selected].map((item, index) => (
                             <div key={index} className="mb-4 border-none border-bottom text-sm md:text-base">
                                 <div className="flex justify-between mb-4">

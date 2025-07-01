@@ -37,7 +37,10 @@ export default function Inscription() {
     function handleChange(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
         setFormData({ ...formData, [event.target.name]: event.target.value });
     }
-
+    function convertToMysqlDateFormat(date: string): string {
+        const [day, month, year] = date.split("-");
+        return `${year}-${month}-${day}`;
+    }
     async function handleSubmit(event: React.FormEvent) {
         event.preventDefault();
 
@@ -54,11 +57,20 @@ export default function Inscription() {
             return;
         }
 
-        const formDataToSend = new FormData();
-        Object.entries(formData).forEach(([key, value]) => formDataToSend.append(key, value));
+         // ✅ Conversion de la date avant l'envoi au backend
+    const dateNaissanceFormatMySQL = convertToMysqlDateFormat(formData.dateNaissance);
 
-        const response = await registerUser(formDataToSend);
-        console.log("Reponse du serveur :", response);
+    const formDataToSend = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+        if (key === "dateNaissance") {
+            formDataToSend.append(key, dateNaissanceFormatMySQL); // Format correct pour MySQL
+        } else {
+            formDataToSend.append(key, value);
+        }
+    });
+
+    const response = await registerUser(formDataToSend);
+    console.log("Reponse du serveur :", response);
 
         if (response.success) {
             Toastify({

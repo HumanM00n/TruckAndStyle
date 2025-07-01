@@ -7,7 +7,10 @@ export const getPersonalInfo = async (userId: number) => {
     try {
         // Le premier any[] contient les resultats de la requêtes 
         // Le deuxième any[] contient les métadonnées des colonnes 
-        const [pullPersonnalInfos]: [any[], any] = await pool.query(`SELECT user_lastname, user_firstname, user_email, user_phone_number FROM tns_users WHERE id_users = ${userId};`);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const [pullPersonnalInfos]: [any[], any] = await pool.query('SELECT user_lastname, user_firstname, user_email, user_phone_number FROM tns_users WHERE id_users = ?',
+  [userId]//on exclue user id et on rajoute un placeholder 
+);
 
         if (!pullPersonnalInfos || pullPersonnalInfos.length === 0) {
             throw new Error("Une erreur lors de la récupérations des informations:")
@@ -33,6 +36,7 @@ export const updatPersonalInfo = async (newInfo: Partial<{ lastname: string; fir
     try {
 
         const partsRequest: string[] = [];
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const newValues: any[] = [];
 
         Object.entries(newInfo).forEach(([key, value]) => {
@@ -44,6 +48,7 @@ export const updatPersonalInfo = async (newInfo: Partial<{ lastname: string; fir
         });
 
         if (newInfo.phone) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const [pullAllPhoneNumber]: [any[], any] = await pool.query(`SELECT * FROM tns_users WHERE user_phone_number = ? AND id_users != ?`,
                 [newInfo.phone, userId]
             );
@@ -57,8 +62,9 @@ export const updatPersonalInfo = async (newInfo: Partial<{ lastname: string; fir
         }
 
         if (newInfo.email) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const [pullAllEmail]: [any[], any] = await pool.query(`SELECT * FROM tns_users WHERE user_email = ? AND id_users != ?`,
-                [newInfo, userId]
+                [newInfo.email, userId]
             );
         
             if (pullAllEmail.length > 0) {

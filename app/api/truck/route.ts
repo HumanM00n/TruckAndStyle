@@ -6,6 +6,7 @@ export async function GET() {
     const [rows] = await pool.query('SELECT truck_latitude, truck_longitude FROM tns_truck WHERE id_truck = 1');
 
     if (Array.isArray(rows) && rows.length > 0) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const { truck_latitude, truck_longitude } = rows[0] as any;
       return NextResponse.json({ latitude: truck_latitude, longitude: truck_longitude });
     }
