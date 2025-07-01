@@ -52,7 +52,6 @@ export async function POST(req: Request) {
         const result = resultQuery as ResultSetHeader;
 
         await pool.execute(`DELETE FROM password_reset_tokens WHERE token = ?`, [token]);
-        console.log("le token a été supprimé")
 
         if (result.affectedRows > 0) {
             return NextResponse.json({ success: true, message: "Votre nouveau mot de passe a été enregistré !"}, { status: 200 })
