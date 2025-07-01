@@ -24,17 +24,10 @@ export default function PsInformations() {
                     md:text-4xl"> Bienvenue sur le site <br /> <span className="color--form">Truck&apos;n Style</span></h1>
 
                     <p className="text-md lg:text-lg">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et nisl
-                        ex. Suspendisse erat augue, maximus at dui at, pulvinar ullamcorper
-                        ante. Integer dapibus ligula mi, sed mattis nisi rutrum vitae. Nam
-                        in leo non nunc commodo convallis in non enim. Pellentesque interdum
-                        vehicula dolor, eget auctor nulla efficitur sit amet. Aenean egestas
-                        tempor lacus, at egestas justo eleifend in. Praesent at massa eu
-                        ante hendrerit pellentesque. Praesent sit amet laoreet felis. Sed in
-                        dolor et tortor consectetur tempor. Phasellus ultrices metus eu elit
-                        eleifend pulvinar. Sed sodales quis mauris ut dapibus. Nulla eget
-                        nisl id ante viverra feugiat sit amet vel mauris. Ut dolor augue,
-                        aliquet nec lorem quis, accumsan ullamcorper quam.
+                        Truck’n Style est une application web innovante qui réinvente l’expérience de la coiffure grâce à un salon mobile qui 
+                        parcourt la France. Pensé pour les personnes actives ou en recherche de praticité, le service propose des prestations 
+                        rapides et soignées, adaptées à tous types de cheveux courts, mi-longs ou longs.
+                        En quelques clics, les utilisateurs peuvent repérer le passage du truck, réserver un créneau et profiter de l’expertise de coiffeurs professionnels, sans les contraintes d’un salon classique.
                     </p>
 
                     <div className="flex mt-3 gap-3">
