@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 
-export default function AccountRecoveryLink({ onClose, onSubmit, }: { onClose: () => void; onSubmit: (email: string) => void; }) {
+export default function AccountRecoveryLink({ onClose, onSubmit, apiError }: { onClose: () => void; onSubmit: (email: string) => void; 
+  apiError: string | null}) {
   const [ email, setEmail ] = useState("");
-
 
   const handleSubmit = () => {
     if (!email.trim()) return;
@@ -18,7 +18,7 @@ export default function AccountRecoveryLink({ onClose, onSubmit, }: { onClose: (
         <div className="h-[375px] w-96 bg--form rounded-md text-sm shadow-lg relative animate-appear" role="dialog" aria-modal="true"
           onClick={(e) => e.stopPropagation()}>
 
-          <div onSubmit={handleSubmit} className="flex flex-col gap-7 items-center p-4">
+          <div className="flex flex-col gap-7 items-center p-4">
             <div className="relative w-full text-right">
               <button type="button" className="btn-close btn-close-white focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-2" 
               aria-label="Close" onClick={onClose}></button>
@@ -39,6 +39,8 @@ export default function AccountRecoveryLink({ onClose, onSubmit, }: { onClose: (
                 required
                 className="form-control md:py-2.5 px-4 placeholder-[#8C5744] placeholder-opacity-70 focus:ring-[#8C5744] focus:border-[#8C5744] focus:ring-4 transition"
               />
+
+              {apiError && <p className="text-red-500 text-sm absolute bottom-[75px] font-[550] italic">{apiError}</p>}
             </div>
 
             <button 

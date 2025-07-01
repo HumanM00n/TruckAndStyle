@@ -30,6 +30,7 @@
     "bootstrap": "^5.3.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "dotenv": "^16.4.7",
     "flatpickr": "^4.6.13",
     "install": "^0.13.0",
@@ -44,13 +45,10 @@
     "npm": "^11.1.0",
     "ou": "^0.0.2",
     "react": "^19.0.0",
+    "react-day-picker": "^9.7.0",
     "react-dom": "^19.0.0",
     "styled-components": "^6.1.19",
-
-    "tailwind-merge": "^3.3.0",
-
     "tailwind-merge": "^3.3.1",
-
     "tailwindcss-animate": "^1.0.7",
     "toastify-js": "^1.12.0"
   },

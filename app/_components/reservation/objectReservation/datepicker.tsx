@@ -57,7 +57,7 @@ const handleSelect = (d: Date | undefined, h: string | null) => {
           <Calendar
             mode="single"
             selected={date}
-            onSelect={(d) => {
+            onSelect={(d: any) => {
               setDate(d)
               handleSelect(d, heure)
             }}
