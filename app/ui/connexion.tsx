@@ -10,11 +10,11 @@ import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import AccountRecoveryLink from "@/app/_components/showForgotPasswordForm/AccountRecoveryLink";
 
 export default function LoginPage() {
+    const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const router = useRouter();
     const [showContainerLink, setShowContainerLink] = useState(false);
     const [ apiError, setApiError ] = useState<string | null>(null);
 
