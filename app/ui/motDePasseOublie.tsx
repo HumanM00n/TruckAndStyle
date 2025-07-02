@@ -23,7 +23,6 @@ export default function MdpOublie() {
         const token = getTokenByUrl.get('token');
 
         if (!token) {
-            console.log("Aucun token trouvé dans l'url");
             setIsTokenValid(false);
             setIsLoading(false);
             return;
@@ -32,7 +31,6 @@ export default function MdpOublie() {
         const checkToken = async () => {
             try {
                 const res = await fetch(`/api/auth/reset-password?token=${token}`);
-                console.log('reponse du status', res.status);
 
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 const data = await res.json();
@@ -97,7 +95,6 @@ export default function MdpOublie() {
         } finally {
             setIsLoading(false)
         }
-
     }
 
     if (isLoading) {
@@ -113,7 +110,6 @@ export default function MdpOublie() {
                 <hr className="text-white border" />
                 <div className="border-1 border-blue-500 w-full h-full flex justify-center items-center fixed inset-0 z-20" role="dialog"
                     aria-modal="true">
-
                     <div className="h-[110px] rounded-md bg--grisArdoise text-sm shadow-lg top-0 px-4 py-3">
                         <p className="text-xl">Ce lien a expiré ou est invalide.</p>
                         <a href="/connexion" className="underline underline-offset-1 relative top-2">Retour à la connexion</a>
@@ -185,12 +181,6 @@ export default function MdpOublie() {
                             )}
                         </div>
                     )}
-
-
-
-                    {/* {responseMessage && (
-            <p className="text-sm text-center absolute top-[365px] font-semibold text-red-600">{responseMessage}</p>
-          )} */}
                 </div>
             </form>
         </section>

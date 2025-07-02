@@ -26,7 +26,7 @@ export async function POST(req: Request) {
     const user = (isTokenExpires as any)[0];
 
     if (!user) {
-        return NextResponse.json({ message: "Token invalide ou expiré. (POST)" }, { status: 400 });
+        return NextResponse.json({ message: "Token invalide ou expiré." }, { status: 400 });
     }
 
     if (!newPassword || !confirmNewPassword) {
@@ -69,7 +69,6 @@ export async function GET(req: Request) {
     const token = searchParams.get("token");
 
     if (!token) {
-        console.log("Le token n'est pas récupéré")
         return NextResponse.json({ message: "Une erreur est survenue lors du processus. Veuillez réessayer." }, { status: 400 });
     }
 

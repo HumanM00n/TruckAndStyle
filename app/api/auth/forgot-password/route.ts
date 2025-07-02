@@ -25,7 +25,6 @@ export async function POST(req: Request) {
     if ((queryEmailVerify as never[]).length === 0) {
         return NextResponse.json({ message: "Indentifiant incorrect." }, { status: 401 });
     }
-
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const user = (queryEmailVerify as any)[0];
         const userId = user.id_users;
@@ -55,10 +54,8 @@ Ce lien expirera dans 1 heure. Si vous n’avez pas fait cette demande, vous pou
 Merci,
 L’équipe TruckNStyle`
 
-        })
-        
-        console.log(resetPasswordLink)
-         return NextResponse.json({ success: true, message: "Le lien de réinitialisation de votre mot de passe a été envoyé." }, { status: 200 });
+        })        
+        return NextResponse.json({ success: true, message: "Le lien de réinitialisation de votre mot de passe a été envoyé." }, { status: 200 });
     } catch (error) {
         console.error("Erreur MySQL :", error)
         return NextResponse.json({ message: "Erreur interne" }, { status: 500 });
