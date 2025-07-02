@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import { useRef } from "react";
+import { playfair } from "@/app/styles/fonts";
 
 export default function DsInfosCoupes() {
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -24,7 +25,7 @@ export default function DsInfosCoupes() {
 
                 {/* BLOC 1 => TITRE & TEXT */}
                 <div className="px-4 md:w-1/2">
-                    <h2 className="text-3xl text-center mb-2">
+                    <h2 className={` ${playfair.className} text-3xl text-center mb-2`}>
                         Découvre <span className="color--form">nos coupes</span>
                     </h2>
                     <p className="text-base text-left sm:px-16 md:px-6 lg:px-10">

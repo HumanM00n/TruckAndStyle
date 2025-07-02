@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { playfair } from "@/app/styles/fonts";
 
 export default function PsInformations() {
 
@@ -20,12 +21,11 @@ export default function PsInformations() {
             md:min-h-dvh">
                 <div className="w-full px-3
                 md:w-1/2">
-                    <h1 className="text-3xl mb-3
-                    md:text-4xl"> Bienvenue sur le site <br /> <span className="color--form">Truck&apos;n Style</span></h1>
+                    <h1 className={`${playfair.className} text-3xl mb-3 md:text-4xl`}> Bienvenue sur le site <br /> <span className="color--form">Truck&apos;n Style</span></h1>
 
                     <p className="text-md lg:text-lg">
                         Truck’n Style est une application web innovante qui réinvente l’expérience de la coiffure grâce à un salon mobile qui 
-                        parcourt la France. Pensé pour les personnes actives ou en recherche de praticité, le service propose des prestations 
+                        parcourt l&apos;île de France. Pensé pour les personnes actives ou en recherche de praticité, le service propose des prestations 
                         rapides et soignées, adaptées à tous types de cheveux courts, mi-longs ou longs.
                         En quelques clics, les utilisateurs peuvent repérer le passage du truck, réserver un créneau et profiter de l’expertise de coiffeurs professionnels, sans les contraintes d’un salon classique.
                     </p>
