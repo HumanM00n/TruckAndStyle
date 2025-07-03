@@ -13,6 +13,7 @@ export async function GET(req: Request) {
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET!);
         return NextResponse.json({ message: "Accès autorisé", user: decoded })
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
         return NextResponse.json({ message: "Token invalid" }, { status: 403 });
     }

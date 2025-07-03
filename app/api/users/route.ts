@@ -30,7 +30,8 @@ export async function POST(req: Request) {
     }
 }
 
-// Récupération des utilisateurs 
+
+//Récupération des utilisateurs 
 export async function GET(req: Request) {
     try {
         const { searchParams } = new URL(req.url);
@@ -46,7 +47,6 @@ export async function GET(req: Request) {
             query = 'SELECT * from tns_users';
             values = [];
         }
-
         const [rows] = await pool.query(query, values);
         return NextResponse.json(rows);
     } catch (error) {
@@ -54,6 +54,8 @@ export async function GET(req: Request) {
         return NextResponse.json({ message: "Problème lors de la récupération des utilisateurs" })
     } 
 }
+
+
 
 
     // Mise à jour de l'uilisateur 
@@ -73,7 +75,7 @@ export async function GET(req: Request) {
                      user_firstname = COALESCE(?, user_firstname),
                      user_email = COALESCE(?, user_email),
                      user_password = COALESCE(?, user_password),
-                     user_phone_number = COALESCE(?, user_phone_number),
+                     user_phone_number = COALESCE(?, user_phone_number)
                    WHERE id_users = ?`;
 
     const values = [id, lastName, firstName, email, hashedPassword, phone_number];
