@@ -16,12 +16,6 @@ export async function POST(req: Request) {
     const [isTokenExpires] = await pool.execute(`SELECT u.id_users, t.token FROM password_reset_tokens t
                                                     JOIN tns_users u ON t.user_id = u.id_users 
                                                     WHERE t.token = ? AND expires_at > NOW();`, [token],)
-    const valideToken = (isTokenExpires as unknown[])[0];
-
-    if (!valideToken) {
-        return NextResponse.json({ message: "Le lien a expiré. Merci de refaire une demande." }, { status: 400 });
-    }
-
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const user = (isTokenExpires as any)[0];
 
@@ -69,22 +63,22 @@ export async function GET(req: Request) {
     const token = searchParams.get("token");
 
     if (!token) {
+        console.log("Le token n'est pas récupéré")
         return NextResponse.json({ message: "Une erreur est survenue lors du processus. Veuillez réessayer." }, { status: 400 });
     }
 
-    const [isTokenExpires] = await pool.execute(`SELECT u.id_users, t.token FROM password_reset_tokens t
-                                                    JOIN tns_users u ON t.user_id = u.id_users 
-                                                    WHERE t.token = ? AND expires_at > NOW();`, [token],)
-    const valideToken = (isTokenExpires as unknown[])[0];
+    const [rows] = await pool.execute(
+        `SELECT u.id_users, t.token FROM password_reset_tokens t
+         JOIN tns_users u ON t.user_id = u.id_users 
+         WHERE t.token = ? AND t.expires_at > NOW();`,
+        [token]
+    );
 
-    if (!valideToken) {
-        return NextResponse.json({ message: "Le lien a expiré. Merci de refaire une demande." }, { status: 400 });
-    }
-
-    const user = (isTokenExpires as never)[0];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const user = (rows as any[])[0];
 
     if (!user) {
-        return NextResponse.json({ message: "Token invalide ou expiré." }, { status: 400 });
+        return NextResponse.json({ message: "Lien expiré ou invalide." }, { status: 400 });
     }
 
     return NextResponse.json({ message: "Token valide." }, { status: 200 });
