@@ -11,6 +11,7 @@ type Props = {
 };
 
 export default function PsChoixCoupes({ selected, onSelect, onChoixFinal  }: Props) {
+
     return (
         <section className="min-h-[80vh] text-white
         md:min-h-auto">
