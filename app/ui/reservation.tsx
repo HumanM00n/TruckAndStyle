@@ -8,6 +8,9 @@ import { useSession } from "next-auth/react";
 import { format } from "date-fns";
 
 export default function Reservation() {
+  const { data: session, status } = useSession();
+  const userId = session?.user.id;
+
   const [coupe, setCoupe] = useState<View | null>('courtes');
   const [coupeChoisie, setCoupeChoisie] = useState<string | null>(null);
 
@@ -15,19 +18,14 @@ export default function Reservation() {
   const [heure, setHeure] = useState<string | null>(null);
   const [affichage, setAffichage] = useState<string>("Choisir une date");
 
-  const { data: session, status } = useSession();
-  const userId = session?.user.id;
+  const [responseMessage, setResponseMessage] = useState("");
+  const [ isReservationValid, setIsReservationValid ] = useState(false)
 
   const handleDateTimeChange = (datetime: string) => {
     const [dateStr, heureStr] = datetime.split(' ');
     setDate(new Date(dateStr));
     setHeure(heureStr.slice(0, 5)); 
   };
-
-  console.log("email :", session?.user.email);
-  console.log("id :", session?.user.id);
-  console.log(coupeChoisie);
-  console.log(date, heure);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,6 +66,12 @@ export default function Reservation() {
       alert("Une erreur est survenue avec le serveur.");
     }
   };
+
+  if (isReservationValid) {
+    return (
+
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit}>
