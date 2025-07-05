@@ -18,6 +18,7 @@ export default function Reservation() {
   const [heure, setHeure] = useState<string | null>(null);
   const [affichage, setAffichage] = useState<string>("Choisir une date");
 
+  const [isLoading, setIsLoading] = useState(true)
   const [responseMessage, setResponseMessage] = useState("");
   const [ isReservationValid, setIsReservationValid ] = useState(false)
 
