@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import pool from "@/app/_lib/db";
 import { RowDataPacket } from "mysql2";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/route";
 
 // Récupération de toutes les réservations
 export async function GET(req: Request) {
@@ -37,14 +35,6 @@ export async function POST(req: Request) {
    const coupeChoisie = body.coupeChoisie;
    const datetime = body.datetime;
 
-   const session = await getServerSession(authOptions);
-
-    console.log(session);
-    console.log("userId:", userId);
-    console.log("Type de userId:", typeof userId);
-    console.log("coupeChoisie:", coupeChoisie);
-    console.log("datetime:", datetime);
-
    if(!userId) {
     return NextResponse.json({ message: "Informations manquantes !"}, { status: 401 });
    }
@@ -58,10 +48,7 @@ export async function POST(req: Request) {
    }
 
     try {
-        const queryReservation = `INSERT INTO tns_reservation
-        (id_customer, reservation_haircut_name, reservation_datetime, reservation_duration_haircut, reservation_price_haircut) 
-        VALUES (?, ?, ?, 30, 10.00)`;
-
+        const queryReservation = `INSERT INTO tns_reservation (id_customer, reservation_haircut_name, reservation_datetime, reservation_duration_haircut, reservation_price_haircut) VALUES (?, ?, ?, ?, ?)`;
         const valuesReservation = [userId, coupeChoisie, datetime, 30, 10.00];
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
