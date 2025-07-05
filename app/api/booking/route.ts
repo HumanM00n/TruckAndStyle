@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import pool from "@/app/_lib/db";
 import { RowDataPacket } from "mysql2";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/route";
 
 // Récupération de toutes les réservations
 export async function GET(req: Request) {
@@ -30,38 +32,42 @@ export async function GET(req: Request) {
 
 // Création d'une réservation
 export async function POST(req: Request) {
+   const body = await req.json();
+   const userId = body.userId;
+   const coupeChoisie = body.coupeChoisie;
+   const datetime = body.datetime;
+
+   const session = await getServerSession(authOptions);
+
+    console.log(session);
+    console.log("userId:", userId);
+    console.log("Type de userId:", typeof userId);
+    console.log("coupeChoisie:", coupeChoisie);
+    console.log("datetime:", datetime);
+
+   if(!userId) {
+    return NextResponse.json({ message: "Informations manquantes !"}, { status: 401 });
+   }
+
+   if(!coupeChoisie) {
+    return NextResponse.json({ message: "Veuillez Choisir une coupe de cheveux !"}, { status: 400 });
+   }
+
+   if(!datetime) {
+    return NextResponse.json({ message: "Veuillez choisir une date et une heure ! "}, { status: 400 });
+   }
+
     try {
-        const {
-            id_customer,
-            reservation_haircut_name,
-            reservation_datetime,
-            reservation_duration_haircut,
-            reservation_price_haircut,
-            
-        } = await req.json();
+        const queryReservation = `INSERT INTO tns_reservation
+        (id_customer, reservation_haircut_name, reservation_datetime, reservation_duration_haircut, reservation_price_haircut) 
+        VALUES (?, ?, ?, 30, 10.00)`;
 
-        if (
-            !id_customer || !reservation_haircut_name || !reservation_datetime || !reservation_duration_haircut ||
-            !reservation_price_haircut 
-        ) {
-            return NextResponse.json({ message: "Données invalides ou incomplètes" }, { status: 400 });
-        }
+        const valuesReservation = [userId, coupeChoisie, datetime, 30, 10.00];
 
-        const query = `
-            INSERT INTO tns_reservation 
-            (id_customer, reservation_haircut_name, reservation_datetime, reservation_duration_haircut, reservation_price_haircut, create_at) 
-            VALUES (?, ?, ?, ?, ?, ?, ?)`;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const [resultQuery] = await pool.execute(queryReservation, valuesReservation);
 
-        const [result] = await pool.query(query, [
-            id_customer,
-            reservation_haircut_name,
-            reservation_datetime,
-            reservation_duration_haircut,
-            reservation_price_haircut,
-        ]);
-
-        const insertId = (result as { insertId: number }).insertId;
-        return NextResponse.json({ message: "Réservation créée", id: insertId });
+        return NextResponse.json({ message: "Votre réservation a bien été prise en compte"}, {status: 200});
     } catch (error) {
         console.error("Erreur lors de la création de la réservation :", error);
         return NextResponse.json({ message: "Erreur serveur" }, { status: 500 });
