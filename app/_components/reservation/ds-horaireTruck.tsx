@@ -47,7 +47,7 @@ export default function DsHoraireAndTruckResa() {
 
                 <div className="w-auto absolute top-60 right-4 lg:right-16 lg:top-48 xl:right-24 2xl:right-56 2xl:top-40">
                     <div className="w-full md:relative md:bottom-5">
-                        <h2 className={`${playfair.className} text-xl md:text-2xl md:text-end`}>Où se trouve le Hair'Truck ?</h2>
+                        <h2 className={`${playfair.className} text-xl md:text-2xl md:text-end`}>Où se trouve le Hair&apos;Truck ?</h2>
                     </div>
 
                     {/* MAPS */}
