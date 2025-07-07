@@ -5,7 +5,7 @@ import Link from "next/link";
 import PsChoixCoupes from "../_components/reservation/ps-choixCoupes";
 import DsHoraireAndTruckResa from "../_components/reservation/ds-horaireTruck";
 import TsChoixHeureResa from "../_components/reservation/ts-choixHeure";
-import SuccessBooking from "../_components/reservation/objecResa/SuccessRedirect";
+import SuccessBooking from "../_components/reservation/objectReservation/SuccessRedirect";
 import { View } from "../_lib/choixCoupes.ps-resa";
 import { format } from "date-fns";
 
