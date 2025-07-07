@@ -3,30 +3,9 @@ import pool from "@/app/_lib/db";
 import { RowDataPacket } from "mysql2";
 
 // Récupération de toutes les réservations
-export async function GET(req: Request) {
-    try {
-        const { searchParams } = new URL(req.url);
-        const userId = searchParams.get("userId");
+// export async function GET(req: Request) {
 
-        let query = "SELECT id_reservation, id_haircut, reservation_datetime, reservation_price_haircut, id_hairdresser FROM tns_reservation";
-        const values: (string | number)[] = [];
-
-        if (userId) {
-            query += " WHERE id_hairdresser = ?";
-            values.push(userId);
-        }
-
-        const [reservations] = await pool.query(query, values);
-
-        // Typage explicite du résultat de la requête
-        const formattedReservations = reservations as RowDataPacket[];
-
-        return NextResponse.json(formattedReservations);
-    } catch (error) {
-        console.error("Erreur lors de la récupération des réservations :", error);
-        return NextResponse.json({ message: "Erreur serveur" }, { status: 500 });
-    }
-}
+// }
 
 // Création d'une réservation
 export async function POST(req: Request) {
@@ -98,27 +77,6 @@ export async function PUT(req: Request) {
 }
 
 // Suppression d'une réservation
-export async function DELETE(req: Request) {
-    try {
-        const { searchParams } = new URL(req.url);
-        const id_reservation = parseInt(searchParams.get("id") || "", 10);
+// export async function DELETE(req: Request) {
 
-        const checkQuery = "SELECT id_reservation FROM tns_reservation WHERE id_reservation = ?";
-        const [existingReservations] = await pool.query(checkQuery, [id_reservation]);
-
-        // Typage explicite de la réponse SQL
-        const formattedReservations = existingReservations as RowDataPacket[];
-
-        if (formattedReservations.length === 0) {
-            return NextResponse.json({ message: "Réservation introuvable" }, { status: 404 });
-        }
-
-        const deleteQuery = "DELETE FROM tns_reservation WHERE id_reservation = ?";
-        await pool.query(deleteQuery, [id_reservation]);
-
-        return NextResponse.json({ message: "Réservation supprimée avec succès" });
-    } catch (error) {
-        console.error("Erreur lors de la suppression de la réservation :", error);
-        return NextResponse.json({ message: "Erreur serveur" }, { status: 500 });
-    }
-}
+// }
