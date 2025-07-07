@@ -94,7 +94,7 @@ export default function MyBookings() {
         </div>
 
 
-        <div className="relative">
+        <div className="relative top-[500px]">
           <button
             onClick={() => signOut()}
             className="
@@ -107,6 +107,8 @@ export default function MyBookings() {
                     bottom-60
                     -left-8
                     transition
+                    md:bottom-0
+                    md:-left-[275px]
                     hover:bg-[#323041]">Se déconnecter</button>
         </div>
       </div>
