@@ -27,30 +27,6 @@ export async function POST(req: Request) {
    }
 
     try {
-<<<<<<< HEAD
-        const body = await req.json();
-        const { email, coupeChoisi, date, temps, cout } = body;
-
-        if (!email || !coupeChoisi || !date || !temps || !cout) {
-            return NextResponse.json({ error: "Champs manquants" }, { status: 400 });
-        }
-
-        const sql = `
-      INSERT INTO reservations (
-        id_customer,
-        reservation_haircut_name,
-        reservation_datetime,
-        reservation_duration_haircut,
-        reservation_price_haircut,
-        created_at
-      ) VALUES (?, ?, ?, ?, ?, NOW())`;
-
-        const values = [email, coupeChoisi, date, temps, cout];
-
-        const [result] = await pool.execute(sql, values);
-
-        return NextResponse.json({ success: true, id: (result as any).insertId }, { status: 201 });
-=======
         const queryReservation = `INSERT INTO tns_reservation (id_customer, reservation_haircut_name, reservation_datetime, reservation_duration_haircut, reservation_price_haircut) VALUES (?, ?, ?, ?, ?)`;
         const valuesReservation = [userId, coupeChoisie, datetime, 30, 10.00];
 
@@ -58,12 +34,12 @@ export async function POST(req: Request) {
         const [resultQuery] = await pool.execute(queryReservation, valuesReservation);
 
         return NextResponse.json({ message: "Votre réservation a bien été prise en compte"}, {status: 200});
->>>>>>> feature/reservation
     } catch (error) {
-        console.error("Erreur lors de la réservation :", error);
-        return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
+        console.error("Erreur lors de la création de la réservation :", error);
+        return NextResponse.json({ message: "Erreur serveur" }, { status: 500 });
     }
 }
+
 // Mise à jour d'une réservation
 export async function PUT(req: Request) {
     try {

@@ -2,7 +2,7 @@
 'use client';
 
 import Image from "next/image";
-import DateTimePicker from "./objecResa/datepicker";
+import DateTimePicker from "./objectReservation/datepicker";
 import { playfair } from "@/app/styles/fonts";
 
 type Props = {
