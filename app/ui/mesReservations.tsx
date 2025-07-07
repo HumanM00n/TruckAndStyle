@@ -1,14 +1,15 @@
 "use client";
 
 import { signOut } from "next-auth/react";
+import { playfair } from "@/app/styles/fonts";
 
 export default function MyBookings() {
 
   return (
     <>
-      <div className="border flex flex-col justify-center items-center gap-8 md:flex-row md:justify-around md:items-start">
+      <div className="flex flex-col justify-center items-center gap-8 md:flex-row md:justify-around md:items-start">
         <div className="w-[420px] mb-14">
-          <h2 className="pb-3 card-title font-bold">Mes rendez-vous</h2>
+          <h2 className={`${playfair.className} pb-3 card-title font-bold`}>Mes rendez-vous</h2>
           <form className="card w-full rounded-md mb-3 py-3 bg--form flex flex-row text-white">
             <div className="card-body">
               <h4 className="card-title font-semibold pb-2">
@@ -90,6 +91,21 @@ export default function MyBookings() {
               </div> */}
             </div>
           </form>
+        </div>
+
+
+        <div className="static right-28 bottom-[160px] md:relative md:top-80" >
+          <button
+            onClick={() => signOut()}
+            className="
+                    border 
+                    rounded-sm  
+                    px-5 
+                    py-2
+                    absolute
+                    bottom-16
+                    transition
+                    hover:bg-[#323041]">Se déconnecter</button>
         </div>
       </div>
     </>

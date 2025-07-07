@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import { getPersonalInfo, updatPersonalInfo } from "../_action/infosPersosAction";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
@@ -15,6 +15,7 @@ export default function PersonalInfoForm() {
 
     if (!session || !session.user?.id) return null;
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         if (session?.user?.id) {
             const fetchData = async () => {
@@ -225,7 +226,7 @@ export default function PersonalInfoForm() {
                     static 
                     right-28 
                     bottom-[160px] 
-                    md:absolute md:right-44 md:top-2/4 md:mt-5"
+                    md:relative md:top-80"
                 >
 
                     <button 
