@@ -7,13 +7,13 @@ export default function MyBookings() {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center gap-8 md:flex-row md:justify-around md:items-start">
-        <div className="w-[420px] mb-14">
+      <div className="min-h-[75vh] md:min-h-[85vh] flex flex-col justify-center items-center gap-8 md:flex-row md:justify-around md:items-start">
+        <div className="w-[420px] mb-72">
           <h2 className={`${playfair.className} pb-3 card-title font-bold`}>Mes rendez-vous</h2>
           <form className="card w-full rounded-md mb-3 py-3 bg--form flex flex-row text-white">
             <div className="card-body">
               <h4 className="card-title font-semibold pb-2">
-                30 janvier 2025 à 16h30{" "}
+                30 janvier 2025 à 16h30
               </h4>{" "}
               {/* Faire ajouter le résultat de la requête */}
               <p className="card-text text-sm underline pb-3">
@@ -94,16 +94,18 @@ export default function MyBookings() {
         </div>
 
 
-        <div className="static right-28 bottom-[160px] md:relative md:top-80" >
+        <div className="relative">
           <button
             onClick={() => signOut()}
             className="
+                    w-60
                     border 
                     rounded-sm  
                     px-5 
                     py-2
                     absolute
-                    bottom-16
+                    bottom-60
+                    -left-8
                     transition
                     hover:bg-[#323041]">Se déconnecter</button>
         </div>
