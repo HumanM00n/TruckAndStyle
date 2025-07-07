@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
 import Image from "next/image";
@@ -13,20 +14,31 @@ type Props = {
     setAffichage: (value: string) => void;
     coupeChoisie: string | null;
     setCoupeChoisie: (value: string | null) => void;
+<<<<<<< HEAD
 };
 
 export default function TsChoixHeureResa({ date, setDate, heure, setHeure, affichage, setAffichage, coupeChoisie, setCoupeChoisie }: Props) {
+=======
+    onDateTimeChange: ((datetime: string) => void);
+}
 
-    const handleDateTime = (datetime: string) => {
-        console.log("Créneau choisi :", datetime)
-    }
+export default function TsChoixHeureResa({ date, setDate, heure, setHeure, affichage, setAffichage, coupeChoisie, setCoupeChoisie, onDateTimeChange }: Props) {
+>>>>>>> feature/reservation
+
+  const handleDateTime = (datetime: string) => {
+    onDateTimeChange(datetime); // <-- Remonter la valeur au parent Reservation
+  };
 
     const resetReservation = () => {
         setDate(undefined);
         setHeure(null);
         setAffichage("Choisir une date");
         setCoupeChoisie(null);
+<<<<<<< HEAD
     };
+=======
+    }
+>>>>>>> feature/reservation
 
     return (
         <section className="w-auto min-h-[80vh] text-white">
@@ -35,13 +47,22 @@ export default function TsChoixHeureResa({ date, setDate, heure, setHeure, affic
                     <h2 className={`${playfair.className} text-xl pl-2 md:text-2xl `}>Choix de votre <span className="color--form">Horaire</span></h2>
                 </div>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> feature/reservation
                 {coupeChoisie && (
                     <div className="md:w-1/3">
                         <div className="border-1 border-[#733E34] w-52 px-2 py-3 mt-3 rounded-lg text-sm mx-auto 
                     xl:w-60
                     xl:text-[15px]
                     2xl:h-96
+<<<<<<< HEAD
                     2xl:w-[300px]">
+=======
+                    2xl:w-[300px]
+                    ">
+>>>>>>> feature/reservation
                             <Image
                                 alt="Photo de la coiffure selectionnée"
                                 src={"/assets/photoCadreResa.png"}
@@ -66,21 +87,32 @@ export default function TsChoixHeureResa({ date, setDate, heure, setHeure, affic
                             </div>
 
                             <div className="text-center pt-4">
+<<<<<<< HEAD
                                 <button type="button" className="cursor-pointer underline" onClick={resetReservation}>Supprimer</button>
                             </div>
                         </div>
                     </div>
                 )}
+=======
+                                <button className="cursor-pointer underline" onClick={resetReservation}>Supprimer</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                )}
+
+>>>>>>> feature/reservation
 
                 <div className="mt-2 pl-2 md:w-2/3 md:h-[600px] xl:static">
                     <div className="xl:static">
-                        <p className={`${playfair.className} text-xl md:text-xl 2xl:text-3xl`}>Nom du Hair'Truck</p>
+                        <p className={`${playfair.className} text-xl md:text-xl 2xl:text-3xl`}>Nom du Hair&apos;Truck</p>
                         <p className="italic text-sm md:text-lg">HairOnWhells</p>
                     </div>
 
                     <div className="mt-4 xl:static">
-                        <p className={`${playfair.className} text-xl md:text-xl 2xl:text-3xl`}>Adresse du Hair'Truck</p>
-                        <p className="italic text-sm underline">*adresse du hair'Truck*</p>
+                        <p className={`${playfair.className} text-xl md:text-xl 2xl:text-3xl`}>Adresse du Hair&apos;Truck</p>
+                        <p className="italic text-sm underline">*adresse du hair&apos;Truck*</p>
                     </div>
 
                     <div className="p-6 max-w-xl mx-auto">
