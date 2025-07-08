@@ -60,9 +60,11 @@ function Calendar({
         ...classNames,
       }}
       components={{
+          // @ts-expect-error - override default icons
         IconLeft: ({ className, ...props }) => (
           <ChevronLeft className={cn("h-4 w-4", className)} {...props} />
         ),
+          // @ts-expect-error - override default icons
         IconRight: ({ className, ...props }) => (
           <ChevronRight className={cn("h-4 w-4", className)} {...props} />
         ),

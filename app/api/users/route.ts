@@ -118,4 +118,4 @@ export async function DELETE(req: Request) {
     return NextResponse.json({ message: 'Problème lors de la suppression de l\'utilisateur' });   
    }
 
-} 
+}  

@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  app:
+    build: .
+    container_name: trucknstyle_app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=mysql://root:root@db:3306/trucknstyle
+    volumes:
+      - .:/app
+    command: sh -c "npm install && npm run build && npm start"
+
+  db:
+    image: mysql:8.0
+    container_name: trucknstyle_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: trucknstyle
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: trucknstyle_pma
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+
+volumes:
+  db_data:

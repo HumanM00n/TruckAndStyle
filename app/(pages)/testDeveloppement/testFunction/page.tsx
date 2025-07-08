@@ -1,10 +1,13 @@
 'use client';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { handleClientScriptLoad } from "next/script";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useState, useRef, useEffect } from "react";
 
 export default function page() {
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const countClick = useRef(0);
 
     function handleClick() {

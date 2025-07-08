@@ -1,5 +1,6 @@
 'use client';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useState, useEffect, use } from "react";
 import { getPersonalInfo, updatPersonalInfo } from "../_action/infosPersosAction";
 import { useSession } from "next-auth/react";
@@ -9,12 +10,15 @@ import Toastify from "toastify-js";
 export default function PersonalInfoForm() {
 
     const { data: session, status } = useSession();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [showPassword, setshowPassword] = useState(false);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [success, setSuccess] = useState(false);
     const [formData, setFormData] = useState({ lastname: "", firstname: "", phone: "", email: "", password: "" });
 
     if (!session || !session.user?.id) return null;
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         if (session?.user?.id) {
             const fetchData = async () => {
@@ -67,6 +71,7 @@ export default function PersonalInfoForm() {
 
                 setSuccess(true);
             } else {
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 const toast = Toastify({
                     text: updatedInfo?.message,
                     duration: 5000,

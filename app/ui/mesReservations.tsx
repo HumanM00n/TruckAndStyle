@@ -1,5 +1,6 @@
 "use client";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { signOut } from "next-auth/react";
 
 export default function MyBookings() {

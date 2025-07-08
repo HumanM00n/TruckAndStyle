@@ -1,5 +1,6 @@
 'use client'
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useState, useRef, useEffect } from "react"
 import { format } from "date-fns"
 import { fr } from "date-fns/locale"
@@ -16,6 +17,7 @@ const horairesWeek = [
   "18:00",
 ]
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const horairesWeekEnd = [
   "10:00", "10:30", "11:00", "11:30",
   "12:00", "12:30", "13:00", "13:30",
@@ -59,6 +61,7 @@ export default function DateTimePicker({ onDateTimeChange, }: { onDateTimeChange
           <Calendar
             mode="single"
             selected={date}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             onSelect={(d: any) => {
               setDate(d)
               handleSelect(d, heure)

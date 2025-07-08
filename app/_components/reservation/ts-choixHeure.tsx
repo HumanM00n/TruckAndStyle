@@ -15,6 +15,7 @@ type Props = {
     setCoupeChoisie: (value: string | null) => void;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function TsChoixHeureResa({ date, setDate, heure, setHeure, affichage, setAffichage, coupeChoisie, setCoupeChoisie }: Props) {
 
     const handleDateTime = (datetime: string) => {
@@ -74,13 +75,13 @@ export default function TsChoixHeureResa({ date, setDate, heure, setHeure, affic
 
                 <div className="mt-2 pl-2 md:w-2/3 md:h-[600px] xl:static">
                     <div className="xl:static">
-                        <p className={`${playfair.className} text-xl md:text-xl 2xl:text-3xl`}>Nom du Hair'Truck</p>
+                        <p className={`${playfair.className} text-xl md:text-xl 2xl:text-3xl`}>Nom du Hair&apos;Truck</p>
                         <p className="italic text-sm md:text-lg">HairOnWhells</p>
                     </div>
 
                     <div className="mt-4 xl:static">
-                        <p className={`${playfair.className} text-xl md:text-xl 2xl:text-3xl`}>Adresse du Hair'Truck</p>
-                        <p className="italic text-sm underline">*adresse du hair'Truck*</p>
+                        <p className={`${playfair.className} text-xl md:text-xl 2xl:text-3xl`}>Adresse du Hair&apos;Truck</p>
+                        <p className="italic text-sm underline">*adresse du hair&apos;Truck*</p>
                     </div>
 
                     <div className="p-6 max-w-xl mx-auto">

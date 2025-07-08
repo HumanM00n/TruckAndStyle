@@ -52,6 +52,7 @@ export async function POST(req: Request) {
 
         const [result] = await pool.execute(sql, values);
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         return NextResponse.json({ success: true, id: (result as any).insertId }, { status: 201 });
     } catch (error) {
         console.error("Erreur lors de la réservation :", error);

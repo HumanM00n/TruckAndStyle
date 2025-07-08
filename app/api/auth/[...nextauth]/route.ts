@@ -1,71 +1,60 @@
-/* eslint-disable @typescript-eslint/prefer-as-const */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from "bcryptjs"; 
+import bcrypt from "bcryptjs";
 import pool from '@/app/_lib/db';
 
-export const authOptions = {
+const handler = NextAuth({
+  providers: [
+    CredentialsProvider({
+      name: "credentials",
+      credentials: {
+        email: { type: "email" },
+        password: { type: "password" }
+      },
+      async authorize(credentials) {
+        const { email, password } = credentials!;
 
-    providers: [
-        CredentialsProvider({
-            name: "credentials",
-            credentials: {
-                email: { type: "email" },
-                password: { type: "password" }
-            },
+        const [users] = await pool.query("SELECT * FROM tns_users WHERE user_email = ?", [email]);
 
-            async authorize(credentials) {
-                const { email, password } = credentials!;
+        if ((users as any[]).length === 0) {
+          return null;
+        }
 
-                const [users] = await pool.query("SELECT * FROM tns_users WHERE user_email = ?", [email]);
+        const user = (users as any[])[0];
 
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                if ((users as any[]).length === 0) {
-                    return null; 
-                }
+        const passwordMatch = await bcrypt.compare(password, user.user_password);
 
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                const user = (users as any[])[0];
+        if (!passwordMatch) {
+          return null;
+        }
 
-                const passwordMatch = await bcrypt.compare(password, user.user_password);
+        return { id: user.id_users, email: user.user_email };
+      },
+    }),
+  ],
 
-                if (!passwordMatch) {
-                    return null; 
-                }
-
-                return { id: user.id_users, email: user.user_email };
-            },
-        }),
-    ],
-
-    callbacks: {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        async jwt({ token, user }: any) {
-            if (user) {
-                // Si un utilisateur se connecte, on lui ajoute le token JWT
-                token.id = user.id;
-                token.email = user.email;
-            }
-            return token;
-        },
-
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        async session({ session, token }: any) {
-            session.user.id = token.id;
-            session.user.email = token.email;
-            return session;
-        },
+  callbacks: {
+    async jwt({ token, user }: any) {
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+      }
+      return token;
     },
-
-    session: {
-        strategy: 'jwt' as 'jwt',
-        maxAge: 3600
+    async session({ session, token }: any) {
+      session.user.id = token.id;
+      session.user.email = token.email;
+      return session;
     },
+  },
 
-    secret: process.env.JWT_SECRET,
-};
+  session: {
+    strategy: 'jwt',
+    maxAge: 3600,
+  },
 
-const handler = NextAuth(authOptions);
+  secret: process.env.JWT_SECRET,
+});
 
-export const GET = handler;
-export const POST = handler;
+export { handler as GET, handler as POST };

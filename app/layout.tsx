@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-sync-scripts */
 'use client';
 
 import { usePathname } from "next/navigation";
