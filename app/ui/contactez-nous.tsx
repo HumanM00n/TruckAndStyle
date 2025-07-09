@@ -3,6 +3,7 @@
 
 import { useState} from "react";
 import Toastify from "toastify-js";
+import { SpinnerTns } from "../_components/defaultComponents/spinner";
 
 export default function ContactezNous({ csrfToken }: { csrfToken: string }) {
     const [formData, setFormData] = useState({ inputEmail: '', phoneNumber: '', contentTextarea: '' });
@@ -88,8 +89,10 @@ export default function ContactezNous({ csrfToken }: { csrfToken: string }) {
         }
     }
 
+    // if (!csrfToken) return <SpinnerTns />;
+
     return (
-        <section className="h-screen md:h-dvh lg:h-auto text-white w-full flex-col">
+        <section className="min-h-[70vh] xl:min-h-[79vh] text-white w-full flex-col">
             <h1 className="text-3xl text-center mb-2 md:mb-12">Contactez-Nous</h1>
             <form onSubmit={handleSubmit} className="text-sm md:text-base">
                 <input type="hidden" name="csrfToken" value={csrfToken} />
