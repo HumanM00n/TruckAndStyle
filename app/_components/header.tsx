@@ -77,6 +77,8 @@ export default function Header() {
                         <Link className="hoverMarron" href="/pages">Réservations</Link>
                         <Link className="hoverMarron" href="/">À propos</Link>
                         <Link className="hoverMarron" href="/">Contactez-nous</Link>
+                        <Link className="hoverMarron" href="/connexion">Connexion</Link>
+                        <Link className="hoverMarron" href="/inscription">Inscription</Link>
 
                         {session ? (
                             <Link className="hoverMarron" href="/profil">Mon profil</Link>
@@ -89,8 +91,6 @@ export default function Header() {
                                 </div>
                             </>
                         )}
-
-
                     </div>
                 )
             }
