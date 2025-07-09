@@ -24,8 +24,12 @@ export async function registerUser(formData: FormData) {
         return { success: false, message: "L'adresse email est invalide." };
     }
 
-    if (user_password.length < 8) {
-        return { success: false, message: "Le mot de passe doit contenir au moins 8 caractères." };
+    if (user_password.length < 12) {
+        return { success: false, message: "Le mot de passe doit contenir au moins 12 caractères." };
+    }
+
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(user_password)) {
+        return { success: false, message: "Le mot de passe doit contenir au moins un caractère spécial." };
     }
 
     if (!/^\d{10}$/.test(user_phone_number)) {

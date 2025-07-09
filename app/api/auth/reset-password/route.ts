@@ -31,9 +31,15 @@ export async function POST(req: Request) {
         return NextResponse.json({ message: "Les mots de passe ne correspondent pas." }, { status: 400 })
     }
 
-    if (newPassword.length < 8) {
-        return NextResponse.json({ message: "Le mot de passe doit contenir au moins 8 caractères." }, { status: 400 })
+    if (newPassword.length < 12) {
+        return NextResponse.json({ message: "Le mot de passe doit contenir au moins 12 caractères." }, { status: 400 })
     }
+
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(newPassword)) {
+        return { success: false, message: "Le mot de passe doit contenir au moins un caractère spécial." };
+    }
+
+    // if(newPassword )
 
     try {
         const newPasswordHash = await bcrypt.hash(newPassword, 10);
