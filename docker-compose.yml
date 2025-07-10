@@ -10,8 +10,8 @@ services:
       - NODE_ENV=production
       - DB_HOST=db
       - DB_USER=root
-      - DB_PASSWORD=root
-      - DB_NAME=trucknstyle
+      - DB_PASSWORD=!blaograna27!
+      - DB_NAME=truckn_style_bdd
     depends_on:
       - db
     volumes:
@@ -24,9 +24,9 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: trucknstyle
+      MYSQL_DATABASE: truckn_style_bdd
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
 
